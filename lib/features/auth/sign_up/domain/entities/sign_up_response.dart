@@ -3,9 +3,9 @@ import 'package:milk_ride_live_wc/features/auth/sign_up/domain/entities/sources.
 import 'package:milk_ride_live_wc/features/auth/sign_up/domain/entities/user.dart';
 
 class SignUpResponse {
-  late final String? status;
-  late final int? statusCode;
-  late final String? message;
+  final String? status;
+  final int? statusCode;
+  final String? message;
   final String? customerMobileNumber;
   final User? user;
   final List<Sources>? sources;

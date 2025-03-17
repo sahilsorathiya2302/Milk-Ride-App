@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'api_service.dart';
+part of 'auth_api_service.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'api_service.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
-class _SignUpApiService implements SignUpApiService {
-  _SignUpApiService(this._dio, {this.baseUrl, this.errorLogger}) {
+class _AuthApiService implements AuthApiService {
+  _AuthApiService(this._dio, {this.baseUrl, this.errorLogger}) {
     baseUrl ??= 'https://dev.milkride.com';
   }
 
@@ -20,7 +20,7 @@ class _SignUpApiService implements SignUpApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<SignUpModel> postSignUpData(String mobileNumber, String userId) async {
+  Future<SignUpModel> postSignUpData(String mobileNumber, int userId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

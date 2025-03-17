@@ -4,19 +4,18 @@ import 'package:milk_ride_live_wc/features/auth/sign_up/data/models/sign_up_mode
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:retrofit/retrofit.dart';
 
-part 'api_service.g.dart';
+part 'auth_api_service.g.dart';
 
 @RestApi(baseUrl: ServerConfig.signUpBaseUrl)
-abstract class SignUpApiService {
-  factory SignUpApiService(Dio dio) {
-    BaseOptions baseOptions = BaseOptions(
+abstract class AuthApiService {
+  factory AuthApiService(Dio dio) {
+    dio.options = BaseOptions(
       baseUrl: ServerConfig.signUpBaseUrl,
-      receiveTimeout: Duration(seconds: 30),
-      sendTimeout: Duration(seconds: 30),
-      connectTimeout: Duration(seconds: 30),
+      receiveTimeout: const Duration(seconds: 30),
+      sendTimeout: const Duration(seconds: 30),
+      connectTimeout: const Duration(seconds: 30),
       contentType: ServerConfig.contentType,
     );
-    Dio dio = Dio(baseOptions);
 
     dio.interceptors.add(
       PrettyDioLogger(
@@ -26,12 +25,13 @@ abstract class SignUpApiService {
         requestBody: true,
       ),
     );
-    return _SignUpApiService(dio);
+
+    return _AuthApiService(dio);
   }
 
   @POST(ServerConfig.signUpPath)
   Future<SignUpModel> postSignUpData(
     @Field('mobile_number') String mobileNumber,
-    @Field('user_id') String userId,
+    @Field('user_id') int userId,
   );
 }

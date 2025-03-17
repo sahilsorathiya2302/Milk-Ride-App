@@ -1,5 +1,7 @@
 class Failure {
-  String? messages;
+  final String message;
 
-  Failure({messages = 'An occurred error'});
+  Failure({required this.message});
+  @override
+  String toString() => 'Failure(message:$message)';
 }
