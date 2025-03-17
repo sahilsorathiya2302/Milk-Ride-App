@@ -5,7 +5,7 @@ import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
-  final Icon preFixIcon;
+  final Icon? preFixIcon;
   final int? maxLength;
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
@@ -13,7 +13,7 @@ class CustomTextField extends StatelessWidget {
       {super.key,
       required this.controller,
       required this.hintText,
-      required this.preFixIcon,
+      this.preFixIcon,
       this.validator,
       this.maxLength,
       this.keyboardType});
