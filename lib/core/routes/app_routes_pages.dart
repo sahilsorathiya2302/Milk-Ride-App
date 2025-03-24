@@ -1,7 +1,10 @@
 import 'package:get/get.dart';
 import 'package:milk_ride_live_wc/core/routes/app_routes_names.dart';
+import 'package:milk_ride_live_wc/features/auth/otp/presentation/otp_screen.dart';
 import 'package:milk_ride_live_wc/features/auth/register/presentation/register_screen.dart';
+import 'package:milk_ride_live_wc/features/auth/sign_in/presentation/sign_in_screen.dart';
 import 'package:milk_ride_live_wc/features/auth/sign_up/presentation/sign_up_screen.dart';
+import 'package:milk_ride_live_wc/features/home/presentation/home_screen.dart';
 import 'package:milk_ride_live_wc/features/splash/presentation/splash_screen.dart';
 
 class AppRoutesPages {
@@ -11,12 +14,24 @@ class AppRoutesPages {
       page: () => SplashScreen(),
     ),
     GetPage(
+      name: AppRoutesNames.signInScreen,
+      page: () => SignInScreen(),
+    ),
+    GetPage(
       name: AppRoutesNames.signUpScreen,
       page: () => SignUpScreen(),
     ),
     GetPage(
       name: AppRoutesNames.registerScreen,
       page: () => RegisterScreen(),
+    ),
+    GetPage(
+      name: AppRoutesNames.otpScreen,
+      page: () => OtpScreen(),
+    ),
+    GetPage(
+      name: AppRoutesNames.homeScreen,
+      page: () => HomeScreen(),
     )
   ];
 }

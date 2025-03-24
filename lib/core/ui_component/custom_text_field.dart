@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:milk_ride_live_wc/core/constants/app_string.dart';
 import 'package:milk_ride_live_wc/core/theme/app_border_radius.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
+import 'package:milk_ride_live_wc/core/theme/app_text_size.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -21,15 +23,22 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: TextStyle(
+          fontFamily: AppString.fontFamily, fontWeight: FontWeight.w600),
       keyboardType: keyboardType,
       maxLength: maxLength,
       validator: validator,
       controller: controller,
       decoration: InputDecoration(
+        errorStyle: TextStyle(
+            color: AppColors.errorColor, fontFamily: AppString.fontFamily),
         counterText: "",
         prefixIcon: preFixIcon,
         hintText: hintText,
-        hintStyle: TextStyle(color: AppColors.grey),
+        hintStyle: TextStyle(
+            color: AppColors.grey,
+            fontFamily: AppString.fontFamily,
+            fontSize: AppTextSize.s14),
         disabledBorder: buildOutlineInputBorder(
           radius: AppBorderRadius.r14,
           color: AppColors.grey,

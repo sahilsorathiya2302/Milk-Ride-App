@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:milk_ride_live_wc/core/routes/app_routes_pages.dart';
-import 'package:milk_ride_live_wc/features/auth/sign_up/presentation/cubit/sign_up_cubit.dart';
+import 'package:milk_ride_live_wc/features/auth/cubit/auth_cubit.dart';
 import 'package:milk_ride_live_wc/services/injection.dart';
 
 void main() {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: Size(context.width, context.height),
-      child: BlocProvider<SignUpCubit>(
+      child: BlocProvider<AuthCubit>(
         create: (context) => getIt(),
         child: GlobalLoaderOverlay(
           child: GetMaterialApp(

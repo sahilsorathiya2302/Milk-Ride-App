@@ -14,13 +14,13 @@ class SignUpCubit extends Cubit<SignUpState> {
     required int userId,
   }) async {
     emit(SignUpLoading());
-    final result = await signUpUseCase(SignUpParam(
+    final result = await signUpUseCase.call(SignUpParam(
       mobileNumber: mobileNumber,
       userId: userId,
     ));
 
     result.fold(
-      (failure) => emit(SignUpFail(message: failure.message)),
+      (failure) => emit(SignUpError(errorMessage: failure.toString())),
       (response) {
         if (response.status == AppString.success) {
           emit(SignUpSuccess(signUpResponse: response));

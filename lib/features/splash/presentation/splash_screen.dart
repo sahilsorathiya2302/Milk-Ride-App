@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:milk_ride_live_wc/core/routes/app_routes_names.dart';
-import 'package:milk_ride_live_wc/features/splash/presentation/widgets/logo_widget.dart';
+import 'package:milk_ride_live_wc/core/ui_component/custom_logo_image.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,17 +19,20 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
       Duration(seconds: 3),
-      () => Get.toNamed(AppRoutesNames.signUpScreen),
+      () => Get.toNamed(AppRoutesNames.signInScreen),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          LogoWidget(),
+          CustomLogoImage(
+            height: 250.h,
+            width: 250.w,
+          ),
         ],
       ),
     );

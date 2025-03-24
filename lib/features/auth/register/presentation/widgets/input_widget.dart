@@ -17,26 +17,23 @@ class _InputWidgetState extends State<InputWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CustomTextField(
-          controller: _nameController,
-          hintText: AppString.name,
-        ).paddingSymmetric(vertical: 5),
-        CustomTextField(
-          controller: _nameController,
-          hintText: AppString.email,
-        ).paddingSymmetric(vertical: 5),
-        CustomTextField(
-          controller: _nameController,
-          hintText: AppString.email,
-        ).paddingSymmetric(vertical: 5),
-        CustomTextField(
-          controller: _nameController,
-          hintText: AppString.email,
-        ).paddingSymmetric(vertical: 5),
-        CustomTextField(
-          controller: _nameController,
-          hintText: AppString.email,
-        ).paddingSymmetric(vertical: 5),
+        Row(
+          children: [
+            Expanded(
+              child: CustomTextField(
+                controller: _nameController,
+                hintText: AppString.name,
+              ).paddingSymmetric(vertical: 5),
+            ),
+            SizedBox(width: 10), // Optional spacing between the fields
+            Expanded(
+              child: CustomTextField(
+                controller: _nameController,
+                hintText: AppString.email,
+              ).paddingSymmetric(vertical: 5),
+            ),
+          ],
+        ),
       ],
     ).paddingSymmetric(horizontal: 10);
   }

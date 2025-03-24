@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:milk_ride_live_wc/core/constants/app_string.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
 import 'package:milk_ride_live_wc/core/theme/app_text_size.dart';
 
@@ -22,6 +23,7 @@ class CustomText extends StatelessWidget {
         color: color ?? AppColors.black,
         fontWeight: fontWeight ?? FontWeight.normal,
         fontSize: fontSize ?? AppTextSize.s12,
+        fontFamily: AppString.fontFamily,
       ),
     );
   }
