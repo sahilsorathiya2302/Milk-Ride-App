@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
 import 'package:milk_ride_live_wc/core/routes/app_routes_names.dart';
-import 'package:milk_ride_live_wc/features/auth/otp/presentation/otp_screen.dart';
-import 'package:milk_ride_live_wc/features/auth/register/presentation/register_screen.dart';
-import 'package:milk_ride_live_wc/features/auth/sign_in/presentation/sign_in_screen.dart';
-import 'package:milk_ride_live_wc/features/auth/sign_up/presentation/sign_up_screen.dart';
-import 'package:milk_ride_live_wc/features/home/presentation/home_screen.dart';
+import 'package:milk_ride_live_wc/features/auth/presentations/otp/otp_screen.dart';
+import 'package:milk_ride_live_wc/features/auth/presentations/sign_in/sign_in_screen.dart';
+import 'package:milk_ride_live_wc/features/home/presentation/home_screen/home_screen.dart';
 import 'package:milk_ride_live_wc/features/splash/presentation/splash_screen.dart';
+
+import '../../features/auth/presentations/register/register_screen.dart';
 
 class AppRoutesPages {
   static List<GetPage> pages = [
@@ -18,12 +18,10 @@ class AppRoutesPages {
       page: () => SignInScreen(),
     ),
     GetPage(
-      name: AppRoutesNames.signUpScreen,
-      page: () => SignUpScreen(),
-    ),
-    GetPage(
       name: AppRoutesNames.registerScreen,
-      page: () => RegisterScreen(),
+      page: () => RegisterScreen(
+        getArgument: Get.arguments,
+      ),
     ),
     GetPage(
       name: AppRoutesNames.otpScreen,
@@ -32,6 +30,6 @@ class AppRoutesPages {
     GetPage(
       name: AppRoutesNames.homeScreen,
       page: () => HomeScreen(),
-    )
+    ),
   ];
 }

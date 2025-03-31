@@ -1,15 +1,12 @@
-import 'package:milk_ride_live_wc/features/auth/sign_in/domain/entities/sign_in_response.dart';
+import '../../domain/entities/sign_in_response.dart';
 
 class SignInModel extends SignInResponse {
-  final String mobileNumber;
-
   SignInModel({
     required super.status,
     required super.statusCode,
     required super.message,
     required super.data,
     required super.userId,
-    this.mobileNumber = "",
   });
 
   // No need to parse mobileNumber from response
@@ -26,7 +23,6 @@ class SignInModel extends SignInResponse {
   // Only send mobileNumber in request
   Map<String, dynamic> toJson() {
     return {
-      'mobileNumber': mobileNumber,
       'user_id': userId,
       'status': status,
       'statusCode': statusCode,

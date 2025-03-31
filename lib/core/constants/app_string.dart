@@ -48,11 +48,51 @@ class AppString {
   static const String floor = "2nd Floor";
   static const String society = "Radhe Park";
   static const String lendMark = "Sita Ram Nagar";
-  static const String city = "Surat";
-  static const String area = "Punagam";
+  static const String city = "Select Your City";
+
+  static const String area = "Select Your Area";
   static const String pinCode = "395010";
   static const String hintReferralCode = "GDFCDEW#";
   static const String agentCode = "Agent Code Here !";
   static const String findAbout = "Where You know about us?";
   static const String userCheckMessage = "Please signup first";
+  static const String logicSuccessfully = "Login successfully";
+  static const String citySelectMessage = "Please Select City First";
+  static const String selectCity = "Select City";
+  static const String selectArea = "Select area";
+
+  ///Home
+  static const String vacationMode = "Vacation Mode";
+  static const String myProfile = "My Profile";
+  static const String myPreference = "My Preference";
+  static const String myCart = "My Cart";
+  static const String mySubscription = "My Subscription";
+  static const String myOrder = "My Order";
+  static const String invoiceHistory = "Invoice History";
+  static const String help = "Help";
+
+  static const String notificationTitle =
+      "No delivery available at this moment";
+  static const String view = "View";
+  static const String categories = "Categories";
+  static const String newArrival = "New Arrival";
+  static const String bestSeller = "Best Seller";
+  static const String seasonal = "Seasonal";
+  static const String viewAll = "ViewAll";
+  static const String mustTry = "Must Try";
+  static const String milkRide = "Milk Ride";
+  static const String foodTypeVeg = "veg";
+  static const String profileEmail = "Email Address";
+  static const String profileMobileNumber = "Mobile Number";
+  static const String profileHubName = "Hub Name";
+  static const String profileAreaName = "Area Name";
+  static const String profileGender = "Gender";
+  static const String walletBalance = "Wallet Balance";
+  static const String reservedAmount = "Reserved Amount";
+  static const String creditLimit = "Credit Limit";
+  static const String deliveryBoy = "Delivery Boy";
+  static const String logout = "Logout";
+  static const String verified = "Verified by Milk Ride";
+  static const String emailNull = "null";
+  static const String notFound = "Not Found";
 }

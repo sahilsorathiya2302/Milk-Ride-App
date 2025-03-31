@@ -44,6 +44,7 @@ class CustomTitleWithTextField extends StatelessWidget {
           validator: validator,
           controller: controller,
           decoration: InputDecoration(
+            errorStyle: TextStyle(fontSize: AppTextSize.s0),
             counterText: "",
             prefixIcon: preFixIcon,
             hintText: hintText,

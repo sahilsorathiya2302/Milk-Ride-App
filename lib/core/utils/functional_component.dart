@@ -44,8 +44,20 @@ class FunctionalComponent {
 
   static void errorSnackbar(String title, String message) {
     Get.snackbar(
-      title,
-      message,
+      AppString.empty,
+      AppString.empty,
+      titleText: CustomText(
+        text: title,
+        color: AppColors.white,
+        fontWeight: FontWeight.w700,
+        fontSize: AppTextSize.s16,
+      ),
+      messageText: CustomText(
+        text: message,
+        color: AppColors.white,
+        fontWeight: FontWeight.w700,
+        fontSize: AppTextSize.s16,
+      ),
       snackPosition: SnackPosition.TOP,
       backgroundColor: Colors.red,
       colorText: Colors.white,

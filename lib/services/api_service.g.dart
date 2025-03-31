@@ -10,7 +10,7 @@ part of 'api_service.dart';
 
 class _ApiService implements ApiService {
   _ApiService(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'https://dev.milkride.com/api/milkride/v1/';
+    baseUrl ??= 'https://dev.milkride.com/api/';
   }
 
   final Dio _dio;
@@ -20,7 +20,10 @@ class _ApiService implements ApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<SignInModel> postSignInData(String mobileNumber, String userId) async {
+  Future<SignInModel> postSignInData({
+    required String mobileNumber,
+    required String userId,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -29,7 +32,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'signin',
+            'milkride/v1/signin',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -47,7 +50,11 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<OtpModel> checkOtp(String mobileNumber, int userId, String otp) async {
+  Future<OtpVerifyModel> checkOtp({
+    required String mobileNumber,
+    required int userId,
+    required String otp,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -56,20 +63,20 @@ class _ApiService implements ApiService {
       'user_id': userId,
       'otp': otp,
     };
-    final _options = _setStreamType<OtpModel>(
+    final _options = _setStreamType<OtpVerifyModel>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'otp-check',
+            'milkride/v1/otp-check',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late OtpModel _value;
+    late OtpVerifyModel _value;
     try {
-      _value = OtpModel.fromJson(_result.data!);
+      _value = OtpVerifyModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -78,25 +85,28 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<ResendOtpModel> resendOtp(String mobileNumber, int userId) async {
+  Future<ApiResponseModel> resendOtp({
+    required String mobileNumber,
+    required int userId,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {'mobile_number': mobileNumber, 'user_id': userId};
-    final _options = _setStreamType<ResendOtpModel>(
+    final _options = _setStreamType<ApiResponseModel>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'otp-resend',
+            'milkride/v1/otp-resend',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ResendOtpModel _value;
+    late ApiResponseModel _value;
     try {
-      _value = ResendOtpModel.fromJson(_result.data!);
+      _value = ApiResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -105,12 +115,12 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<RegisterModel> register(
-    String name,
+  Future<RegisterModel> register({
+    required String name,
     String? email,
-    String sourceId,
-    String areaId,
-    String houseNo,
+    required String sourceId,
+    required String areaId,
+    required String houseNo,
     String? floor,
     String? society,
     String? landMark,
@@ -123,8 +133,8 @@ class _ApiService implements ApiService {
     String? agentCode,
     String? deliveryType,
     String? gender,
-    String mobileNumber,
-  ) async {
+    required String mobileNumber,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
@@ -154,7 +164,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'store',
+            'milkride/v1/store',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -172,25 +182,102 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<SignUpModel> postSignUpData(String mobileNumber, int userId) async {
+  Future<RegionsSourceModel> fetchRegionsSourceData({
+    required String mobileNumber,
+    required int userId,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {'mobile_number': mobileNumber, 'user_id': userId};
-    final _options = _setStreamType<SignUpModel>(
+    final _options = _setStreamType<RegionsSourceModel>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'signup',
+            'milkride/v1/signup',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late SignUpModel _value;
+    late RegionsSourceModel _value;
     try {
-      _value = SignUpModel.fromJson(_result.data!);
+      _value = RegionsSourceModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<List<GetAreaModel>> getAreas({required int id}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<List<GetAreaModel>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'customer/get-areas-by-region/${id}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<GetAreaModel> _value;
+    try {
+      _value = _result.data!
+          .map(
+            (dynamic i) => GetAreaModel.fromJson(i as Map<String, dynamic>),
+          )
+          .toList();
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<HomeModel> getHomeData({
+    required String mobileNumber,
+    required int userId,
+    required String type,
+    required String deviceType,
+    required String devicesModel,
+    required String version,
+    required String devicesId,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'mobile_number': mobileNumber,
+      'user_id': userId,
+      'type': type,
+      'device_type': deviceType,
+      'device_model': devicesModel,
+      'version': version,
+      'device_id': devicesId,
+    };
+    final _options = _setStreamType<HomeModel>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'milkride/v1/home',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late HomeModel _value;
+    try {
+      _value = HomeModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
