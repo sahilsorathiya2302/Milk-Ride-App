@@ -39,11 +39,15 @@ class _CategoriesProductsScreenState extends State<CategoriesProductsScreen> {
         body: BlocBuilder<ProductCubit, ProductState>(
           builder: (context, state) {
             if (state is ProductLoading) {
-              return Center(child: CircularProgressIndicator());
+              return Center(
+                child: CircularProgressIndicator(),
+              );
             } else if (state is ProductLoadedState) {
               return CategoriesProductInfoWidgets(state: state);
             } else {
-              return CircularProgressIndicator();
+              return Center(
+                child: CircularProgressIndicator(),
+              );
             }
           },
         ));

@@ -1,6 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:get/get.dart';
-import 'package:loader_overlay/loader_overlay.dart';
 import 'package:milk_ride_live_wc/core/constants/app_string.dart';
 import 'package:milk_ride_live_wc/features/product/domain/usecase/categories_product_use_case.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/product/product_state.dart';
@@ -32,6 +30,5 @@ class ProductCubit extends Cubit<ProductState> {
         }
       },
     );
-    Get.context!.loaderOverlay.hide();
   }
 }

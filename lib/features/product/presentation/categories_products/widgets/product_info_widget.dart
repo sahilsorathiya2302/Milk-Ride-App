@@ -39,12 +39,12 @@ class ProductInfoWidget extends StatelessWidget {
         Row(
           children: [
             SizedBox(
-              width: 80,
+              width: 80.w,
               child: CustomText(
                 maxLine: 2,
                 text: name,
                 fontWeight: FontWeight.w700,
-                fontSize: AppTextSize.s12,
+                fontSize: AppTextSize.s14,
               ),
             ),
             10.width,
@@ -57,19 +57,9 @@ class ProductInfoWidget extends StatelessWidget {
         ),
         Row(
           children: [
-            CustomText(
-              text: packageSize,
-              fontWeight: FontWeight.w600,
-              fontSize: AppTextSize.s14,
-              color: AppColors.grey,
-            ),
+            packageVolumeText(text: packageSize),
             5.width,
-            CustomText(
-              text: volume,
-              fontWeight: FontWeight.w600,
-              fontSize: AppTextSize.s14,
-              color: AppColors.grey,
-            ),
+            packageVolumeText(text: volume),
           ],
         ),
         Row(
@@ -90,6 +80,15 @@ class ProductInfoWidget extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+
+  CustomText packageVolumeText({required String text}) {
+    return CustomText(
+      text: text,
+      fontWeight: FontWeight.w600,
+      fontSize: AppTextSize.s14,
+      color: AppColors.grey,
     );
   }
 }
