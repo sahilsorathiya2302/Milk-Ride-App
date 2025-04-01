@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
+import 'package:milk_ride_live_wc/core/theme/app_text_size.dart';
 import 'package:milk_ride_live_wc/core/theme/icon_size.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_text.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final void Function()? leadingOnPressed;
   final void Function()? actionOnPressed;
-  final IconData leadingIcon;
+  final IconData? leadingIcon;
   final IconData? actionIcon;
   final String? imageName;
   final String? titleName;
+  final bool? centerTitle;
   const CustomAppBar(
       {super.key,
       this.leadingOnPressed,
-      required this.leadingIcon,
+      this.leadingIcon,
       this.imageName,
       this.titleName,
       this.actionIcon,
-      this.actionOnPressed});
+      this.actionOnPressed,
+      this.centerTitle});
 
   @override
   State<CustomAppBar> createState() => _CustomAppBarState();
@@ -46,8 +49,12 @@ class _CustomAppBarState extends State<CustomAppBar> {
               height: 130.h,
               width: 130.w,
             )
-          : CustomText(text: widget.titleName.toString()),
-      centerTitle: true,
+          : CustomText(
+              text: widget.titleName.toString(),
+              fontWeight: FontWeight.w700,
+              fontSize: AppTextSize.s16,
+            ),
+      centerTitle: widget.centerTitle ?? false,
       actions: [
         IconButton(
           onPressed: widget.actionOnPressed,

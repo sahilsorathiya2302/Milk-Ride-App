@@ -7,4 +7,6 @@ class AppRoutesNames {
   static const String signInScreen = "/signInScreen";
   static const String otpScreen = "/otpScreen";
   static const String homeScreen = "/homeScreen";
+  static const String viewCategories = "/viewCategories";
+  static const String categoryProduct = "/categoryProduct";
 }

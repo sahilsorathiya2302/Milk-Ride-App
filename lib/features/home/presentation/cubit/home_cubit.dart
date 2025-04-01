@@ -9,7 +9,6 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit({required this.homeUseCase}) : super(HomeInitial());
 
   Future<void> getHomeData(HomeParam param) async {
-    emit(HomeLoading());
     final response = await homeUseCase.call(HomeParam(
         mobileNumber: param.mobileNumber,
         userId: param.userId,

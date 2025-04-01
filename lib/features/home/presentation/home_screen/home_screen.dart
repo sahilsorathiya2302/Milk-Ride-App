@@ -73,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       appBar: CustomAppBar(
+        centerTitle: true,
         leadingOnPressed: () {
           scaffoldKey.currentState?.openDrawer();
         },
@@ -82,15 +83,16 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
-          if (state is HomeLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is HomeLoaded) {
+          if (state is HomeLoaded) {
             return ListView(
               children: [
                 10.height,
                 NotificationWidget().paddingSymmetric(horizontal: 15.w),
                 10.height,
-                CategoriesWidget(state: state.homeResponse.data?.categories),
+                CategoriesWidget(
+                  state: state.homeResponse.data?.categories,
+                  customerId: state.homeResponse.data!.customer?.id ?? 0,
+                ),
                 10.height,
                 NewArrivalInfoWidget(
                     state: state.homeResponse.data?.newArrival),
@@ -101,9 +103,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 10.height,
               ],
             );
+          } else {
+            return const Center(child: CircularProgressIndicator());
           }
-
-          return const Center(child: CircularProgressIndicator());
         },
       ),
     );

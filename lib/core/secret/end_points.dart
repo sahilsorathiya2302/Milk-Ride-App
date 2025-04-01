@@ -7,6 +7,8 @@ class EndPoints {
   static const String resendOtp = "otp-resend";
   static const String signUp = "signup";
   static const String home = "home";
+  static const String allCategory = "all-category";
+  static const String categoryProduct = "category-products";
 
   static const String getAreas = "{id}";
 }

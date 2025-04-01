@@ -14,6 +14,13 @@ import 'package:milk_ride_live_wc/features/home/data/repositories/home_repositor
 import 'package:milk_ride_live_wc/features/home/domain/repositories/home_repository.dart';
 import 'package:milk_ride_live_wc/features/home/domain/usecese/home_use_case.dart';
 import 'package:milk_ride_live_wc/features/home/presentation/cubit/home_cubit.dart';
+import 'package:milk_ride_live_wc/features/product/data/repositories/product_impl_remote_repo.dart';
+import 'package:milk_ride_live_wc/features/product/data/repositories/product_impl_repository.dart';
+import 'package:milk_ride_live_wc/features/product/domain/repositories/product_repository.dart';
+import 'package:milk_ride_live_wc/features/product/domain/usecase/categories_product_use_case.dart';
+import 'package:milk_ride_live_wc/features/product/domain/usecase/view_category_use_case.dart';
+import 'package:milk_ride_live_wc/features/product/presentation/cubit/categories/categories_cubit.dart';
+import 'package:milk_ride_live_wc/features/product/presentation/cubit/product/product_cubit.dart';
 import 'package:milk_ride_live_wc/features/splash/cubit/splash_cubit.dart';
 import 'package:milk_ride_live_wc/services/api_service.dart';
 
@@ -91,4 +98,25 @@ void setLocator() {
 
   getIt.registerSingleton(HomeCubit(homeUseCase: getIt()));
   getIt.registerSingleton(SplashCubit());
+
+  getIt.registerLazySingleton<ProductRemoteRepo>(
+    () => ProductImplRemoteRepo(apiService: getIt()),
+  );
+
+  getIt.registerLazySingleton<ProductRepository>(
+    () => ProductImplRepository(productRemoteRepo: getIt()),
+  );
+
+  getIt.registerLazySingleton(
+    () => ViewCategoryUseCase(productRepository: getIt()),
+  );
+  // getIt.registerSingleton(ViewCategoryCubit(viewCategoryUseCase: getIt()));
+
+  getIt.registerLazySingleton(
+    () => CategoriesProductUseCase(productRepository: getIt()),
+  );
+  getIt.registerSingleton(ProductCubit(
+    categoriesProductUseCase: getIt(),
+  ));
+  getIt.registerSingleton(CategoriesCubit(viewCategoryUseCase: getIt()));
 }

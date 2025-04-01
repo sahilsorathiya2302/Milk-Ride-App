@@ -8,6 +8,8 @@ import 'package:milk_ride_live_wc/features/auth/data/models/otp_model.dart';
 import 'package:milk_ride_live_wc/features/auth/data/models/regions_source_model.dart';
 import 'package:milk_ride_live_wc/features/auth/data/models/register_model.dart';
 import 'package:milk_ride_live_wc/features/home/data/models/home_model.dart';
+import 'package:milk_ride_live_wc/features/product/data/models/categories_product_model.dart';
+import 'package:milk_ride_live_wc/features/product/data/models/view_category_model.dart';
 import 'package:milk_ride_live_wc/services/interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:retrofit/retrofit.dart';
@@ -109,5 +111,14 @@ abstract class ApiService {
     @Field("device_model") required String devicesModel,
     @Field("version") required String version,
     @Field("device_id") required String devicesId,
+  });
+  @POST(ServerConfig.milkRideVersion + EndPoints.allCategory)
+  Future<ViewCategoryModel> viewAllCategories(
+      {@Field("user_id") required int userId});
+
+  @POST(ServerConfig.milkRideVersion + EndPoints.categoryProduct)
+  Future<CategoriesProductModel> categoryProduct({
+    @Field("customer_id") required int customerId,
+    @Field("category_id") required int categoryId,
   });
 }

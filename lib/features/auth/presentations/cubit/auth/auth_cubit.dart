@@ -83,7 +83,8 @@ class AuthCubit extends Cubit<AuthState> {
           });
         } else if (result.message == AppString.logicSuccessfully) {
           StorageManager.saveData(StorageKeys.tokenKey, result.appToken);
-
+          StorageManager.saveData(StorageKeys.mobileNumber, mobileNumber);
+          StorageManager.saveData(StorageKeys.userId, userId);
           Get.toNamed(AppRoutesNames.homeScreen);
         }
       } else if (result.status == AppString.error) {
@@ -164,7 +165,8 @@ class AuthCubit extends Cubit<AuthState> {
         if (result.status == AppString.success) {
           Get.toNamed(AppRoutesNames.homeScreen);
           StorageManager.saveData(StorageKeys.tokenKey, result.appToken);
-          StorageManager.saveData(StorageKeys.login, true);
+          StorageManager.saveData(StorageKeys.mobileNumber, mobileNumber);
+          StorageManager.saveData(StorageKeys.userId, userId);
           FunctionalComponent.successSnackbar(
               AppString.success, result.message.toString());
         } else if (result.status == AppString.error) {

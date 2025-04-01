@@ -8,9 +8,12 @@ import 'package:milk_ride_live_wc/core/routes/app_routes_pages.dart';
 import 'package:milk_ride_live_wc/features/auth/presentations/cubit/area/area_cubit.dart';
 import 'package:milk_ride_live_wc/features/auth/presentations/cubit/auth/auth_cubit.dart';
 import 'package:milk_ride_live_wc/features/auth/presentations/cubit/regions_and_sources/regions_sources_cubit.dart';
-import 'package:milk_ride_live_wc/features/home/presentation/cubit/home_cubit.dart';
+import 'package:milk_ride_live_wc/features/product/presentation/cubit/categories/categories_cubit.dart';
+import 'package:milk_ride_live_wc/features/product/presentation/cubit/product/product_cubit.dart';
 import 'package:milk_ride_live_wc/features/splash/cubit/splash_cubit.dart';
 import 'package:milk_ride_live_wc/services/injection.dart';
+
+import 'features/home/presentation/cubit/home_cubit.dart';
 
 void main() async {
   setLocator();
@@ -40,6 +43,12 @@ class MyApp extends StatelessWidget {
             create: (context) => getIt(),
           ),
           BlocProvider<HomeCubit>(
+            create: (context) => getIt(),
+          ),
+          BlocProvider<ProductCubit>(
+            create: (context) => getIt(),
+          ),
+          BlocProvider<CategoriesCubit>(
             create: (context) => getIt(),
           ),
         ],

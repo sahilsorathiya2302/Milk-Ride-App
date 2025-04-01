@@ -8,8 +8,6 @@ abstract class AreaState extends Equatable {
 
 class AreaInitial extends AreaState {}
 
-class AreaLoading extends AreaState {}
-
 class AreaLoadedState extends AreaState {
   final List<AreaResponse> areaResponse;
 

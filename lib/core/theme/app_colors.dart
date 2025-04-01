@@ -8,6 +8,7 @@ class AppColors {
   static const Color secondaryColor = Color(0XFF002336);
   static const Color homeBG = Color(0XFFeff5f6);
   static const Color drawerBG = Color(0XFFeff5f6);
+  static const Color mustTryBG = Color(0XFFC65F22);
   static const Color black = Colors.black;
   static const Color white = Colors.white;
   static const Color red = Colors.red;

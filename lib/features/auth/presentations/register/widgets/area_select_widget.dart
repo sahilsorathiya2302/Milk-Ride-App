@@ -63,9 +63,7 @@ class _AreaSelectWidgetState extends State<AreaSelectWidget> {
           builder: (context) {
             return BlocBuilder<AreaCubit, AreaState>(
               builder: (context, state) {
-                if (state is AreaLoading) {
-                  return CircularProgressIndicator();
-                } else if (state is AreaLoadedState) {
+                if (state is AreaLoadedState) {
                   final item = state.areaResponse;
                   return Column(
                     mainAxisSize: MainAxisSize.min,
@@ -96,8 +94,11 @@ class _AreaSelectWidgetState extends State<AreaSelectWidget> {
                       ),
                     ],
                   );
+                } else if (state is AreaError) {
+                  return CustomText(text: state.errorMessage);
+                } else {
+                  return Text('An Occurred Error');
                 }
-                return CircularProgressIndicator();
               },
             );
           },

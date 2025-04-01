@@ -95,4 +95,7 @@ class AppString {
   static const String verified = "Verified by Milk Ride";
   static const String emailNull = "null";
   static const String notFound = "Not Found";
+  static const String allCategories = "All Categories";
+  static const String categoryProduct = "Category Product";
+  static const String rupeeSymbol = "₹";
 }

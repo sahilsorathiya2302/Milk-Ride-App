@@ -1,4 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:milk_ride_live_wc/features/auth/presentations/cubit/area/area_state.dart';
 
 import '../../../../../core/constants/app_string.dart';
@@ -14,6 +16,7 @@ class AreaCubit extends Cubit<AreaState> {
   }
 
   Future<void> getArea({required int id}) async {
+    Get.context!.loaderOverlay.show();
     final result = await areaUseCase.call(AreaParam(id: id));
     result.fold(
       (failure) {
@@ -24,5 +27,6 @@ class AreaCubit extends Cubit<AreaState> {
         emit(AreaLoadedState(areaResponse: response));
       },
     );
+    Get.context!.loaderOverlay.hide();
   }
 }

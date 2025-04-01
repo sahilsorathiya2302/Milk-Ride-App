@@ -22,26 +22,16 @@ class DefaultInterceptor extends Interceptor {
       options.headers["Authorization"] = "Bearer $token";
     }
 
-    // print("🌍 [REQUEST] ${options.method}: ${options.uri}");
-    // print("📩 Headers: ${options.headers}");
-    // if (options.data != null) print("📦 Body: ${options.data}");
-
     handler.next(options);
   }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    // print("✅ [RESPONSE] ${response.statusCode}: ${response.realUri}");
-    // print("📤 Data: ${response.data}");
-
     handler.next(response);
   }
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    // print("❌ [ERROR] ${err.response?.statusCode}: ${err.message}");
-    // print("📝 Response: ${err.response?.data}");
-
     handler.next(err);
   }
 }
