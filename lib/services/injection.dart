@@ -18,9 +18,13 @@ import 'package:milk_ride_live_wc/features/product/data/repositories/product_imp
 import 'package:milk_ride_live_wc/features/product/data/repositories/product_impl_repository.dart';
 import 'package:milk_ride_live_wc/features/product/domain/repositories/product_repository.dart';
 import 'package:milk_ride_live_wc/features/product/domain/usecase/categories_product_use_case.dart';
+import 'package:milk_ride_live_wc/features/product/domain/usecase/product_use_case.dart';
 import 'package:milk_ride_live_wc/features/product/domain/usecase/view_category_use_case.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/categories/categories_cubit.dart';
+import 'package:milk_ride_live_wc/features/product/presentation/cubit/delivery/delivery_type_cubit.dart';
+import 'package:milk_ride_live_wc/features/product/presentation/cubit/discount/discount_cubit.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/product/product_cubit.dart';
+import 'package:milk_ride_live_wc/features/product/presentation/cubit/product_details/product_details_cubit.dart';
 import 'package:milk_ride_live_wc/features/splash/cubit/splash_cubit.dart';
 import 'package:milk_ride_live_wc/services/api_service.dart';
 
@@ -115,8 +119,17 @@ void setLocator() {
   getIt.registerLazySingleton(
     () => CategoriesProductUseCase(productRepository: getIt()),
   );
+
+  getIt.registerLazySingleton(
+    () => ProductUseCase(productRepository: getIt()),
+  );
   getIt.registerSingleton(ProductCubit(
     categoriesProductUseCase: getIt(),
   ));
+  getIt.registerSingleton(ProductDetailsCubit(
+    productUseCase: getIt(),
+  ));
   getIt.registerSingleton(CategoriesCubit(viewCategoryUseCase: getIt()));
+  getIt.registerSingleton(DeliveryTypeCubit());
+  getIt.registerSingleton(DiscountCubit());
 }

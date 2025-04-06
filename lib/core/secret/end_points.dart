@@ -9,6 +9,7 @@ class EndPoints {
   static const String home = "home";
   static const String allCategory = "all-category";
   static const String categoryProduct = "category-products";
+  static const String product = "product-view";
 
   static const String getAreas = "{id}";
 }

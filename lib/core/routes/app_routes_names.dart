@@ -9,4 +9,5 @@ class AppRoutesNames {
   static const String homeScreen = "/homeScreen";
   static const String viewCategories = "/viewCategories";
   static const String categoryProduct = "/categoryProduct";
+  static const String productDetails = "/productDetails";
 }

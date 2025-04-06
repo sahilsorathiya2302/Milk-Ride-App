@@ -9,6 +9,8 @@ abstract class CategoriesState extends Equatable {
 
 class CategoriesInitial extends CategoriesState {}
 
+class CategoriesLoading extends CategoriesState {}
+
 class CategoriesLoaded extends CategoriesState {
   final ViewCategoryResponse viewCategoryResponse;
 

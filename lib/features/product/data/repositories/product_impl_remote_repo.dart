@@ -1,5 +1,7 @@
 import 'package:milk_ride_live_wc/features/product/domain/entities/categories_product_response.dart';
+import 'package:milk_ride_live_wc/features/product/domain/entities/product_response.dart';
 import 'package:milk_ride_live_wc/features/product/domain/usecase/categories_product_use_case.dart';
+import 'package:milk_ride_live_wc/features/product/domain/usecase/product_use_case.dart';
 import 'package:milk_ride_live_wc/features/product/domain/usecase/view_category_use_case.dart';
 import 'package:milk_ride_live_wc/services/api_service.dart';
 
@@ -11,7 +13,11 @@ abstract class ProductRemoteRepo {
 
   Future<CategoriesProductResponse> categoriesProduct(
       {required CategoriesProductParam param});
+
+  Future<ProductResponse> product({required ProductParam param});
 }
+
+/// ProductImplRemoteRepo
 
 class ProductImplRemoteRepo extends ProductRemoteRepo {
   final ApiService apiService;
@@ -32,5 +38,11 @@ class ProductImplRemoteRepo extends ProductRemoteRepo {
       customerId: param.customerId,
       categoryId: param.categoryId,
     );
+  }
+
+  @override
+  Future<ProductResponse> product({required ProductParam param}) {
+    return apiService.product(
+        customerId: param.customerId, productId: param.productId);
   }
 }

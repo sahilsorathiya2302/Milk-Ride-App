@@ -42,7 +42,7 @@ class FunctionalComponent {
     );
   }
 
-  static void errorSnackbar(String title, String message) {
+  static void errorSnackbar({required String title, required String message}) {
     Get.snackbar(
       AppString.empty,
       AppString.empty,

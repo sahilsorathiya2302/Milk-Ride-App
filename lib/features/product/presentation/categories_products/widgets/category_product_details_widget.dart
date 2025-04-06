@@ -7,7 +7,7 @@ import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
 import 'package:milk_ride_live_wc/core/theme/app_text_size.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_text.dart';
 
-class ProductInfoWidget extends StatelessWidget {
+class CategoryProductDetailsWidget extends StatelessWidget {
   final String brand;
   final String name;
   final String volume;
@@ -15,7 +15,7 @@ class ProductInfoWidget extends StatelessWidget {
   final String mrp;
   final String sellMrp;
 
-  const ProductInfoWidget(
+  const CategoryProductDetailsWidget(
       {super.key,
       required this.brand,
       required this.name,
@@ -57,9 +57,7 @@ class ProductInfoWidget extends StatelessWidget {
         ),
         Row(
           children: [
-            packageVolumeText(text: packageSize),
-            5.width,
-            packageVolumeText(text: volume),
+            packageVolumeText(text: "$packageSize" " $volume"),
           ],
         ),
         Row(

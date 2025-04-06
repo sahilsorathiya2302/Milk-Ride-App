@@ -1,10 +1,10 @@
-import 'package:milk_ride_live_wc/features/product/domain/entities/categories_product_data.dart';
+import 'package:milk_ride_live_wc/features/product/domain/entities/product_data.dart';
 
 class CategoriesProductResponse {
   final String? status;
   final int? statusCode;
   final String? message;
-  final List<CategoriesProductData>? data;
+  final List<ProductData>? data;
 
   CategoriesProductResponse(
       {required this.status,

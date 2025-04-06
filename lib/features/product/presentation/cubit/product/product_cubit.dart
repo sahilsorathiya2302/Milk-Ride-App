@@ -7,26 +7,31 @@ import '../../../../../core/utils/functional_component.dart';
 
 class ProductCubit extends Cubit<ProductState> {
   final CategoriesProductUseCase categoriesProductUseCase;
+
   ProductCubit({
     required this.categoriesProductUseCase,
   }) : super(ProductInitial());
 
   Future<void> categoriesProduct(
       {required int customerId, required categoryId}) async {
-    // Get.context!.loaderOverlay.show();
     emit(ProductLoading());
     final result = await categoriesProductUseCase.call(
         CategoriesProductParam(categoryId: categoryId, customerId: customerId));
 
     result.fold(
-      (failure) =>
-          FunctionalComponent.errorSnackbar(AppString.error, failure.message),
+      (failure) {
+        print("MEssage ==========================>${failure.message}");
+        FunctionalComponent.errorSnackbar(
+            title: AppString.error, message: failure.message);
+      },
       (result) {
+        print("Hello==========================>");
         if (result.status == AppString.success) {
           emit(ProductLoadedState(categoriesProductResponse: result));
         } else if (result.status == AppString.error) {
           FunctionalComponent.errorSnackbar(
-              result.status.toString(), result.message.toString());
+              title: result.status.toString(),
+              message: result.message.toString());
         }
       },
     );

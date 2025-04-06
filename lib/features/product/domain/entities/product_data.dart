@@ -1,8 +1,10 @@
-class Seasonal {
+class ProductData {
   int? id;
   String? name;
-  String? salePrice;
-  String? mrpPrice;
+  dynamic salePrice;
+  String? salePriceDecimal;
+  dynamic mrpPrice;
+  String? mrpPriceDecimal;
   String? indexType;
   int? productId;
   String? packageSize;
@@ -13,11 +15,13 @@ class Seasonal {
   bool? isEggless;
   bool? mustTry;
 
-  Seasonal(
+  ProductData(
       {this.id,
       this.name,
       this.salePrice,
+      this.salePriceDecimal,
       this.mrpPrice,
+      this.mrpPriceDecimal,
       this.indexType,
       this.productId,
       this.packageSize,
@@ -28,11 +32,13 @@ class Seasonal {
       this.isEggless,
       this.mustTry});
 
-  Seasonal.fromJson(Map<String, dynamic> json) {
+  ProductData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     salePrice = json['sale_price'];
+    salePriceDecimal = json['sale_price_decimal'];
     mrpPrice = json['mrp_price'];
+    mrpPriceDecimal = json['mrp_price_decimal'];
     indexType = json['index_type'];
     productId = json['product_id'];
     packageSize = json['package_size'];
@@ -49,7 +55,9 @@ class Seasonal {
     data['id'] = this.id;
     data['name'] = this.name;
     data['sale_price'] = this.salePrice;
+    data['sale_price_decimal'] = this.salePriceDecimal;
     data['mrp_price'] = this.mrpPrice;
+    data['mrp_price_decimal'] = this.mrpPriceDecimal;
     data['index_type'] = this.indexType;
     data['product_id'] = this.productId;
     data['package_size'] = this.packageSize;

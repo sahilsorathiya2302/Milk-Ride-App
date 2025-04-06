@@ -19,13 +19,13 @@ class HomeCubit extends Cubit<HomeState> {
         devicesId: param.devicesId));
 
     response.fold(
-      (failure) => emit(HomeError(errorMessage: failure.message)),
+      (failure) => emit(HomeError(failure: failure)),
       (response) {
         if (response.status == AppString.success) {
           emit(HomeLoaded(homeResponse: response));
         } else if (response.status == AppString.error) {
           FunctionalComponent.errorSnackbar(
-              AppString.error, response.message.toString());
+              title: AppString.error, message: response.message.toString());
         }
       },
     );

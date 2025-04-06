@@ -22,7 +22,8 @@ class RegionsSourcesCubit extends Cubit<RegionsSourcesState> {
 
     result.fold(
       (failure) {
-        FunctionalComponent.errorSnackbar(AppString.error, failure.message);
+        FunctionalComponent.errorSnackbar(
+            title: AppString.error, message: failure.message);
         emit(RegionsSourcesError(errorMessage: failure.message));
       },
       (response) {

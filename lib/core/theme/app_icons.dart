@@ -22,4 +22,8 @@ class AppIcons {
   static const IconData copy = Icons.copy;
   static const IconData wallet = Icons.wallet;
   static const IconData credit = Icons.credit_card;
+  static const IconData add = Icons.add;
+  static const IconData remove = Icons.remove;
+  static const IconData arrowDropDown = Icons.arrow_drop_down;
+  static const IconData close = Icons.close;
 }

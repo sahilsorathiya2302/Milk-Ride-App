@@ -1,21 +1,20 @@
-import 'package:milk_ride_live_wc/features/home/domain/entities/new_arrival.dart';
-import 'package:milk_ride_live_wc/features/home/domain/entities/seasonal.dart';
+import 'package:milk_ride_live_wc/features/home/domain/entities/banners.dart';
+import 'package:milk_ride_live_wc/features/product/domain/entities/product_data.dart';
 
 import '../../../auth/domain/entities/customer.dart';
-import 'best_seller.dart';
-import 'cetegories.dart';
+import '../../../product/domain/entities/cetegories.dart';
 import 'config.dart';
 
 class HomeData {
   Config? config;
   Customer? customer;
-  List<dynamic>? headerBanners;
+  List<Banners>? headerBanners;
   List<Categories>? categories;
-  List<BestSeller>? bestSeller;
-  List<dynamic>? middleBanners;
-  List<NewArrival>? newArrival;
-  List<dynamic>? footerBanners;
-  List<Seasonal>? seasonal;
+  List<ProductData>? bestSeller;
+  List<Banners>? middleBanners;
+  List<ProductData>? newArrival;
+  List<Banners>? footerBanners;
+  List<ProductData>? seasonal;
   int? isVacation;
   int? cartQty;
   List<dynamic>? referralProgram;
@@ -40,7 +39,12 @@ class HomeData {
     customer = json['customer'] != null
         ? new Customer.fromJson(json['customer'])
         : null;
-
+    if (json['headerBanners'] != null) {
+      headerBanners = <Banners>[];
+      json['headerBanners'].forEach((v) {
+        headerBanners!.add(new Banners.fromJson(v));
+      });
+    }
     if (json['categories'] != null) {
       categories = <Categories>[];
       json['categories'].forEach((v) {
@@ -48,23 +52,33 @@ class HomeData {
       });
     }
     if (json['bestSeller'] != null) {
-      bestSeller = <BestSeller>[];
+      bestSeller = <ProductData>[];
       json['bestSeller'].forEach((v) {
-        bestSeller!.add(new BestSeller.fromJson(v));
+        bestSeller!.add(new ProductData.fromJson(v));
       });
     }
-
+    if (json['middleBanners'] != null) {
+      middleBanners = <Banners>[];
+      json['middleBanners'].forEach((v) {
+        middleBanners!.add(new Banners.fromJson(v));
+      });
+    }
     if (json['newArrival'] != null) {
-      newArrival = <NewArrival>[];
+      newArrival = <ProductData>[];
       json['newArrival'].forEach((v) {
-        newArrival!.add(new NewArrival.fromJson(v));
+        newArrival!.add(new ProductData.fromJson(v));
       });
     }
-
+    if (json['footerBanners'] != null) {
+      footerBanners = <Banners>[];
+      json['footerBanners'].forEach((v) {
+        footerBanners!.add(new Banners.fromJson(v));
+      });
+    }
     if (json['seasonal'] != null) {
-      seasonal = <Seasonal>[];
+      seasonal = <ProductData>[];
       json['seasonal'].forEach((v) {
-        seasonal!.add(new Seasonal.fromJson(v));
+        seasonal!.add(new ProductData.fromJson(v));
       });
     }
     isVacation = json['isVacation'];

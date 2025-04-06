@@ -38,7 +38,8 @@ class AuthCubit extends Cubit<AuthState> {
 
     result.fold(
       (failure) {
-        FunctionalComponent.errorSnackbar(AppString.error, failure.message);
+        FunctionalComponent.errorSnackbar(
+            title: AppString.error, message: failure.message);
       },
       (response) {
         if (response.status == AppString.success) {
@@ -51,7 +52,8 @@ class AuthCubit extends Cubit<AuthState> {
           StorageManager.saveData(StorageKeys.mobileNumber, mobileNumber);
           StorageManager.saveData(StorageKeys.userId, response.userId);
         } else if (response.status == AppString.error) {
-          FunctionalComponent.errorSnackbar(response.status, response.message);
+          FunctionalComponent.errorSnackbar(
+              title: response.status, message: response.message);
         }
       },
     );
@@ -69,7 +71,7 @@ class AuthCubit extends Cubit<AuthState> {
 
     result.fold((failure) {
       FunctionalComponent.errorSnackbar(
-          AppString.error, failure.message.toString());
+          title: AppString.error, message: failure.message.toString());
     }, (result) {
       if (result.status == AppString.success) {
         FunctionalComponent.successSnackbar(
@@ -89,7 +91,8 @@ class AuthCubit extends Cubit<AuthState> {
         }
       } else if (result.status == AppString.error) {
         FunctionalComponent.errorSnackbar(
-            result.status.toString(), result.message.toString());
+            title: result.status.toString(),
+            message: result.message.toString());
       }
     });
     Get.context!.loaderOverlay.hide();
@@ -103,8 +106,8 @@ class AuthCubit extends Cubit<AuthState> {
         .call(ResendOtpParam(mobileNumber: mobileNumber, userId: userId));
 
     result.fold(
-      (failure) =>
-          FunctionalComponent.errorSnackbar(AppString.error, failure.message),
+      (failure) => FunctionalComponent.errorSnackbar(
+          title: AppString.error, message: failure.message),
       (result) {
         if (result.status == AppString.success) {
           FunctionalComponent.successSnackbar(
@@ -159,8 +162,8 @@ class AuthCubit extends Cubit<AuthState> {
         mobileNumber: mobileNumber));
 
     result.fold(
-      (failure) =>
-          FunctionalComponent.errorSnackbar(AppString.error, failure.message),
+      (failure) => FunctionalComponent.errorSnackbar(
+          title: AppString.error, message: failure.message),
       (result) {
         if (result.status == AppString.success) {
           Get.toNamed(AppRoutesNames.homeScreen);
@@ -171,7 +174,7 @@ class AuthCubit extends Cubit<AuthState> {
               AppString.success, result.message.toString());
         } else if (result.status == AppString.error) {
           FunctionalComponent.errorSnackbar(
-              AppString.error, result.message.toString());
+              title: AppString.error, message: result.message.toString());
         }
       },
     );

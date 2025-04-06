@@ -17,6 +17,8 @@ class AppColors {
 
   static const Color blue = Colors.blueAccent;
   static const Color shadowColor = Colors.lightBlueAccent;
+  static const Color transparent = Colors.transparent;
   static const Color pink = Colors.pink;
   static const Color orange = Color(0XFFe05320);
+  static const Color darkGrey = Color(0xFF757575);
 }

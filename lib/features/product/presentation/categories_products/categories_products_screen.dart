@@ -4,7 +4,7 @@ import 'package:milk_ride_live_wc/core/constants/app_string.dart';
 import 'package:milk_ride_live_wc/core/constants/argument_key.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_simple_app_bar.dart';
-import 'package:milk_ride_live_wc/features/product/presentation/categories_products/widgets/categories_product_info_widgets.dart';
+import 'package:milk_ride_live_wc/features/product/presentation/categories_products/widgets/categories_product_info_widget.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/product/product_cubit.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/product/product_state.dart';
 
@@ -43,10 +43,12 @@ class _CategoriesProductsScreenState extends State<CategoriesProductsScreen> {
                 child: CircularProgressIndicator(),
               );
             } else if (state is ProductLoadedState) {
-              return CategoriesProductInfoWidgets(state: state);
+              return CategoriesProductInfoWidget(
+                  state: state.categoriesProductResponse.data ?? [],
+                  customerId: widget.getArgument[ArgumentKey.customerId]);
             } else {
               return Center(
-                child: CircularProgressIndicator(),
+                child: Center(child: CircularProgressIndicator()),
               );
             }
           },

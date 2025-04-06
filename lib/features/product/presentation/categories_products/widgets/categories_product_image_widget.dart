@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:milk_ride_live_wc/core/theme/app_border_radius.dart';
 
-class ProductImageWidget extends StatelessWidget {
+class CategoriesProductImageWidget extends StatelessWidget {
   final String images;
-  const ProductImageWidget({super.key, required this.images});
+  const CategoriesProductImageWidget({super.key, required this.images});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +15,8 @@ class ProductImageWidget extends StatelessWidget {
         height: 90.h,
         width: 90.w,
         fit: BoxFit.cover,
+        cacheWidth: null, // No caching
+        cacheHeight: null,
       ),
     );
   }

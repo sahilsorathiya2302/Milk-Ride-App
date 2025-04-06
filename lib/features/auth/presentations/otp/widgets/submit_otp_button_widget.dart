@@ -49,30 +49,6 @@ class _SubmitOtpButtonWidgetState extends State<SubmitOtpButtonWidget> {
               text: AppString.submit,
             );
           },
-          // listener: (context, state) {
-          //   if (state is OtpSuccessState) {
-          //     context.loaderOverlay.hide();
-          //     final message = state.otpResponse.message;
-          //     FunctionalComponent.successSnackbar(
-          //       state.otpResponse.status.toString(),
-          //       message.toString(),
-          //     );
-          //     if (message == AppString.userCheckMessage) {
-          //       Get.toNamed(AppRoutesNames.registerScreen);
-          //     } else {
-          //       Get.toNamed(AppRoutesNames.homeScreen);
-          //     }
-          //   } else if (state is OtpFailureState) {
-          //     context.loaderOverlay.hide();
-          //     FunctionalComponent.errorSnackbar(
-          //         state.otpResponse.status.toString(),
-          //         state.otpResponse.message.toString());
-          //   } else if (state is OtpErrorState) {
-          //     context.loaderOverlay.hide();
-          //     FunctionalComponent.errorSnackbar(
-          //         AppString.error, state.errorMessage.toString());
-          //   }
-          // },
         ),
         30.height,
         ResendOtpWidget(

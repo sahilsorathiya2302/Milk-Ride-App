@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:milk_ride_live_wc/core/constants/app_string.dart';
 import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
-import 'package:milk_ride_live_wc/features/home/domain/entities/best_seller.dart';
 import 'package:milk_ride_live_wc/features/home/presentation/home_screen/widget/card_widget.dart';
 import 'package:milk_ride_live_wc/features/home/presentation/home_screen/widget/main_title_widget.dart';
+import 'package:milk_ride_live_wc/features/product/domain/entities/product_data.dart';
 
 class BestSellerWidget extends StatefulWidget {
-  final List<BestSeller>? state;
+  final List<ProductData>? state;
   const BestSellerWidget({super.key, this.state});
 
   @override
@@ -21,7 +21,7 @@ class _BestSellerWidgetState extends State<BestSellerWidget> {
       children: [
         MainTitleWidget(title: AppString.bestSeller),
         10.height,
-        CardWidget(state: widget.state!.toList()),
+        CardWidget(state: widget.state ?? []),
       ],
     );
   }

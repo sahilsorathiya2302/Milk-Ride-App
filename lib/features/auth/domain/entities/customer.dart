@@ -6,7 +6,6 @@ class Customer {
   String? gender;
   String? deliveryType;
   int? isPostpaid;
-
   String? customerReferrerCode;
   int? wallet;
   int? creditLimit;

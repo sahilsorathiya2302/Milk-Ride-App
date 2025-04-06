@@ -9,6 +9,7 @@ import 'package:milk_ride_live_wc/features/auth/data/models/regions_source_model
 import 'package:milk_ride_live_wc/features/auth/data/models/register_model.dart';
 import 'package:milk_ride_live_wc/features/home/data/models/home_model.dart';
 import 'package:milk_ride_live_wc/features/product/data/models/categories_product_model.dart';
+import 'package:milk_ride_live_wc/features/product/data/models/product_model.dart';
 import 'package:milk_ride_live_wc/features/product/data/models/view_category_model.dart';
 import 'package:milk_ride_live_wc/services/interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -120,5 +121,11 @@ abstract class ApiService {
   Future<CategoriesProductModel> categoryProduct({
     @Field("customer_id") required int customerId,
     @Field("category_id") required int categoryId,
+  });
+
+  @GET(ServerConfig.productVersion + EndPoints.product)
+  Future<ProductModel> product({
+    @Query("customer_id") required int customerId,
+    @Query("product_id") required int productId,
   });
 }

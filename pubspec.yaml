@@ -52,6 +52,10 @@ dependencies:
   get_storage: ^2.1.1
   package_info_plus: ^8.3.0
   device_info_plus: ^11.3.0
+  carousel_slider: ^5.0.0
+  cached_network_image: ^3.4.1
+  skeletonizer: ^1.4.3
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

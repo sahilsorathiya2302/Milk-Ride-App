@@ -4,6 +4,7 @@ class AppBorderRadius {
   AppBorderRadius._();
 
   static double r5 = 5.0.r;
+  static double r8 = 8.0.r;
   static double r10 = 10.0.r;
   static double r12 = 12.0.r;
   static double r14 = 14.0.r;

@@ -6,7 +6,10 @@ import 'package:milk_ride_live_wc/core/ui_component/custom_text.dart';
 class CustomSimpleAppBar extends StatelessWidget
     implements PreferredSizeWidget {
   final String title;
-  const CustomSimpleAppBar({super.key, required this.title});
+  final IconData? icon;
+  final void Function()? onPressed;
+  const CustomSimpleAppBar(
+      {super.key, required this.title, this.icon, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +20,14 @@ class CustomSimpleAppBar extends StatelessWidget
         fontSize: AppTextSize.s16,
         fontWeight: FontWeight.w700,
       ),
+      actions: [
+        IconButton(
+            onPressed: onPressed,
+            icon: Icon(
+              icon,
+              color: AppColors.black,
+            ))
+      ],
     );
   }
 

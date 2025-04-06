@@ -8,7 +8,8 @@ import 'package:milk_ride_live_wc/core/routes/app_routes_names.dart';
 import 'package:milk_ride_live_wc/core/theme/app_border_radius.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
 import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
-import 'package:milk_ride_live_wc/features/home/domain/entities/cetegories.dart';
+import 'package:milk_ride_live_wc/core/ui_component/custom_network_images.dart';
+import 'package:milk_ride_live_wc/features/product/domain/entities/cetegories.dart';
 
 import '../../../../../core/ui_component/custom_view_button.dart';
 import 'main_title_widget.dart';
@@ -35,7 +36,6 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                 arguments: {ArgumentKey.customerId: widget.customerId});
           },
         ),
-        10.height,
         SizedBox(
           height: 130.h,
           child: ListView.builder(
@@ -61,12 +61,11 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                       5.height,
                       ClipRRect(
                         borderRadius: BorderRadius.circular(AppBorderRadius.r5),
-                        child: Image.network(
-                          categories.imageUrl ??
+                        child: CustomNetworkImages(
+                          src: categories.imageUrl ??
                               "https://via.placeholder.com/80",
-                          height: 80,
-                          width: 80,
-                          fit: BoxFit.cover,
+                          height: 80.h,
+                          width: 80.w,
                         ),
                       ),
                       Spacer(),

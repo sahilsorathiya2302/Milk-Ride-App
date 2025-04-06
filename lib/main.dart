@@ -9,7 +9,10 @@ import 'package:milk_ride_live_wc/features/auth/presentations/cubit/area/area_cu
 import 'package:milk_ride_live_wc/features/auth/presentations/cubit/auth/auth_cubit.dart';
 import 'package:milk_ride_live_wc/features/auth/presentations/cubit/regions_and_sources/regions_sources_cubit.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/categories/categories_cubit.dart';
+import 'package:milk_ride_live_wc/features/product/presentation/cubit/delivery/delivery_type_cubit.dart';
+import 'package:milk_ride_live_wc/features/product/presentation/cubit/discount/discount_cubit.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/product/product_cubit.dart';
+import 'package:milk_ride_live_wc/features/product/presentation/cubit/product_details/product_details_cubit.dart';
 import 'package:milk_ride_live_wc/features/splash/cubit/splash_cubit.dart';
 import 'package:milk_ride_live_wc/services/injection.dart';
 
@@ -49,6 +52,15 @@ class MyApp extends StatelessWidget {
             create: (context) => getIt(),
           ),
           BlocProvider<CategoriesCubit>(
+            create: (context) => getIt(),
+          ),
+          BlocProvider<ProductDetailsCubit>(
+            create: (context) => getIt(),
+          ),
+          BlocProvider<DeliveryTypeCubit>(
+            create: (context) => getIt(),
+          ),
+          BlocProvider<DiscountCubit>(
             create: (context) => getIt(),
           ),
         ],

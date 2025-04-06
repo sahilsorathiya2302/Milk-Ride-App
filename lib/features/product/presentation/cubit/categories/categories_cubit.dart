@@ -10,18 +10,20 @@ class CategoriesCubit extends Cubit<CategoriesState> {
       : super(CategoriesInitial());
 
   Future<void> viewCategory(int userId) async {
+    emit(CategoriesLoading());
     final result =
         await viewCategoryUseCase.call(ViewCategoryParam(userId: userId));
 
     result.fold(
-      (failure) =>
-          FunctionalComponent.errorSnackbar(AppString.error, failure.message),
+      (failure) => FunctionalComponent.errorSnackbar(
+          title: AppString.error, message: failure.message),
       (result) {
         if (result.status == AppString.success) {
           emit(CategoriesLoaded(viewCategoryResponse: result));
         } else if (result.status == AppString.error) {
           FunctionalComponent.errorSnackbar(
-              result.status.toString(), result.message.toString());
+              title: result.status.toString(),
+              message: result.message.toString());
         }
       },
     );

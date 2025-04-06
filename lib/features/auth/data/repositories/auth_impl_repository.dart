@@ -23,7 +23,7 @@ class AuthImplRepository extends AuthRepository {
           mobileNumber: mobileNumber, userId: userId);
       return right(result);
     } catch (e) {
-      return left(Failure(message: e.toString()));
+      return left(ServerFailure(message: e.toString()));
     }
   }
 
@@ -34,7 +34,7 @@ class AuthImplRepository extends AuthRepository {
 
       return right(result);
     } catch (e) {
-      return left(Failure(message: e.toString()));
+      return left(ServerFailure(message: e.toString()));
     }
   }
 
@@ -48,7 +48,7 @@ class AuthImplRepository extends AuthRepository {
           mobileNumber: mobileNumber, userId: userId, otp: otp);
       return right(response);
     } catch (e) {
-      return left(Failure(message: e.toString()));
+      return left(ServerFailure(message: e.toString()));
     }
   }
 
@@ -60,7 +60,7 @@ class AuthImplRepository extends AuthRepository {
           mobileNumber: mobileNumber, userId: userId);
       return right(response);
     } catch (e) {
-      return left(Failure(message: e.toString()));
+      return left(ServerFailure(message: e.toString()));
     }
   }
 
@@ -71,7 +71,7 @@ class AuthImplRepository extends AuthRepository {
       final response = await authRemoteRepo.userRegister(param: param);
       return right(response);
     } catch (e) {
-      return left(Failure(message: e.toString()));
+      return left(ServerFailure(message: e.toString()));
     }
   }
 
@@ -83,7 +83,7 @@ class AuthImplRepository extends AuthRepository {
           mobileNumber: mobileNumber, userId: userId);
       return right(response);
     } catch (e) {
-      return left(Failure(message: e.toString()));
+      return left(ServerFailure(message: e.toString()));
     }
   }
 }

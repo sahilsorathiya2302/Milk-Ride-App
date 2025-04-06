@@ -20,7 +20,8 @@ class AreaCubit extends Cubit<AreaState> {
     final result = await areaUseCase.call(AreaParam(id: id));
     result.fold(
       (failure) {
-        FunctionalComponent.errorSnackbar(AppString.error, failure.message);
+        FunctionalComponent.errorSnackbar(
+            title: AppString.error, message: failure.message);
         emit(AreaError(errorMessage: failure.message));
       },
       (response) {

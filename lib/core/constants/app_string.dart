@@ -98,4 +98,21 @@ class AppString {
   static const String allCategories = "All Categories";
   static const String categoryProduct = "Category Product";
   static const String rupeeSymbol = "₹";
+  static const String productDetails = "Product Details";
+  static const String eggLess = "Egg Less";
+  static const String deliveryType = "Delivery Type";
+  static const String morning = "Morning";
+  static const String evening = "Evening";
+  static const String purchaseFor = "Purchase For";
+  static const String buy = "Buy Once";
+  static const String subscription = "Subscription";
+  static const String totalAmount = "Total Amount";
+  static const String texes = "(inclusive of all texes)";
+  static const String app = "app";
+  static const String android = "android";
+  static const String addToCart = "Add to Cart";
+  static const String option = "Option";
+  static const String selectQuantityLimitMess =
+      "please choose quantity between 1 to 50.";
+  static const String chooseDeliveryType = "Choose Delivery Type:";
 }

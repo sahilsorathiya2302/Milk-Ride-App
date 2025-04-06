@@ -47,8 +47,8 @@ class _AreaSelectWidgetState extends State<AreaSelectWidget> {
       onTap: () async {
         if (widget.preventOpen) {
           FunctionalComponent.errorSnackbar(
-            AppString.error,
-            AppString.citySelectMessage,
+            title: AppString.error,
+            message: AppString.citySelectMessage,
           );
           return;
         }

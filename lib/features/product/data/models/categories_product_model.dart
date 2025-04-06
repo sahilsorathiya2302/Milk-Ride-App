@@ -1,5 +1,5 @@
-import 'package:milk_ride_live_wc/features/product/domain/entities/categories_product_data.dart';
 import 'package:milk_ride_live_wc/features/product/domain/entities/categories_product_response.dart';
+import 'package:milk_ride_live_wc/features/product/domain/entities/product_data.dart';
 
 class CategoriesProductModel extends CategoriesProductResponse {
   CategoriesProductModel(
@@ -11,9 +11,7 @@ class CategoriesProductModel extends CategoriesProductResponse {
       statusCode: json['statusCode'],
       message: json['message'],
       data: json['data'] != null
-          ? (json['data'] as List)
-              .map((v) => CategoriesProductData.fromJson(v))
-              .toList()
+          ? (json['data'] as List).map((v) => ProductData.fromJson(v)).toList()
           : null,
     );
   }

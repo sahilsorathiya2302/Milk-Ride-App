@@ -47,7 +47,8 @@ class _CityAndAreaSelectWidgetState extends State<CitySelectWidget> {
                 onTap: () {
                   if (widget.preventOpen) {
                     FunctionalComponent.errorSnackbar(
-                        AppString.error, AppString.citySelectMessage);
+                        title: AppString.error,
+                        message: AppString.citySelectMessage);
                     return;
                   }
                   showModalBottomSheet(
