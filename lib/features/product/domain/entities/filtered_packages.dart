@@ -19,15 +19,16 @@ class FilteredPackages {
   bool? mustTry;
   int? minQtyAllow;
   int? maxQtyAllow;
-  Null otherInfo;
-  Null storageUsage;
-  Null benefits;
-  Null description;
+  dynamic otherInfo;
+  dynamic storageUsage;
+  dynamic benefits;
+  dynamic description;
   int? percentageDifference;
   bool? inStock;
   bool? isTrial;
-  Null trialPackage;
+  dynamic trialPackage;
   bool? isSubscriptionPlan;
+  String? planTitle;
 
   FilteredPackages(
       {this.id,
@@ -94,35 +95,35 @@ class FilteredPackages {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['sale_price'] = this.salePrice;
-    data['sale_price_decimal'] = this.salePriceDecimal;
-    data['mrp_price'] = this.mrpPrice;
-    data['mrp_price_decimal'] = this.mrpPriceDecimal;
-    data['index_type'] = this.indexType;
-    data['product_id'] = this.productId;
-    data['package_size'] = this.packageSize;
-    data['image_url'] = this.imageUrl;
-    data['brand'] = this.brand;
-    data['volume'] = this.volume;
-    data['food_type'] = this.foodType;
-    data['is_eggless'] = this.isEggless;
-    data['delivery_type'] = this.deliveryType;
-    data['allow_in_cart'] = this.allowInCart;
-    data['allow_in_subscription'] = this.allowInSubscription;
-    data['must_try'] = this.mustTry;
-    data['min_qty_allow'] = this.minQtyAllow;
-    data['max_qty_allow'] = this.maxQtyAllow;
-    data['other_info'] = this.otherInfo;
-    data['storage_usage'] = this.storageUsage;
-    data['benefits'] = this.benefits;
-    data['description'] = this.description;
-    data['percentage_difference'] = this.percentageDifference;
-    data['in_stock'] = this.inStock;
-    data['is_trial'] = this.isTrial;
-    data['trial_package'] = this.trialPackage;
-    data['is_subscription_plan'] = this.isSubscriptionPlan;
+    data['id'] = id;
+    data['name'] = name;
+    data['sale_price'] = salePrice;
+    data['sale_price_decimal'] = salePriceDecimal;
+    data['mrp_price'] = mrpPrice;
+    data['mrp_price_decimal'] = mrpPriceDecimal;
+    data['index_type'] = indexType;
+    data['product_id'] = productId;
+    data['package_size'] = packageSize;
+    data['image_url'] = imageUrl;
+    data['brand'] = brand;
+    data['volume'] = volume;
+    data['food_type'] = foodType;
+    data['is_eggless'] = isEggless;
+    data['delivery_type'] = deliveryType;
+    data['allow_in_cart'] = allowInCart;
+    data['allow_in_subscription'] = allowInSubscription;
+    data['must_try'] = mustTry;
+    data['min_qty_allow'] = minQtyAllow;
+    data['max_qty_allow'] = maxQtyAllow;
+    data['other_info'] = otherInfo;
+    data['storage_usage'] = storageUsage;
+    data['benefits'] = benefits;
+    data['description'] = description;
+    data['percentage_difference'] = percentageDifference;
+    data['in_stock'] = inStock;
+    data['is_trial'] = isTrial;
+    data['trial_package'] = trialPackage;
+    data['is_subscription_plan'] = isSubscriptionPlan;
     return data;
   }
 }

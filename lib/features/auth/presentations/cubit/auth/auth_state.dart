@@ -6,3 +6,9 @@ class AuthState extends Equatable {
 }
 
 class AuthInitial extends AuthState {}
+
+class AuthError extends AuthState {
+  final String errorMessage;
+
+  AuthError({required this.errorMessage});
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:milk_ride_live_wc/core/constants/app_string.dart';
 import 'package:milk_ride_live_wc/core/theme/app_border_radius.dart';
@@ -6,17 +7,26 @@ import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
 import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
 import 'package:milk_ride_live_wc/core/theme/app_text_size.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_text.dart';
+import 'package:milk_ride_live_wc/features/product/presentation/cubit/product_details/product_details_cubit.dart';
+import 'package:milk_ride_live_wc/features/subscription/presentation/cubit/subscription_cubit.dart';
 
 class AddToCartButtonWidget extends StatelessWidget {
-  final int selaPrice;
+  final int customerId;
+
   final int quantity;
-  const AddToCartButtonWidget(
-      {super.key, required this.selaPrice, required this.quantity});
+  final int userId;
+
+  const AddToCartButtonWidget({
+    super.key,
+    required this.quantity,
+    required this.customerId,
+    required this.userId,
+  });
 
   @override
   Widget build(BuildContext context) {
-    print(quantity);
-    print(selaPrice);
+    final cubit = context.read<ProductDetailsCubit>();
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -30,7 +40,23 @@ class AddToCartButtonWidget extends StatelessWidget {
                   340.w,
                   60.h,
                 )),
-            onPressed: () {},
+            onPressed: () {
+              context.read<SubscriptionCubit>().addToCart(
+                  packageId: cubit.selectedProduct?.id ?? 1,
+                  customerId: customerId,
+                  userId: userId,
+                  frequencyType: AppString.oneTime,
+                  frequencyValue: AppString.empty,
+                  qty: quantity,
+                  schedule: AppString.oneTime,
+                  dayWiseQuantity: 0,
+                  deliveryType: cubit.deliveryType.toString(),
+                  startDate: AppString.empty,
+                  endDate: AppString.empty,
+                  trialProduct: 0,
+                  noOfUsages: 0,
+                  productId: cubit.selectedProduct?.productId ?? 1);
+            },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -39,7 +65,8 @@ class AddToCartButtonWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: "${AppString.rupeeSymbol}${selaPrice * quantity}",
+                      text:
+                          "${AppString.rupeeSymbol}${cubit.totalPrice.toStringAsFixed(2)}",
                       fontSize: AppTextSize.s14,
                       fontWeight: FontWeight.w700,
                     ),

@@ -8,15 +8,21 @@ import 'package:milk_ride_live_wc/core/storage/storage_keys.dart';
 import 'package:milk_ride_live_wc/core/storage/storage_manager.dart';
 import 'package:milk_ride_live_wc/core/theme/app_border_radius.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
+import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
 import 'package:milk_ride_live_wc/core/theme/app_text_size.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_network_images.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_text.dart';
+import 'package:milk_ride_live_wc/core/ui_component/network_fail_card.dart';
+import 'package:milk_ride_live_wc/features/product/presentation/categories/widgets/categories_shimmer_place_holder.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/categories/categories_cubit.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/categories/categories_state.dart';
 
 class CategoriesIntoWidget extends StatefulWidget {
   final int customerId;
-  const CategoriesIntoWidget({super.key, required this.customerId});
+  final String configImage;
+
+  const CategoriesIntoWidget(
+      {super.key, required this.customerId, required this.configImage});
 
   @override
   State<CategoriesIntoWidget> createState() => _CategoriesIntoWidgetState();
@@ -36,13 +42,20 @@ class _CategoriesIntoWidgetState extends State<CategoriesIntoWidget> {
     return BlocBuilder<CategoriesCubit, CategoriesState>(
         builder: (context, state) {
       if (state is CategoriesLoading) {
-        return Center(child: CircularProgressIndicator());
+        return Center(child: CategoriesShimmerPlaceHolder());
+      } else if (state is CategoriesError) {
+        return Expanded(
+          child: Align(
+            alignment: Alignment.center,
+            child: NetworkFailCard(message: state.errorMessage),
+          ),
+        );
       } else if (state is CategoriesLoaded) {
         return Expanded(
           child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 1.0,
+              crossAxisCount: 3,
+              childAspectRatio: 0.75,
             ),
             itemCount: state.viewCategoryResponse.data?.length,
             itemBuilder: (BuildContext context, int index) {
@@ -51,40 +64,64 @@ class _CategoriesIntoWidgetState extends State<CategoriesIntoWidget> {
                 onTap: () {
                   Get.toNamed(AppRoutesNames.categoryProduct, arguments: {
                     ArgumentKey.categoryId: categoriesInfo?.id,
-                    ArgumentKey.customerId: widget.customerId
+                    ArgumentKey.customerId: widget.customerId,
+                    ArgumentKey.categoriesName: categoriesInfo?.name,
+                    ArgumentKey.configImage: widget.configImage
                   });
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                      color: AppColors.primaryLightColor,
-                      borderRadius: BorderRadius.circular(AppBorderRadius.r10)),
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(AppBorderRadius.r8)),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ClipRRect(
-                        borderRadius:
-                            BorderRadius.circular(AppBorderRadius.r10),
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(AppBorderRadius.r8),
+                            topLeft: Radius.circular(AppBorderRadius.r8)),
                         child: CustomNetworkImages(
-                          src: categoriesInfo?.imageUrl.toString() ?? "",
-                          height: 100,
-                          width: 100,
+                          src: categoriesInfo?.imageUrl ?? widget.configImage,
+                          height: 110.h,
                         ),
                       ),
-                      CustomText(
-                        text: categoriesInfo?.name.toString() ?? "",
-                        color: AppColors.black,
-                        fontSize: AppTextSize.s16,
-                        fontWeight: FontWeight.w700,
-                      ),
+                      1.height,
+                      Container(
+                        width: 120,
+                        decoration: BoxDecoration(
+                            color: AppColors.white,
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(AppBorderRadius.r8),
+                              bottomLeft: Radius.circular(AppBorderRadius.r8),
+                            )),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Center(
+                                child: CustomText(
+                                  text: categoriesInfo?.name.toString() ?? "",
+                                  color: AppColors.black,
+                                  fontSize: AppTextSize.s12,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
                     ],
                   ),
-                ).paddingSymmetric(horizontal: 15.w, vertical: 10.h),
+                ).paddingSymmetric(horizontal: 7.w, vertical: 10.h),
               );
             },
-          ),
+          ).paddingSymmetric(horizontal: 10),
         );
       } else {
-        return Center(child: CircularProgressIndicator());
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [CategoriesShimmerPlaceHolder()],
+        );
       }
     });
   }

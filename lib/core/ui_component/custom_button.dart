@@ -12,7 +12,7 @@ class CustomButton extends StatelessWidget {
   final String text;
   final double? textSize;
   final bool? border;
-  final bool? bgWhite;
+  final Color? color;
   final bool? textBlack;
   const CustomButton(
       {super.key,
@@ -22,18 +22,19 @@ class CustomButton extends StatelessWidget {
       this.width,
       this.textSize,
       this.border,
-      this.bgWhite,
-      this.textBlack});
+      this.textBlack,
+      this.color});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
-            side: border == true ? BorderSide(color: AppColors.black) : null,
+            side: border == true
+                ? BorderSide(color: AppColors.primaryColor)
+                : null,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(AppBorderRadius.r10)),
-            backgroundColor:
-                bgWhite == true ? AppColors.white : AppColors.primaryColor,
+            backgroundColor: color ?? AppColors.primaryColor,
             fixedSize: Size(width ?? 330.w, height ?? 45.h)),
         onPressed: onPressed,
         child: CustomText(

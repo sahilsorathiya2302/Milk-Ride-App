@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:milk_ride_live_wc/core/ui_component/network_fail_card.dart';
 import 'package:milk_ride_live_wc/core/ui_component/select_item_app_bar.dart';
 import 'package:milk_ride_live_wc/features/auth/presentations/cubit/regions_and_sources/regions_sources_state.dart';
 
@@ -37,7 +38,9 @@ class _CityAndAreaSelectWidgetState extends State<CitySelectWidget> {
   Widget build(BuildContext context) {
     return BlocBuilder<RegionsSourcesCubit, RegionsSourcesState>(
       builder: (context, state) {
-        if (state is RegionsSourcesLoaded) {
+        if (state is RegionsSourcesError) {
+          return NetworkFailCard(message: state.errorMessage);
+        } else if (state is RegionsSourcesLoaded) {
           final items = state.regionsSourcesResponse.data.regions;
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,11 +130,6 @@ class _CityAndAreaSelectWidgetState extends State<CitySelectWidget> {
                 ),
               ),
             ],
-          );
-        } else if (state is RegionsSourcesError) {
-          return Center(
-            child:
-                Text(state.errorMessage, style: TextStyle(color: Colors.red)),
           );
         }
         return const SizedBox();

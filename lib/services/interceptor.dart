@@ -16,8 +16,7 @@ class DefaultInterceptor extends Interceptor {
 
     final String? token = StorageManager.readData("token");
     //
-    print(
-        "===================================>$token"); // Ensure correct async handling
+    print("===================================>$token");
     if (token != null) {
       options.headers["Authorization"] = "Bearer $token";
     }

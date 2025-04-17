@@ -1,0 +1,94 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:milk_ride_live_wc/core/constants/app_string.dart';
+import 'package:milk_ride_live_wc/core/theme/app_border_radius.dart';
+import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
+import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
+import 'package:milk_ride_live_wc/core/theme/app_text_size.dart';
+import 'package:milk_ride_live_wc/core/ui_component/custom_text.dart';
+
+void showDeleteConfirmationDialog({required void Function()? onPressed}) {
+  showDialog(
+    context: Get.context!,
+    builder: (BuildContext context) {
+      return Dialog(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CircleAvatar(
+                radius: 30,
+                backgroundColor: AppColors.primaryLightColor,
+                child: Icon(Icons.help, size: 30, color: AppColors.white),
+              ),
+              30.height,
+              CustomText(
+                text: AppString.removeCartItemConfirm,
+                fontWeight: FontWeight.w600,
+                fontSize: AppTextSize.s14,
+              ),
+              20.height,
+              Align(
+                alignment: Alignment.center,
+                child: CustomText(
+                  textAlign: TextAlign.center,
+                  maxLine: 2,
+                  text: AppString.removeCartProductConfirm,
+                  color: AppColors.darkGrey,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              30.height,
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () => Navigator.pop(context),
+                      style: OutlinedButton.styleFrom(
+                        side: BorderSide(color: AppColors.primaryColor),
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(AppBorderRadius.r10),
+                        ),
+                      ),
+                      child: CustomText(
+                        text: AppString.cancel,
+                        fontWeight: FontWeight.w600,
+                        fontSize: AppTextSize.s14,
+                        color: AppColors.black,
+                      ),
+                    ),
+                  ),
+                  10.width,
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: onPressed,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(AppBorderRadius.r10),
+                        ),
+                      ),
+                      child: CustomText(
+                        text: AppString.yes,
+                        fontWeight: FontWeight.w600,
+                        fontSize: AppTextSize.s14,
+                        color: AppColors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}

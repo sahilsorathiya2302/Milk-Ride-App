@@ -34,51 +34,49 @@ class HomeData {
       this.referralProgram});
 
   HomeData.fromJson(Map<String, dynamic> json) {
-    config =
-        json['config'] != null ? new Config.fromJson(json['config']) : null;
-    customer = json['customer'] != null
-        ? new Customer.fromJson(json['customer'])
-        : null;
+    config = json['config'] != null ? Config.fromJson(json['config']) : null;
+    customer =
+        json['customer'] != null ? Customer.fromJson(json['customer']) : null;
     if (json['headerBanners'] != null) {
       headerBanners = <Banners>[];
       json['headerBanners'].forEach((v) {
-        headerBanners!.add(new Banners.fromJson(v));
+        headerBanners!.add(Banners.fromJson(v));
       });
     }
     if (json['categories'] != null) {
       categories = <Categories>[];
       json['categories'].forEach((v) {
-        categories!.add(new Categories.fromJson(v));
+        categories!.add(Categories.fromJson(v));
       });
     }
     if (json['bestSeller'] != null) {
       bestSeller = <ProductData>[];
       json['bestSeller'].forEach((v) {
-        bestSeller!.add(new ProductData.fromJson(v));
+        bestSeller!.add(ProductData.fromJson(v));
       });
     }
     if (json['middleBanners'] != null) {
       middleBanners = <Banners>[];
       json['middleBanners'].forEach((v) {
-        middleBanners!.add(new Banners.fromJson(v));
+        middleBanners!.add(Banners.fromJson(v));
       });
     }
     if (json['newArrival'] != null) {
       newArrival = <ProductData>[];
       json['newArrival'].forEach((v) {
-        newArrival!.add(new ProductData.fromJson(v));
+        newArrival!.add(ProductData.fromJson(v));
       });
     }
     if (json['footerBanners'] != null) {
       footerBanners = <Banners>[];
       json['footerBanners'].forEach((v) {
-        footerBanners!.add(new Banners.fromJson(v));
+        footerBanners!.add(Banners.fromJson(v));
       });
     }
     if (json['seasonal'] != null) {
       seasonal = <ProductData>[];
       json['seasonal'].forEach((v) {
-        seasonal!.add(new ProductData.fromJson(v));
+        seasonal!.add(ProductData.fromJson(v));
       });
     }
     isVacation = json['isVacation'];
@@ -86,30 +84,30 @@ class HomeData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.config != null) {
-      data['config'] = this.config!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (config != null) {
+      data['config'] = config!.toJson();
     }
-    if (this.customer != null) {
-      data['customer'] = this.customer!.toJson();
-    }
-
-    if (this.categories != null) {
-      data['categories'] = this.categories!.map((v) => v.toJson()).toList();
-    }
-    if (this.bestSeller != null) {
-      data['bestSeller'] = this.bestSeller!.map((v) => v.toJson()).toList();
+    if (customer != null) {
+      data['customer'] = customer!.toJson();
     }
 
-    if (this.newArrival != null) {
-      data['newArrival'] = this.newArrival!.map((v) => v.toJson()).toList();
+    if (categories != null) {
+      data['categories'] = categories!.map((v) => v.toJson()).toList();
+    }
+    if (bestSeller != null) {
+      data['bestSeller'] = bestSeller!.map((v) => v.toJson()).toList();
     }
 
-    if (this.seasonal != null) {
-      data['seasonal'] = this.seasonal!.map((v) => v.toJson()).toList();
+    if (newArrival != null) {
+      data['newArrival'] = newArrival!.map((v) => v.toJson()).toList();
     }
-    data['isVacation'] = this.isVacation;
-    data['cart_qty'] = this.cartQty;
+
+    if (seasonal != null) {
+      data['seasonal'] = seasonal!.map((v) => v.toJson()).toList();
+    }
+    data['isVacation'] = isVacation;
+    data['cart_qty'] = cartQty;
 
     return data;
   }

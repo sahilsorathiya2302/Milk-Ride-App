@@ -33,18 +33,18 @@ class CategoryProductDetailsWidget extends StatelessWidget {
         CustomText(
           text: brand,
           fontWeight: FontWeight.w600,
-          fontSize: AppTextSize.s12,
+          fontSize: AppTextSize.s11,
           color: AppColors.grey,
         ),
         Row(
           children: [
             SizedBox(
-              width: 80.w,
+              width: 110.w,
               child: CustomText(
                 maxLine: 2,
                 text: name,
                 fontWeight: FontWeight.w700,
-                fontSize: AppTextSize.s14,
+                fontSize: AppTextSize.s13,
               ),
             ),
             10.width,
@@ -65,14 +65,14 @@ class CategoryProductDetailsWidget extends StatelessWidget {
             CustomText(
               text: AppString.rupeeSymbol + sellMrp,
               fontWeight: FontWeight.w700,
-              fontSize: AppTextSize.s14,
+              fontSize: AppTextSize.s13,
             ),
             5.width,
             CustomText(
               textDecoration: TextDecoration.lineThrough,
               text: AppString.rupeeSymbol + mrp,
               fontWeight: FontWeight.w600,
-              fontSize: AppTextSize.s14,
+              fontSize: AppTextSize.s13,
               color: AppColors.grey,
             ),
           ],
@@ -85,7 +85,7 @@ class CategoryProductDetailsWidget extends StatelessWidget {
     return CustomText(
       text: text,
       fontWeight: FontWeight.w600,
-      fontSize: AppTextSize.s14,
+      fontSize: AppTextSize.s11,
       color: AppColors.grey,
     );
   }

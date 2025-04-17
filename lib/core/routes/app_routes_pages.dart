@@ -2,11 +2,15 @@ import 'package:get/get.dart';
 import 'package:milk_ride_live_wc/core/routes/app_routes_names.dart';
 import 'package:milk_ride_live_wc/features/auth/presentations/otp/otp_screen.dart';
 import 'package:milk_ride_live_wc/features/auth/presentations/sign_in/sign_in_screen.dart';
-import 'package:milk_ride_live_wc/features/home/presentation/home_screen/home_screen.dart';
+import 'package:milk_ride_live_wc/features/bottom_nav/bottom_nav_screen.dart';
+import 'package:milk_ride_live_wc/features/cart/presentation/cart_screen.dart';
+import 'package:milk_ride_live_wc/features/cart/presentation/widgets/success_widgets.dart';
+import 'package:milk_ride_live_wc/features/home/presentation/home_screen.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/categories/view_categories_screen.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/categories_products/categories_products_screen.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/product_details/product_details_screen.dart';
 import 'package:milk_ride_live_wc/features/splash/presentation/splash_screen.dart';
+import 'package:milk_ride_live_wc/features/subscription/presentation/subscription_screen.dart';
 
 import '../../features/auth/presentations/register/register_screen.dart';
 
@@ -51,6 +55,24 @@ class AppRoutesPages {
       page: () => ProductDetailsScreen(
         getArgument: Get.arguments,
       ),
+    ),
+    GetPage(
+      name: AppRoutesNames.subscriptionScreen,
+      page: () => SubscriptionScreen(
+        subscriptionItemArgument: Get.arguments,
+      ),
+    ),
+    GetPage(
+        name: AppRoutesNames.cartScreen,
+        page: () => CartScreen(),
+        arguments: Get.arguments),
+    GetPage(
+      name: AppRoutesNames.bottomNavScreen,
+      page: () => BottomNavScreen(),
+    ),
+    GetPage(
+      name: AppRoutesNames.successScreen,
+      page: () => SuccessWidgets(),
     ),
   ];
 }

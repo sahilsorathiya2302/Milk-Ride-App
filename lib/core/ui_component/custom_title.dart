@@ -7,11 +7,13 @@ import '../theme/app_colors.dart';
 class CustomTitle extends StatelessWidget {
   final String text;
   final Color? color;
+  final double? textSize;
 
   const CustomTitle({
     super.key,
     required this.text,
     this.color,
+    this.textSize,
   });
 
   @override
@@ -21,7 +23,7 @@ class CustomTitle extends StatelessWidget {
       style: TextStyle(
           color: color ?? AppColors.black,
           fontWeight: FontWeight.bold,
-          fontSize: AppTextSize.s22,
+          fontSize: textSize ?? AppTextSize.s22,
           fontFamily: AppString.fontFamily),
     );
   }

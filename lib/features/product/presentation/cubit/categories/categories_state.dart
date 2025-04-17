@@ -18,3 +18,9 @@ class CategoriesLoaded extends CategoriesState {
   @override
   List<Object?> get props => [viewCategoryResponse];
 }
+
+class CategoriesError extends CategoriesState {
+  final String errorMessage;
+
+  CategoriesError({required this.errorMessage});
+}

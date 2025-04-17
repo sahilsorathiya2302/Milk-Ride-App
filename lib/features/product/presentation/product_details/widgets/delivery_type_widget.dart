@@ -8,11 +8,10 @@ import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
 import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
 import 'package:milk_ride_live_wc/core/theme/app_text_size.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_text.dart';
+import 'package:milk_ride_live_wc/features/product/presentation/cubit/product_details/product_details_cubit.dart';
+import 'package:milk_ride_live_wc/features/product/presentation/cubit/product_details/product_details_state.dart';
 
-import '../../cubit/delivery/delivery_type_cubit.dart';
-import '../../cubit/delivery/delivery_type_state.dart';
-
-class DeliveryTypeWidget extends StatelessWidget {
+class DeliveryTypeWidget extends StatefulWidget {
   final String morningMessage;
   final String eveningMessage;
 
@@ -22,6 +21,11 @@ class DeliveryTypeWidget extends StatelessWidget {
     required this.eveningMessage,
   });
 
+  @override
+  State<DeliveryTypeWidget> createState() => _DeliveryTypeWidgetState();
+}
+
+class _DeliveryTypeWidgetState extends State<DeliveryTypeWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -37,9 +41,9 @@ class DeliveryTypeWidget extends StatelessWidget {
         5.height,
         Row(
           children: [
-            _deliveryButton(AppString.morning),
+            _deliveryButton(AppString.morning, AppString.morning),
             10.width,
-            _deliveryButton(AppString.evening),
+            _deliveryButton(AppString.evening, AppString.evening),
           ],
         ),
       ],
@@ -47,64 +51,55 @@ class DeliveryTypeWidget extends StatelessWidget {
   }
 
   Widget _deliveryMessage() {
-    return BlocBuilder<DeliveryTypeCubit, DeliveryTypeState>(
+    return BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
       builder: (context, state) {
-        String selectedDelivery = state is DeliveryTypeUpdated
-            ? state.deliveryType
-            : AppString.morning; // Default to Morning
-
-        // Ensure the first selection is applied if not already set
-        if (state is! DeliveryTypeUpdated) {
-          context
-              .read<DeliveryTypeCubit>()
-              .selectDeliveryType(AppString.morning);
-        }
+        final cubit = context.read<ProductDetailsCubit>();
 
         return Container(
           height: 30.h,
           decoration: BoxDecoration(
             color: AppColors.primaryLightColor,
-            border: Border.all(color: AppColors.black),
+            border: Border.all(color: AppColors.primaryColor),
             borderRadius: BorderRadius.circular(AppBorderRadius.r8),
           ),
           child: Align(
             alignment: Alignment.centerLeft,
             child: CustomText(
-              text: selectedDelivery == AppString.morning
-                  ? morningMessage
-                  : eveningMessage,
+              text: cubit.deliveryType == AppString.morning
+                  ? widget.morningMessage
+                  : widget.eveningMessage,
               fontWeight: FontWeight.w700,
               fontSize: AppTextSize.s10,
-            ).paddingSymmetric(horizontal: 10),
+            ).paddingSymmetric(horizontal: 10.h),
           ),
         );
       },
     );
   }
 
-  Widget _deliveryButton(String type) {
-    return BlocBuilder<DeliveryTypeCubit, DeliveryTypeState>(
+  Widget _deliveryButton(String label, String type) {
+    return BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
       builder: (context, state) {
-        String selectedDelivery = state is DeliveryTypeUpdated
-            ? state.deliveryType
-            : AppString.morning; // Default value
+        final cubit = context.read<ProductDetailsCubit>();
+        bool isSelected = cubit.deliveryType == type;
 
-        bool isSelected = selectedDelivery == type;
         return GestureDetector(
-          onTap: () =>
-              context.read<DeliveryTypeCubit>().selectDeliveryType(type),
+          onTap: () {
+            cubit.changeDeliveryType(type);
+          },
           child: Container(
-            height: 35,
-            width: 110,
+            height: 35.h,
+            width: 110.w,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppBorderRadius.r10),
               color: isSelected ? AppColors.primaryLightColor : Colors.white,
               border: Border.all(
-                  color: isSelected ? AppColors.black : AppColors.grey),
+                color: isSelected ? AppColors.primaryColor : AppColors.grey,
+              ),
             ),
             child: Center(
               child: CustomText(
-                text: type,
+                text: label,
                 fontSize: AppTextSize.s14,
                 fontWeight: FontWeight.w700,
                 color: isSelected ? AppColors.black : AppColors.grey,

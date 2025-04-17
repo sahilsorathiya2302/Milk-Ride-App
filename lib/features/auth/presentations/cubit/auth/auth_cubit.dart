@@ -43,7 +43,8 @@ class AuthCubit extends Cubit<AuthState> {
       },
       (response) {
         if (response.status == AppString.success) {
-          FunctionalComponent.successSnackbar(response.message, response.data);
+          FunctionalComponent.successSnackbar(
+              title: response.message, message: response.data);
           Get.toNamed(AppRoutesNames.otpScreen, arguments: {
             ArgumentKey.mobileNumber: mobileNumber,
             ArgumentKey.userId: response.userId
@@ -75,8 +76,8 @@ class AuthCubit extends Cubit<AuthState> {
     }, (result) {
       if (result.status == AppString.success) {
         FunctionalComponent.successSnackbar(
-          result.status.toString(),
-          result.message.toString(),
+          title: result.status.toString(),
+          message: result.message.toString(),
         );
         if (result.message == AppString.userCheckMessage) {
           Get.toNamed(AppRoutesNames.registerScreen, arguments: {
@@ -87,7 +88,8 @@ class AuthCubit extends Cubit<AuthState> {
           StorageManager.saveData(StorageKeys.tokenKey, result.appToken);
           StorageManager.saveData(StorageKeys.mobileNumber, mobileNumber);
           StorageManager.saveData(StorageKeys.userId, userId);
-          Get.toNamed(AppRoutesNames.homeScreen);
+          Get.toNamed(AppRoutesNames.bottomNavScreen,
+              arguments: {ArgumentKey.customerId: result.customer?.id});
         }
       } else if (result.status == AppString.error) {
         FunctionalComponent.errorSnackbar(
@@ -111,10 +113,12 @@ class AuthCubit extends Cubit<AuthState> {
       (result) {
         if (result.status == AppString.success) {
           FunctionalComponent.successSnackbar(
-              result.message.toString(), result.data.toString());
+              title: result.message.toString(),
+              message: result.data.toString());
         } else if (result.status == AppString.error) {
           FunctionalComponent.successSnackbar(
-              result.message.toString(), result.data.toString());
+              title: result.message.toString(),
+              message: result.data.toString());
         }
       },
     );
@@ -166,12 +170,14 @@ class AuthCubit extends Cubit<AuthState> {
           title: AppString.error, message: failure.message),
       (result) {
         if (result.status == AppString.success) {
-          Get.toNamed(AppRoutesNames.homeScreen);
+          Get.toNamed(AppRoutesNames.bottomNavScreen,
+              arguments: {ArgumentKey.customerId: result.customer?.id});
+          print(result.appToken);
           StorageManager.saveData(StorageKeys.tokenKey, result.appToken);
           StorageManager.saveData(StorageKeys.mobileNumber, mobileNumber);
           StorageManager.saveData(StorageKeys.userId, userId);
           FunctionalComponent.successSnackbar(
-              AppString.success, result.message.toString());
+              title: AppString.success, message: result.message.toString());
         } else if (result.status == AppString.error) {
           FunctionalComponent.errorSnackbar(
               title: AppString.error, message: result.message.toString());

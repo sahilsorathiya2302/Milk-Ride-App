@@ -1,69 +1,82 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:milk_ride_live_wc/core/constants/app_string.dart';
-import 'package:milk_ride_live_wc/core/utils/functional_component.dart';
+import 'package:milk_ride_live_wc/core/utils/product_operation.dart';
+import 'package:milk_ride_live_wc/features/product/domain/entities/filtered_packages.dart';
 import 'package:milk_ride_live_wc/features/product/domain/usecase/product_use_case.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/product_details/product_details_state.dart';
 
 class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   final ProductUseCase productUseCase;
 
-  double selectedPrice = 0.0;
-  int selectedQuantity = 1;
-
   ProductDetailsCubit({required this.productUseCase})
       : super(ProductDetailsInitial());
 
-  Future<void> product({
+  List<FilteredPackages>? product;
+  FilteredPackages? selectedProduct;
+  int quantity = 1;
+  String deliveryType = AppString.morning;
+
+  Future<void> productDetails({
     required int customerId,
     required int productId,
   }) async {
     emit(ProductDetailsLoading());
-
-    final result = await productUseCase.call(
-      ProductParam(customerId: customerId, productId: productId),
-    );
-
+    final result = await productUseCase
+        .call(ProductParam(customerId: customerId, productId: productId));
     result.fold(
       (failure) {
-        FunctionalComponent.errorSnackbar(
-          title: AppString.error,
-          message: failure.message,
-        );
+        emit(ProductDetailsError(failure: failure.message));
       },
       (result) {
-        if (result.status == AppString.success) {
-          // ✅ emit with selected price & quantity
-          emit(ProductDetailsLoaded(
-            productResponse: result,
-            selectedPrice: selectedPrice,
-            selectedQuantity: selectedQuantity,
-          ));
-        } else {
-          FunctionalComponent.errorSnackbar(
-            title: result.status.toString(),
-            message: result.message.toString(),
-          );
+        product = result.data?.filteredPackages;
+
+        if (product != null && product!.isNotEmpty) {
+          selectedProduct = product?.first;
+          quantity = ProductOperationHelper.resetQtyOnVariantSelect();
         }
+
+        emit(ProductDetailsLoaded(
+          productResponse: result,
+          selectedVariant: selectedProduct,
+          quantity: quantity,
+          deliveryType: deliveryType.toString(),
+        ));
       },
     );
   }
 
-  void updatePrice(double price) {
-    selectedPrice = price;
-    _refreshState();
+  void selectVariant({required FilteredPackages variant}) {
+    selectedProduct = variant;
+    quantity = ProductOperationHelper.resetQtyOnVariantSelect();
+    setCurrentState();
   }
 
-  void updateQuantity(int quantity) {
-    selectedQuantity = quantity;
-    _refreshState();
+  void incrementQty() {
+    quantity = ProductOperationHelper.incrementQty(quantity, selectedProduct);
+    setCurrentState();
   }
 
-  void _refreshState() {
+  void decrementQty() {
+    quantity = ProductOperationHelper.decrementQty(quantity, selectedProduct);
+    setCurrentState();
+  }
+
+  void changeDeliveryType(String type) {
+    deliveryType = type;
+    setCurrentState();
+  }
+
+  double get totalPrice =>
+      ProductOperationHelper.calculateTotalPrice(quantity, selectedProduct);
+
+  void setCurrentState() {
     if (state is ProductDetailsLoaded) {
+      final res = (state as ProductDetailsLoaded).productResponse;
       emit(ProductDetailsLoaded(
-        productResponse: (state as ProductDetailsLoaded).productResponse,
-        selectedPrice: selectedPrice,
-        selectedQuantity: selectedQuantity,
+        productResponse: res,
+        selectedVariant: selectedProduct,
+        quantity: quantity,
+        deliveryType: deliveryType,
       ));
     }
   }

@@ -15,8 +15,9 @@ class CategoriesCubit extends Cubit<CategoriesState> {
         await viewCategoryUseCase.call(ViewCategoryParam(userId: userId));
 
     result.fold(
-      (failure) => FunctionalComponent.errorSnackbar(
-          title: AppString.error, message: failure.message),
+      (failure) {
+        emit(CategoriesError(errorMessage: failure.message.toString()));
+      },
       (result) {
         if (result.status == AppString.success) {
           emit(CategoriesLoaded(viewCategoryResponse: result));

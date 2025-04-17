@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:milk_ride_live_wc/core/failures/failure.dart';
+import 'package:milk_ride_live_wc/core/utils/exception_handler.dart';
 import 'package:milk_ride_live_wc/features/auth/data/repositories/auth_impl_remote_repo.dart';
 import 'package:milk_ride_live_wc/features/auth/domain/entities/area_response.dart';
 import 'package:milk_ride_live_wc/features/auth/domain/entities/otp_response.dart';
@@ -22,8 +24,8 @@ class AuthImplRepository extends AuthRepository {
       final result = await authRemoteRepo.fetchRegionsAndSources(
           mobileNumber: mobileNumber, userId: userId);
       return right(result);
-    } catch (e) {
-      return left(ServerFailure(message: e.toString()));
+    } on DioException catch (e) {
+      return left(ExceptionHandler.handleError(error: e));
     }
   }
 
@@ -33,8 +35,8 @@ class AuthImplRepository extends AuthRepository {
       final result = await authRemoteRepo.getArea(id: id);
 
       return right(result);
-    } catch (e) {
-      return left(ServerFailure(message: e.toString()));
+    } on DioException catch (e) {
+      return left(ExceptionHandler.handleError(error: e));
     }
   }
 
@@ -47,8 +49,8 @@ class AuthImplRepository extends AuthRepository {
       final response = await authRemoteRepo.otpCheck(
           mobileNumber: mobileNumber, userId: userId, otp: otp);
       return right(response);
-    } catch (e) {
-      return left(ServerFailure(message: e.toString()));
+    } on DioException catch (e) {
+      return left(ExceptionHandler.handleError(error: e));
     }
   }
 
@@ -59,8 +61,8 @@ class AuthImplRepository extends AuthRepository {
       final response = await authRemoteRepo.postSignInData(
           mobileNumber: mobileNumber, userId: userId);
       return right(response);
-    } catch (e) {
-      return left(ServerFailure(message: e.toString()));
+    } on DioException catch (e) {
+      return left(ExceptionHandler.handleError(error: e));
     }
   }
 
@@ -70,8 +72,8 @@ class AuthImplRepository extends AuthRepository {
     try {
       final response = await authRemoteRepo.userRegister(param: param);
       return right(response);
-    } catch (e) {
-      return left(ServerFailure(message: e.toString()));
+    } on DioException catch (e) {
+      return left(ExceptionHandler.handleError(error: e));
     }
   }
 
@@ -82,8 +84,8 @@ class AuthImplRepository extends AuthRepository {
       final response = await authRemoteRepo.resendOtp(
           mobileNumber: mobileNumber, userId: userId);
       return right(response);
-    } catch (e) {
-      return left(ServerFailure(message: e.toString()));
+    } on DioException catch (e) {
+      return left(ExceptionHandler.handleError(error: e));
     }
   }
 }

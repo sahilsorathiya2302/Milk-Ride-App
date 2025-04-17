@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:milk_ride_live_wc/core/theme/app_border_radius.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
@@ -17,8 +18,8 @@ class UserBalanceDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
-      width: 350,
+      height: 100.h,
+      width: 350.w,
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(AppBorderRadius.r10),
@@ -28,8 +29,8 @@ class UserBalanceDetails extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            width: 50,
-            height: 50,
+            width: 50.w,
+            height: 50.h,
             decoration:
                 BoxDecoration(color: AppColors.homeBG, shape: BoxShape.circle),
             child: Icon(icon),

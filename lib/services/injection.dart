@@ -9,23 +9,46 @@ import 'package:milk_ride_live_wc/features/auth/domain/usecases/register_use_cas
 import 'package:milk_ride_live_wc/features/auth/domain/usecases/resend_otp_use_case.dart';
 import 'package:milk_ride_live_wc/features/auth/domain/usecases/sign_in_use_case.dart';
 import 'package:milk_ride_live_wc/features/auth/presentations/cubit/area/area_cubit.dart';
+import 'package:milk_ride_live_wc/features/cart/data/repositories/cart_impl_remote_repo.dart';
+import 'package:milk_ride_live_wc/features/cart/data/repositories/cart_impl_repository.dart';
+import 'package:milk_ride_live_wc/features/cart/data/repositories/place_order_impl_remote_repo.dart';
+import 'package:milk_ride_live_wc/features/cart/data/repositories/place_order_impl_repository.dart';
+import 'package:milk_ride_live_wc/features/cart/domain/repositories/cart_repository.dart';
+import 'package:milk_ride_live_wc/features/cart/domain/repositories/place_order_repository.dart';
+import 'package:milk_ride_live_wc/features/cart/domain/usecase/cart_item_remove_use_case.dart';
+import 'package:milk_ride_live_wc/features/cart/domain/usecase/cart_quantity_update_use_case.dart';
+import 'package:milk_ride_live_wc/features/cart/domain/usecase/cart_use_case.dart';
+import 'package:milk_ride_live_wc/features/cart/domain/usecase/place_order_use_case.dart';
+import 'package:milk_ride_live_wc/features/cart/presentation/cubit/cart/cart_cubit.dart';
+import 'package:milk_ride_live_wc/features/cart/presentation/cubit/place_order/place_order_cubit.dart';
 import 'package:milk_ride_live_wc/features/home/data/repositories/home_remote_repo_impl.dart';
 import 'package:milk_ride_live_wc/features/home/data/repositories/home_repository_impl.dart';
 import 'package:milk_ride_live_wc/features/home/domain/repositories/home_repository.dart';
 import 'package:milk_ride_live_wc/features/home/domain/usecese/home_use_case.dart';
 import 'package:milk_ride_live_wc/features/home/presentation/cubit/home_cubit.dart';
+import 'package:milk_ride_live_wc/features/order/data/repositories/order_impl_remote_repo.dart';
+import 'package:milk_ride_live_wc/features/order/data/repositories/order_impl_repository.dart';
+import 'package:milk_ride_live_wc/features/order/domain/use_case/order_cancel_use_case.dart';
+import 'package:milk_ride_live_wc/features/order/domain/use_case/order_use_case.dart';
+import 'package:milk_ride_live_wc/features/order/presentation/cubit/order/order_cubit.dart';
+import 'package:milk_ride_live_wc/features/order/presentation/cubit/order_cancel/order_cancel_cubit.dart';
 import 'package:milk_ride_live_wc/features/product/data/repositories/product_impl_remote_repo.dart';
 import 'package:milk_ride_live_wc/features/product/data/repositories/product_impl_repository.dart';
 import 'package:milk_ride_live_wc/features/product/domain/repositories/product_repository.dart';
 import 'package:milk_ride_live_wc/features/product/domain/usecase/categories_product_use_case.dart';
 import 'package:milk_ride_live_wc/features/product/domain/usecase/product_use_case.dart';
+import 'package:milk_ride_live_wc/features/product/domain/usecase/variants_use_case.dart';
 import 'package:milk_ride_live_wc/features/product/domain/usecase/view_category_use_case.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/categories/categories_cubit.dart';
-import 'package:milk_ride_live_wc/features/product/presentation/cubit/delivery/delivery_type_cubit.dart';
-import 'package:milk_ride_live_wc/features/product/presentation/cubit/discount/discount_cubit.dart';
-import 'package:milk_ride_live_wc/features/product/presentation/cubit/product/product_cubit.dart';
+import 'package:milk_ride_live_wc/features/product/presentation/cubit/categories_products/categories_product_cubit.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/product_details/product_details_cubit.dart';
+import 'package:milk_ride_live_wc/features/product/presentation/cubit/variants/variants_cubit.dart';
 import 'package:milk_ride_live_wc/features/splash/cubit/splash_cubit.dart';
+import 'package:milk_ride_live_wc/features/subscription/data/repositories/subscription_impl_remote_repo.dart';
+import 'package:milk_ride_live_wc/features/subscription/data/repositories/subscription_impl_repository.dart';
+import 'package:milk_ride_live_wc/features/subscription/domain/repositories/subscription_repository.dart';
+import 'package:milk_ride_live_wc/features/subscription/domain/usecase/subscription_use_case.dart';
+import 'package:milk_ride_live_wc/features/subscription/presentation/cubit/subscription_cubit.dart';
 import 'package:milk_ride_live_wc/services/api_service.dart';
 
 import '../features/auth/domain/usecases/otp_use_case.dart';
@@ -123,13 +146,79 @@ void setLocator() {
   getIt.registerLazySingleton(
     () => ProductUseCase(productRepository: getIt()),
   );
-  getIt.registerSingleton(ProductCubit(
+  getIt.registerSingleton(CategoriesProductCubit(
     categoriesProductUseCase: getIt(),
   ));
   getIt.registerSingleton(ProductDetailsCubit(
     productUseCase: getIt(),
   ));
   getIt.registerSingleton(CategoriesCubit(viewCategoryUseCase: getIt()));
-  getIt.registerSingleton(DeliveryTypeCubit());
-  getIt.registerSingleton(DiscountCubit());
+
+  getIt.registerLazySingleton<CartRemoteRepo>(
+    () => CartImplRemoteRepo(apiService: getIt()),
+  );
+
+  getIt.registerLazySingleton<CartRepository>(
+    () => CartImplRepository(cartRemoteRepo: getIt()),
+  );
+
+  getIt.registerLazySingleton(
+    () => CartUseCase(cartRepository: getIt()),
+  );
+
+  getIt.registerLazySingleton(
+    () => CartItemRemoveUseCase(cartRepository: getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => CartQuantityUpdateUseCase(cartRepository: getIt()),
+  );
+  getIt.registerSingleton(CartCubit(
+    cartQuantityUpdateUseCase: getIt(),
+    cartItemRemoveUseCase: getIt(),
+    cartUseCase: getIt(),
+  ));
+
+  getIt.registerLazySingleton<SubscriptionRemoteRepo>(
+    () => SubscriptionImplRemoteRepo(apiService: getIt()),
+  );
+  getIt.registerLazySingleton<SubscriptionRepository>(
+    () => SubscriptionImplRepository(subscriptionRemoteRepo: getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => SubscriptionUseCase(subscriptionRepository: getIt()),
+  );
+  getIt.registerSingleton(SubscriptionCubit(getIt()));
+  getIt
+      .registerLazySingleton(() => VariantsUseCase(productRepository: getIt()));
+  getIt.registerSingleton(VariantsCubit(variantsUseCase: getIt()));
+  getIt.registerLazySingleton<PlaceOrderRemoteRepo>(
+    () => PlaceOrderImplRemoteRepo(apiService: getIt()),
+  );
+
+  getIt.registerLazySingleton<PlaceOrderRepository>(
+    () => PlaceOrderImplRepository(placeOrderRemoteRepo: getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => PlaceOrderUseCase(placeOrderRepository: getIt()),
+  );
+
+  getIt.registerSingleton(PlaceOrderCubit(placeOrderUseCase: getIt()));
+
+  getIt.registerLazySingleton(
+    () => OrderImplRemoteRepo(apiService: getIt()),
+  );
+
+  getIt.registerLazySingleton(
+    () => OrderImplRepository(orderImplRemoteRepo: getIt()),
+  );
+
+  getIt.registerLazySingleton(
+    () => OrderUseCase(orderImplRepository: getIt()),
+  );
+  getIt.registerSingleton(OrderCubit(orderUseCase: getIt()));
+
+  getIt.registerLazySingleton(
+    () => OrderCancelUseCase(orderImplRepository: getIt()),
+  );
+  getIt.registerSingleton(OrderCancelCubit(orderCancelUseCase: getIt()));
 }

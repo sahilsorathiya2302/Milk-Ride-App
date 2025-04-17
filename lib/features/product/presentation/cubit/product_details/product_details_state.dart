@@ -14,24 +14,25 @@ class ProductDetailsLoading extends ProductDetailsState {}
 
 class ProductDetailsLoaded extends ProductDetailsState {
   final ProductResponse productResponse;
-  final double selectedPrice;
-  final int selectedQuantity;
-
+  final FilteredPackages? selectedVariant;
+  final int quantity;
+  final String deliveryType;
   ProductDetailsLoaded({
     required this.productResponse,
-    required this.selectedPrice,
-    required this.selectedQuantity,
+    required this.selectedVariant,
+    required this.quantity,
+    required this.deliveryType,
   });
 
-  List<FilteredPackages>? get filteredPackages =>
-      productResponse.data?.filteredPackages;
-
   @override
-  List<Object?> get props => [productResponse, selectedPrice, selectedQuantity];
+  List<Object?> get props =>
+      [productResponse, selectedVariant, quantity, deliveryType];
 }
 
-class ProductOfferSelected extends ProductDetailsState {
-  final int selectedIndex;
+class ProductDetailsError extends ProductDetailsState {
+  final String failure;
 
-  ProductOfferSelected(this.selectedIndex);
+  ProductDetailsError({required this.failure});
+  @override
+  List<Object?> get props => [failure];
 }

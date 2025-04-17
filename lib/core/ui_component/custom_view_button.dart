@@ -15,10 +15,13 @@ class CustomViewButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 25.h,
-      width: 90.w,
+      width: 110.w,
       decoration: BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.circular(AppBorderRadius.r5),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(AppBorderRadius.r10),
+          bottomRight: Radius.circular(AppBorderRadius.r10),
+        ),
       ),
       child: Center(
         child: CustomText(

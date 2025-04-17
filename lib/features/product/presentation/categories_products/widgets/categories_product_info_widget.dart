@@ -16,12 +16,14 @@ import 'category_product_details_widget.dart';
 
 class CategoriesProductInfoWidget extends StatefulWidget {
   final List<ProductData> state;
+  final String configImages;
   final int customerId;
 
   const CategoriesProductInfoWidget({
     super.key,
     required this.state,
     required this.customerId,
+    required this.configImages,
   });
 
   @override
@@ -47,10 +49,11 @@ class _CategoriesProductInfoWidgetsState
                   Get.toNamed(AppRoutesNames.productDetails, arguments: {
                     ArgumentKey.customerId: widget.customerId,
                     ArgumentKey.productId: categoriesProduct.productId,
+                    ArgumentKey.packageId: categoriesProduct.id,
                   });
                 },
                 child: Container(
-                  height: 120.h,
+                  height: 110.h,
                   decoration: BoxDecoration(
                     color: AppColors.white,
                     borderRadius: BorderRadius.circular(AppBorderRadius.r10),
@@ -58,7 +61,8 @@ class _CategoriesProductInfoWidgetsState
                   child: Row(
                     children: [
                       CategoriesProductImageWidget(
-                          images: categoriesProduct.imageUrl.toString()),
+                          images: categoriesProduct.imageUrl ??
+                              widget.configImages),
                       10.width,
                       CategoryProductDetailsWidget(
                         name: categoriesProduct.name.toString(),
@@ -76,6 +80,7 @@ class _CategoriesProductInfoWidgetsState
                               : SizedBox(),
                           Spacer(),
                           FilterOptionWidget(
+                            packageId: categoriesProduct.id ?? 0,
                             customerId: widget.customerId,
                             productId: categoriesProduct.productId ?? 0,
                           ),

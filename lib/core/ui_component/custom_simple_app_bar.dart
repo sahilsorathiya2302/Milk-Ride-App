@@ -6,15 +6,16 @@ import 'package:milk_ride_live_wc/core/ui_component/custom_text.dart';
 class CustomSimpleAppBar extends StatelessWidget
     implements PreferredSizeWidget {
   final String title;
+  final Color? color;
   final IconData? icon;
   final void Function()? onPressed;
   const CustomSimpleAppBar(
-      {super.key, required this.title, this.icon, this.onPressed});
+      {super.key, required this.title, this.icon, this.onPressed, this.color});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.white,
+      backgroundColor: color ?? AppColors.white,
       title: CustomText(
         text: title,
         fontSize: AppTextSize.s16,

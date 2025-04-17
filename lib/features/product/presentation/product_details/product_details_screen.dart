@@ -3,13 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:milk_ride_live_wc/core/constants/app_string.dart';
+import 'package:milk_ride_live_wc/core/routes/app_routes_names.dart';
+import 'package:milk_ride_live_wc/core/storage/storage_keys.dart';
+import 'package:milk_ride_live_wc/core/storage/storage_manager.dart';
 import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
+import 'package:milk_ride_live_wc/core/theme/app_text_size.dart';
+import 'package:milk_ride_live_wc/core/ui_component/custom_app_loader.dart';
+import 'package:milk_ride_live_wc/core/ui_component/custom_quantity_sector.dart';
+import 'package:milk_ride_live_wc/core/ui_component/network_fail_card.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/product_details/widgets/add_to_cart_button_widget.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/product_details/widgets/delivery_type_widget.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/product_details/widgets/musty_try_egg_less_widget.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/product_details/widgets/product_info_widget.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/product_details/widgets/products_image_widget.dart';
-import 'package:milk_ride_live_wc/features/product/presentation/product_details/widgets/quantity_selector_widget.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/product_details/widgets/special_offer_list_widget.dart';
 
 import '../../../../core/constants/argument_key.dart';
@@ -30,17 +36,16 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  late final ProductDetailsCubit cubit;
-
   @override
   void initState() {
     super.initState();
-    cubit = context.read<ProductDetailsCubit>();
-    cubit.product(
-      customerId: widget.getArgument[ArgumentKey.customerId],
-      productId: widget.getArgument[ArgumentKey.productId],
-    );
+    context.read<ProductDetailsCubit>().productDetails(
+          customerId: widget.getArgument[ArgumentKey.customerId],
+          productId: widget.getArgument[ArgumentKey.productId],
+        );
   }
+
+  final userId = StorageManager.readData(StorageKeys.userId);
 
   @override
   Widget build(BuildContext context) {
@@ -49,14 +54,24 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       appBar: CustomSimpleAppBar(
         title: AppString.productDetails,
         icon: AppIcons.cart,
+        onPressed: () {
+          Get.toNamed(AppRoutesNames.cartScreen, arguments: {
+            ArgumentKey.customerId: widget.getArgument[ArgumentKey.customerId]
+          });
+        },
       ),
       body: BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
         builder: (context, state) {
+          final cubit = context.read<ProductDetailsCubit>();
           if (state is ProductDetailsLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: Center(child: CustomAppLoader()));
+          } else if (state is ProductDetailsError) {
+            return NetworkFailCard(message: state.failure);
           } else if (state is ProductDetailsLoaded) {
-            final information = state.filteredPackages?[0];
-
+            final selected = state.selectedVariant;
+            if (selected == null) {
+              return const Center(child: Text("No variant selected"));
+            }
             return Stack(
               children: [
                 ListView(
@@ -65,39 +80,32 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ProductsImageWidget(
-                          images: information?.imageUrl.toString() ?? "",
+                          images: selected.imageUrl ?? "",
                         ),
-                        5.height,
+                        15.height,
                         MustyTryEggLessWidget(
-                          isMustTry: information?.mustTry ?? false,
-                          isEggLess: information?.isEggless ?? false,
+                          isMustTry: selected.mustTry ?? false,
+                          isEggLess: selected.isEggless ?? false,
                         ),
-                        5.height,
+                        10.height,
                         ProductInfoWidget(
-                          brandName: information?.brand.toString() ?? "",
-                          foodType: information?.foodType.toString() ?? "",
-                          productName: information?.name.toString() ?? "",
+                          brandName: selected.brand.toString(),
+                          foodType: selected.foodType.toString(),
+                          productName: selected.name.toString(),
                         ),
-                        5.height,
+                        8.height,
                         SpecialOfferListWidget(
                           packages:
                               state.productResponse.data?.filteredPackages ??
                                   [],
-                          onPackageSelected: (value) {
-                            cubit.updatePrice(value);
-                          },
-                          onResetQuantity: (qty) {
-                            cubit.updateQuantity(qty);
-                          },
                         ),
                         10.height,
-                        QuantitySelectorWidget(
-                          initialQuantity: cubit.selectedQuantity,
-                          minQuantity: information?.minQtyAllow ?? 1,
-                          maxQuantity: information?.maxQtyAllow ?? 50,
-                          onQuantityChanged: (value) {
-                            cubit.updateQuantity(value);
-                          },
+                        CustomQuantitySector(
+                          quantity: cubit.quantity.toString(),
+                          minQuantity: selected.minQtyAllow ?? 1,
+                          maxQuantity: selected.maxQtyAllow ?? 50,
+                          addOnPressed: () => cubit.incrementQty(),
+                          removeOnPressed: () => cubit.decrementQty(),
                         ),
                         5.height,
                         CustomText(
@@ -113,7 +121,44 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               state.productResponse.data?.morningCutoff ?? "",
                         ),
                         10.height,
-                        PurchaseForWidget(),
+                        CustomText(
+                          text: AppString.purchaseFor,
+                          fontWeight: FontWeight.w600,
+                          fontSize: AppTextSize.s14,
+                        ),
+                        PurchaseForWidget(
+                          subscribeOnPressed: () {
+                            Get.toNamed(
+                              AppRoutesNames.subscriptionScreen,
+                              arguments: {
+                                ArgumentKey.customerId:
+                                    widget.getArgument[ArgumentKey.customerId],
+                                ArgumentKey.productId:
+                                    cubit.selectedProduct?.productId,
+                                ArgumentKey.packageId:
+                                    cubit.selectedProduct?.id,
+                                ArgumentKey.productName:
+                                    cubit.selectedProduct?.name,
+                                ArgumentKey.productImage:
+                                    cubit.selectedProduct?.imageUrl,
+                                ArgumentKey.volume:
+                                    cubit.selectedProduct?.volume,
+                                ArgumentKey.productPackegeSize:
+                                    cubit.selectedProduct?.packageSize,
+                                ArgumentKey.salePrice:
+                                    cubit.selectedProduct?.salePrice,
+                                ArgumentKey.mrpPrice:
+                                    cubit.selectedProduct?.mrpPrice,
+                                ArgumentKey.selectQuantity: cubit.quantity,
+                                ArgumentKey.deliveryType: cubit.deliveryType,
+                              },
+                            );
+                          },
+                          onPressed: () {},
+                          height: 8.h,
+                          width: 110.w,
+                          textSize: AppTextSize.s12,
+                        ),
                         80.height,
                       ],
                     ).paddingSymmetric(horizontal: 12.w, vertical: 10.h),
@@ -122,14 +167,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: AddToCartButtonWidget(
-                    selaPrice: cubit.selectedPrice.toInt(),
-                    quantity: cubit.selectedQuantity,
+                    userId: userId,
+                    customerId: widget.getArgument[ArgumentKey.customerId],
+                    quantity: cubit.quantity,
                   ),
-                ),
+                )
               ],
             );
           }
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: CustomAppLoader());
         },
       ),
     );

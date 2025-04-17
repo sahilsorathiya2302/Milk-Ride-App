@@ -31,8 +31,8 @@ class RegionsSourcesCubit extends Cubit<RegionsSourcesState> {
           emit(RegionsSourcesLoaded(regionsSourcesResponse: response));
         } else {
           FunctionalComponent.successSnackbar(
-            response.message.toString(),
-            response.data.toString(),
+            title: response.message.toString(),
+            message: response.data.toString(),
           );
         }
       },

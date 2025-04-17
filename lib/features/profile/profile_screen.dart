@@ -10,6 +10,7 @@ import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
 import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
 import 'package:milk_ride_live_wc/core/theme/app_text_size.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_text.dart';
+import 'package:milk_ride_live_wc/core/ui_component/network_fail_card.dart';
 import 'package:milk_ride_live_wc/features/home/presentation/cubit/home_cubit.dart';
 import 'package:milk_ride_live_wc/features/home/presentation/cubit/home_state.dart';
 import 'package:milk_ride_live_wc/features/profile/widgets/user_balance_details.dart';
@@ -20,9 +21,9 @@ import '../../../../../core/theme/app_icons.dart';
 import '../../../../../core/theme/icon_size.dart';
 import '../../../../../core/ui_component/custom_button.dart';
 
-void showProfileBottomSheet(BuildContext context) {
+void showProfileBottomSheet() {
   showModalBottomSheet(
-    context: context,
+    context: Get.context!,
     isScrollControlled: true,
     backgroundColor: Colors.transparent,
     shape: RoundedRectangleBorder(
@@ -236,22 +237,27 @@ void showProfileBottomSheet(BuildContext context) {
                                   UserBalanceDetails(
                                       icon: AppIcons.wallet,
                                       title: AppString.walletBalance,
-                                      info: "₹ ${customer?.wallet}"),
+                                      info:
+                                          "${AppString.rupeeSymbol} ${customer?.wallet}"),
                                   10.height,
                                   UserBalanceDetails(
                                       icon: AppIcons.credit,
                                       title: AppString.creditLimit,
-                                      info: "₹ ${customer?.creditLimit}"),
+                                      info:
+                                          "${AppString.rupeeSymbol} ${customer?.creditLimit}"),
                                   10.height,
                                   CustomButton(
-                                      onPressed: () {
-                                        StorageManager.removeData(
+                                      onPressed: () async {
+                                        // await StorageManager.clearData();
+
+                                        await StorageManager.removeData(
                                             StorageKeys.mobileNumber);
-                                        StorageManager.removeData(
+                                        await StorageManager.removeData(
                                             StorageKeys.tokenKey);
-                                        StorageManager.removeData(
+                                        await StorageManager.removeData(
                                             StorageKeys.userId);
 
+                                        await StorageManager.clearData();
                                         Get.offAllNamed(
                                             AppRoutesNames.signInScreen);
                                       },
@@ -265,8 +271,10 @@ void showProfileBottomSheet(BuildContext context) {
                     ],
                   ),
                 );
+              } else if (state is HomeError) {
+                return NetworkFailCard(message: state.failure);
               }
-              return CircularProgressIndicator();
+              return Center(child: CircularProgressIndicator());
             },
           );
         },

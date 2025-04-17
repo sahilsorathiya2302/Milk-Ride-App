@@ -5,7 +5,7 @@ class AppString {
   static const String verification = "Verification";
   static const String empty = "";
   static const String signInTitle = "Login/Sign up";
-  static const String everMilk = "evermilk";
+  static const String everMilk = "dairydash";
 
   static const String hintMobile = "Enter Mobile Number";
   static const String hintUserId = "Enter UserId";
@@ -96,7 +96,7 @@ class AppString {
   static const String emailNull = "null";
   static const String notFound = "Not Found";
   static const String allCategories = "All Categories";
-  static const String categoryProduct = "Category Product";
+  static const String product = "Product";
   static const String rupeeSymbol = "₹";
   static const String productDetails = "Product Details";
   static const String eggLess = "Egg Less";
@@ -115,4 +115,48 @@ class AppString {
   static const String selectQuantityLimitMess =
       "please choose quantity between 1 to 50.";
   static const String chooseDeliveryType = "Choose Delivery Type:";
+  static const String deliverySchedule = "Delivery Schedule";
+  static const String chooseDate = "Choose Date";
+  static const String selectStartDate = "Start Date";
+  static const String selectEndDate = "End Date";
+  static const String subscribe = "Subscribe";
+  static const String now = "Now";
+  static const String orderDetails = "Order Details";
+  static const String subTotal = "Sub Total";
+  static const String deliveryCharges = "Delivery Charges";
+  static const String deliveryAddress = "Delivery Address";
+  static const String payableAmount = "Payable Amount";
+  static const String placeOrder = "Place Order";
+  static const String deliveryOn = "Delivery On";
+  static const String addCartMessage = "Product added into cart";
+  static const String zero = "0";
+  static const String cancel = "Cancel";
+  static const String yes = "Yes";
+  static const String dayWise = "Day Wise";
+  static const String oneTime = "one_time";
+  static const String updateQuantity = "Update Quantity";
+  static const String removeCartItemConfirm = "Remove from Cart?";
+  static const String cartEmpty = "Your cart is empty. Add something to it!";
+  static const String emptySchedule = "Please select Delivery Schedule";
+  static const String productNotFound = "Product Not Found";
+  static const String removeCartProductConfirm =
+      "Are you sure you want to remove this product from cart?";
+
+  static const String home = "Home  ";
+  static const String order = "Order";
+  static const String cart = "Cart";
+  static const String thankYou = "THANK YOU";
+  static const String orderPlaceMessage = "Your order placed Successfully!";
+  static const String continuesShopping = "Continues Shopping";
+  static const String orderNow = "Order Now";
+  static const String noOrderFound = "No Orders Found";
+  static const String noOrderFoundMessage =
+      "No orders Yet for this date or status. check back after placing an order.";
+  static const String requiredSelectReason = "Select Reason*";
+  static const String selectReason = "Select Reason";
+  static const String delete = "Delete";
+  static const String cancelOrderReason = "Cancel order reason";
+  static const String emptySelectReasonMsg = "please Select Any Reason";
+  static const String refundAmount = "Refunded Amount";
+  static const String delivered = "delivered";
 }

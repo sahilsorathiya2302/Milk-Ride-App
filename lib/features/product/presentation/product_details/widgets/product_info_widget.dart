@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:milk_ride_live_wc/core/constants/app_string.dart';
 import 'package:milk_ride_live_wc/core/key/app_images_key.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
 import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
@@ -37,7 +38,7 @@ class ProductInfoWidget extends StatelessWidget {
               color: AppColors.black,
             ),
             10.width,
-            foodType == "veg"
+            foodType == AppString.foodTypeVeg
                 ? Image.asset(
                     AppImagesKey.foodType,
                     height: 10,

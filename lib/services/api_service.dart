@@ -7,10 +7,14 @@ import 'package:milk_ride_live_wc/features/auth/data/models/get_area_model.dart'
 import 'package:milk_ride_live_wc/features/auth/data/models/otp_model.dart';
 import 'package:milk_ride_live_wc/features/auth/data/models/regions_source_model.dart';
 import 'package:milk_ride_live_wc/features/auth/data/models/register_model.dart';
+import 'package:milk_ride_live_wc/features/cart/data/models/cart_model.dart';
 import 'package:milk_ride_live_wc/features/home/data/models/home_model.dart';
+import 'package:milk_ride_live_wc/features/order/data/models/order_model.dart';
 import 'package:milk_ride_live_wc/features/product/data/models/categories_product_model.dart';
 import 'package:milk_ride_live_wc/features/product/data/models/product_model.dart';
+import 'package:milk_ride_live_wc/features/product/data/models/variant_model.dart';
 import 'package:milk_ride_live_wc/features/product/data/models/view_category_model.dart';
+import 'package:milk_ride_live_wc/features/subscription/data/models/subscription_model.dart';
 import 'package:milk_ride_live_wc/services/interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:retrofit/retrofit.dart';
@@ -23,7 +27,6 @@ part 'api_service.g.dart';
 abstract class ApiService {
   factory ApiService(Dio dio) {
     final String? token = StorageManager.readData("token");
-    print("Retrieved Token: $token");
 
     dio.options = BaseOptions(
       baseUrl: ServerConfig.baseUrl,
@@ -47,8 +50,6 @@ abstract class ApiService {
         requestBody: true,
       ),
     );
-
-    print("Headers Before Request: \${dio.options.headers}");
 
     return _ApiService(dio);
   }
@@ -123,9 +124,63 @@ abstract class ApiService {
     @Field("category_id") required int categoryId,
   });
 
+  @GET(ServerConfig.productVersion + EndPoints.productVariants)
+  Future<VariantModel> variants({
+    @Query("customer_id") required int customerId,
+    @Query("product_id") required int productId,
+  });
+
   @GET(ServerConfig.productVersion + EndPoints.product)
   Future<ProductModel> product({
     @Query("customer_id") required int customerId,
     @Query("product_id") required int productId,
+  });
+
+  @POST(ServerConfig.milkRideVersion + EndPoints.subscription)
+  Future<SubscriptionModel> createSubscription({
+    @Field("package_id") required int packageId,
+    @Field("customer_id") required int customerId,
+    @Field("user_id") required int userId,
+    @Field("frequency_type") required String frequencyType,
+    @Field("frequency_value") required dynamic frequencyValue,
+    @Field("qty") required int quantity,
+    @Field("schedule") required String schedule,
+    @Field("day_wise_quantity") required List<int> dayWiseQuantity,
+    @Field("delivery_type") required String deliveryType,
+    @Field("start_date") required String startDate,
+    @Field("end_date") required String endDate,
+    @Field("trial_product") required int trialProduct,
+    @Field("no_of_usages") required int noOfUsages,
+    @Field("product_id") required int productId,
+  });
+
+  @POST(ServerConfig.milkRideVersion + EndPoints.addToCart)
+  Future<CartModel> addToCart({
+    @Field("customer_id") required int customerId,
+  });
+  @POST(ServerConfig.milkRideVersion + EndPoints.removeCartItem)
+  Future<ApiResponseModel> removeCartItem({
+    @Field("cart_id") required int cartId,
+  });
+
+  @POST(ServerConfig.milkRideVersion + EndPoints.updateCartItemQty)
+  Future<ApiResponseModel> updateCartItemQty({
+    @Field("cart") required String cart,
+  });
+  @POST(ServerConfig.milkRideVersion + EndPoints.placeOrder)
+  Future<ApiResponseModel> placeOrder({
+    @Field("user_id") required int userId,
+    @Field("customer_id") required int customerId,
+  });
+  @POST(ServerConfig.milkRideVersion + EndPoints.orders)
+  Future<OrderModel> orders({
+    @Field("delivery_date") required String deliveryDate,
+    @Field("customer_id") required int customerId,
+  });
+  @POST(ServerConfig.milkRideVersion + EndPoints.cancelOrder)
+  Future<ApiResponseModel> cancelOrder({
+    @Field("order_id") required int orderId,
+    @Field("package_id") required int packageId,
+    @Field("reason_id") required int? reasonId,
   });
 }

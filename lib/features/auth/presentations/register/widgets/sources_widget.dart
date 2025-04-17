@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:milk_ride_live_wc/core/constants/app_string.dart';
+import 'package:milk_ride_live_wc/core/ui_component/network_fail_card.dart';
 import 'package:milk_ride_live_wc/features/auth/presentations/cubit/regions_and_sources/regions_sources_cubit.dart';
 import 'package:milk_ride_live_wc/features/auth/presentations/cubit/regions_and_sources/regions_sources_state.dart';
 
@@ -30,15 +31,10 @@ class _SourcesWidgetState extends State<SourcesWidget> {
   Widget build(BuildContext context) {
     return BlocBuilder<RegionsSourcesCubit, RegionsSourcesState>(
       builder: (context, state) {
-        if (state is RegionsSourcesLoading) {
+        if (state is RegionsSourcesError) {
+          return NetworkFailCard(message: state.errorMessage);
+        } else if (state is RegionsSourcesLoading) {
           return const Center(child: CircularProgressIndicator());
-        } else if (state is RegionsSourcesError) {
-          return Center(
-            child: Text(
-              state.errorMessage,
-              style: TextStyle(color: Colors.red),
-            ),
-          );
         } else if (state is RegionsSourcesLoaded) {
           final items = state.regionsSourcesResponse.data.sources;
 

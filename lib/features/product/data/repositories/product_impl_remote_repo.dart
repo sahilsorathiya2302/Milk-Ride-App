@@ -1,7 +1,9 @@
 import 'package:milk_ride_live_wc/features/product/domain/entities/categories_product_response.dart';
 import 'package:milk_ride_live_wc/features/product/domain/entities/product_response.dart';
+import 'package:milk_ride_live_wc/features/product/domain/entities/variant_response.dart';
 import 'package:milk_ride_live_wc/features/product/domain/usecase/categories_product_use_case.dart';
 import 'package:milk_ride_live_wc/features/product/domain/usecase/product_use_case.dart';
+import 'package:milk_ride_live_wc/features/product/domain/usecase/variants_use_case.dart';
 import 'package:milk_ride_live_wc/features/product/domain/usecase/view_category_use_case.dart';
 import 'package:milk_ride_live_wc/services/api_service.dart';
 
@@ -15,9 +17,8 @@ abstract class ProductRemoteRepo {
       {required CategoriesProductParam param});
 
   Future<ProductResponse> product({required ProductParam param});
+  Future<VariantResponse> variants({required VariantsParam param});
 }
-
-/// ProductImplRemoteRepo
 
 class ProductImplRemoteRepo extends ProductRemoteRepo {
   final ApiService apiService;
@@ -43,6 +44,12 @@ class ProductImplRemoteRepo extends ProductRemoteRepo {
   @override
   Future<ProductResponse> product({required ProductParam param}) {
     return apiService.product(
+        customerId: param.customerId, productId: param.productId);
+  }
+
+  @override
+  Future<VariantResponse> variants({required VariantsParam param}) {
+    return apiService.variants(
         customerId: param.customerId, productId: param.productId);
   }
 }

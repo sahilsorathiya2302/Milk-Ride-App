@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AppIcons {
@@ -26,4 +27,11 @@ class AppIcons {
   static const IconData remove = Icons.remove;
   static const IconData arrowDropDown = Icons.arrow_drop_down;
   static const IconData close = Icons.close;
+  static const IconData location = Icons.location_on;
+  static const IconData bike = Icons.pedal_bike_outlined;
+  static const IconData delete = CupertinoIcons.trash;
+  static const IconData cancelRounded = Icons.cancel_rounded;
+  static const IconData productIcons = Icons.grid_view;
+  static const IconData home = Icons.home;
+  static const IconData calendar = Icons.calendar_month;
 }

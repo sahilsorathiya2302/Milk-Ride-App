@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:milk_ride_live_wc/core/theme/app_border_radius.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_text.dart';
+import 'package:milk_ride_live_wc/core/ui_component/network_fail_card.dart';
 import 'package:milk_ride_live_wc/features/auth/presentations/cubit/area/area_state.dart';
 
 import '../../../../../core/constants/app_string.dart';
@@ -63,7 +64,9 @@ class _AreaSelectWidgetState extends State<AreaSelectWidget> {
           builder: (context) {
             return BlocBuilder<AreaCubit, AreaState>(
               builder: (context, state) {
-                if (state is AreaLoadedState) {
+                if (state is AreaError) {
+                  return NetworkFailCard(message: state.errorMessage);
+                } else if (state is AreaLoadedState) {
                   final item = state.areaResponse;
                   return Column(
                     mainAxisSize: MainAxisSize.min,
@@ -94,8 +97,6 @@ class _AreaSelectWidgetState extends State<AreaSelectWidget> {
                       ),
                     ],
                   );
-                } else if (state is AreaError) {
-                  return CustomText(text: state.errorMessage);
                 } else {
                   return Text('An Occurred Error');
                 }
