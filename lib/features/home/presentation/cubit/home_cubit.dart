@@ -22,7 +22,6 @@ class HomeCubit extends Cubit<HomeState> {
 
     response.fold(
       (failure) {
-        print("===========>${failure.message}");
         emit(HomeError(failure: failure.message.toString()));
       },
       (response) {

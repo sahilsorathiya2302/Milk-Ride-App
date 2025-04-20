@@ -1,5 +1,5 @@
-import 'package:milk_ride_live_wc/features/auth/domain/entities/data.dart';
 import 'package:milk_ride_live_wc/features/auth/domain/entities/sign_up_response.dart';
+import 'package:milk_ride_live_wc/features/auth/domain/entities/user_data.dart';
 
 class RegionsSourceModel extends RegionsSourcesResponse {
   RegionsSourceModel(

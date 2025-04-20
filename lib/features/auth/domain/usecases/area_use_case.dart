@@ -12,7 +12,7 @@ class AreaUseCase implements UseCase<List<AreaResponse>, AreaParam> {
 
   @override
   Future<Either<Failure, List<AreaResponse>>> call(AreaParam param) async {
-    return await authRepository.getArea(param.id);
+    return await authRepository.getArea(param: param);
   }
 }
 

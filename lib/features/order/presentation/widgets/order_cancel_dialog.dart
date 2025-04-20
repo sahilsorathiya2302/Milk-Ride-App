@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:milk_ride_live_wc/core/constants/app_string.dart';
 import 'package:milk_ride_live_wc/core/theme/app_border_radius.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
+import 'package:milk_ride_live_wc/core/theme/app_icons.dart';
 import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
 import 'package:milk_ride_live_wc/core/theme/app_text_size.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_button.dart';
@@ -36,14 +36,14 @@ class _OrderCancelDialogState extends State<OrderCancelDialog> {
   Widget build(BuildContext context) {
     final cubit = context.read<OrderCubit>();
 
-    // 🛠 Set the controller text only once if needed
     if (reasonController.text.isEmpty && cubit.state.cancelReason.isNotEmpty) {
       reasonController.text = cubit.state.cancelReason;
     }
 
     return AlertDialog(
       backgroundColor: AppColors.homeBG,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppBorderRadius.r12)),
       title: CustomText(
         text: AppString.requiredSelectReason,
         fontWeight: FontWeight.w700,
@@ -74,7 +74,7 @@ class _OrderCancelDialogState extends State<OrderCancelDialog> {
 
               if (selectedReason != null) {
                 reasonController.text = selectedReason;
-                cubit.selectReason(selectedReason);
+                cubit.selectReason(selectedReason, cubit.state.reasonId ?? 0);
               }
             },
             readOnly: true,
@@ -86,10 +86,7 @@ class _OrderCancelDialogState extends State<OrderCancelDialog> {
             ),
             decoration: InputDecoration(
               hintText: AppString.selectReason,
-              suffixIcon: Icon(
-                Icons.arrow_drop_down,
-                size: AppTextSize.s11,
-              ),
+              suffixIcon: Icon(AppIcons.arrowDropDown),
               hintStyle: TextStyle(
                 fontSize: AppTextSize.s14,
                 color: AppColors.grey,
@@ -110,7 +107,7 @@ class _OrderCancelDialogState extends State<OrderCancelDialog> {
               child: CustomButton(
                 onPressed: () {
                   reasonController.clear();
-                  cubit.selectReason(""); // Clear Cubit state too
+                  cubit.selectReason("", 0);
                   Get.back();
                 },
                 text: AppString.cancel,
@@ -131,7 +128,7 @@ class _OrderCancelDialogState extends State<OrderCancelDialog> {
                       context.read<OrderCancelCubit>().orderCancel(
                           orderId: widget.orderId,
                           packageId: widget.packageId,
-                          reasonId: 39);
+                          reasonId: cubit.state.reasonId ?? 0);
                       Get.back();
                     }
                   },

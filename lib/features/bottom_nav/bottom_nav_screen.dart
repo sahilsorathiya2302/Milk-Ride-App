@@ -25,10 +25,11 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     return [
       const HomeScreen(),
       const Scaffold(body: Center(child: Text("Products"))),
-      const OrderScreen(),
+      Builder(
+        builder: (context) => OrderScreen(),
+      ),
       const Scaffold(body: Center(child: Text("Subscriptions"))),
       SizedBox()
-      // Cart screen is not part of the tab screens
     ];
   }
 
@@ -39,8 +40,6 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       bottomBarItem(title: AppString.order, icon: AppIcons.order),
       bottomBarItem(
           title: AppString.subscription, icon: AppIcons.subscriptions),
-
-      // Cart button that navigates to cart screen
       PersistentBottomNavBarItem(
         icon: Icon(AppIcons.cart),
         title: AppString.cart,
@@ -54,10 +53,6 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
         inactiveColorPrimary: AppColors.bottomIconTextColor,
         onPressed: (context) {
           Get.toNamed(AppRoutesNames.cartScreen);
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => const CartScreen()),
-          // );
         },
       ),
     ];

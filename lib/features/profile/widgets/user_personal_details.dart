@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:milk_ride_live_wc/core/theme/app_border_radius.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
@@ -29,7 +30,7 @@ class UserPersonalDetails extends StatelessWidget {
             fontWeight: FontWeight.w500,
             color: AppColors.grey,
             fontSize: AppTextSize.s12,
-          ).paddingSymmetric(horizontal: 10),
+          ).paddingSymmetric(horizontal: 10.w),
           CustomText(
             text: info,
             fontWeight: FontWeight.w700,

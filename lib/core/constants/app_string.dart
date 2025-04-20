@@ -141,6 +141,9 @@ class AppString {
   static const String productNotFound = "Product Not Found";
   static const String removeCartProductConfirm =
       "Are you sure you want to remove this product from cart?";
+  static const String appCloseConfirm = "Are you sure want to exit ?";
+  static const String appCloseConfirmMessage =
+      "All operations will stop if you exit this app.";
 
   static const String home = "Home  ";
   static const String order = "Order";
@@ -159,4 +162,8 @@ class AppString {
   static const String emptySelectReasonMsg = "please Select Any Reason";
   static const String refundAmount = "Refunded Amount";
   static const String delivered = "delivered";
+  static const String ok = "OK";
+  static const String orderCancelled = "Order Cancelled";
+  static const String orderCancelledMessage =
+      "Your Order has been cancelled successfully";
 }

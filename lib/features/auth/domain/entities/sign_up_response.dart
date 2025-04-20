@@ -1,4 +1,4 @@
-import 'package:milk_ride_live_wc/features/auth/domain/entities/data.dart';
+import 'package:milk_ride_live_wc/features/auth/domain/entities/user_data.dart';
 
 class RegionsSourcesResponse {
   final String status;

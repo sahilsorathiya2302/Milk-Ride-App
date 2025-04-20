@@ -9,6 +9,7 @@ import 'package:milk_ride_live_wc/features/auth/domain/entities/register_respons
 import 'package:milk_ride_live_wc/features/auth/domain/entities/sign_in_response.dart';
 import 'package:milk_ride_live_wc/features/auth/domain/entities/sign_up_response.dart';
 import 'package:milk_ride_live_wc/features/auth/domain/repositories/auth_repository.dart';
+import 'package:milk_ride_live_wc/features/auth/domain/usecases/area_use_case.dart';
 import 'package:milk_ride_live_wc/features/auth/domain/usecases/register_use_case.dart';
 
 import '../../../../core/common_model/api_response_model.dart';
@@ -30,9 +31,10 @@ class AuthImplRepository extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, List<AreaResponse>>> getArea(int id) async {
+  Future<Either<Failure, List<AreaResponse>>> getArea(
+      {required AreaParam param}) async {
     try {
-      final result = await authRemoteRepo.getArea(id: id);
+      final result = await authRemoteRepo.getArea(id: param.id);
 
       return right(result);
     } on DioException catch (e) {

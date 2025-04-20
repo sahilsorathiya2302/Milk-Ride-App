@@ -65,27 +65,7 @@ class AuthImplRemoteRepo extends AuthRemoteRepo {
   }
 
   @override
-  Future<RegisterResponse> userRegister(
-      {
-      // required String name,
-      // required String? email,
-      // required String sourceId,
-      // required String areaId,
-      // required String houseNo,
-      // required String? floor,
-      // required String society,
-      // required String landMark,
-      // required String city,
-      // required String area,
-      // required String pinCode,
-      // required String regionId,
-      // required String userId,
-      // required String? referrerCode,
-      // required String? agentCode,
-      // required String deliveryType,
-      // required String gender,
-      // required String mobileNumber,
-      required RegisterParam param}) async {
+  Future<RegisterResponse> userRegister({required RegisterParam param}) async {
     return await apiService.register(
       email: param.email,
       sourceId: param.sourceId,

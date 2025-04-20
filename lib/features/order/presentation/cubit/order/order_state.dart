@@ -6,30 +6,33 @@ class OrderState extends Equatable {
   final DateTime selectedDate;
   final int index;
   final String cancelReason;
+  final int? reasonId;
 
   const OrderState({
     required this.baseDate,
     required this.selectedDate,
     required this.index,
     required this.cancelReason,
+    required this.reasonId,
   });
 
   List<DateTime> get surroundingDates {
     return List.generate(15, (i) => baseDate.subtract(Duration(days: 7 - i)));
   }
 
-  // Copy with method for state modifications
   OrderState copyWith({
     DateTime? baseDate,
     DateTime? selectedDate,
     int? index,
     String? cancelReason,
+    int? reasonId,
   }) {
     return OrderState(
       baseDate: baseDate ?? this.baseDate,
       selectedDate: selectedDate ?? this.selectedDate,
       index: index ?? this.index,
       cancelReason: cancelReason ?? this.cancelReason,
+      reasonId: reasonId ?? this.reasonId,
     );
   }
 
@@ -43,6 +46,7 @@ class OrderInitial extends OrderState {
     required super.selectedDate,
     required super.index,
     required super.cancelReason,
+    required super.reasonId,
   });
 
   @override
@@ -55,6 +59,7 @@ class OrderLoadingState extends OrderState {
     required super.selectedDate,
     required super.index,
     required super.cancelReason,
+    required super.reasonId,
   });
 
   @override
@@ -70,6 +75,7 @@ class OrderLoadedState extends OrderState {
     required super.index,
     required this.orderResponse,
     required super.cancelReason,
+    required super.reasonId,
   });
 
   @override
@@ -79,6 +85,7 @@ class OrderLoadedState extends OrderState {
     int? index,
     String? cancelReason,
     OrderResponse? orderResponse,
+    int? reasonId,
   }) {
     return OrderLoadedState(
       baseDate: baseDate ?? this.baseDate,
@@ -86,12 +93,18 @@ class OrderLoadedState extends OrderState {
       index: index ?? this.index,
       orderResponse: orderResponse ?? this.orderResponse,
       cancelReason: cancelReason ?? this.cancelReason,
+      reasonId: reasonId ?? this.reasonId,
     );
   }
 
   @override
-  List<Object?> get props =>
-      [orderResponse, baseDate, selectedDate, index, cancelReason];
+  List<Object?> get props => [
+        orderResponse,
+        baseDate,
+        selectedDate,
+        index,
+        cancelReason,
+      ];
 }
 
 class OrderErrorState extends OrderState {
@@ -103,9 +116,15 @@ class OrderErrorState extends OrderState {
     required super.index,
     required this.errorMessage,
     required super.cancelReason,
+    required super.reasonId,
   });
 
   @override
-  List<Object?> get props =>
-      [errorMessage, baseDate, selectedDate, index, cancelReason];
+  List<Object?> get props => [
+        errorMessage,
+        baseDate,
+        selectedDate,
+        index,
+        cancelReason,
+      ];
 }

@@ -35,7 +35,7 @@ abstract class ApiService {
       connectTimeout: const Duration(seconds: 30),
       headers: {
         if (token != null) "Authorization": "Bearer $token",
-        "Content-Type": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
       },
     );
 

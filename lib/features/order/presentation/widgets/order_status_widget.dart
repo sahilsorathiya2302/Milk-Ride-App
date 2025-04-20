@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:milk_ride_live_wc/core/theme/app_border_radius.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
 import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
@@ -30,7 +31,6 @@ class _OrderStatusWidgetState extends State<OrderStatusWidget> {
       height: 30.h,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: 15.w),
         itemCount: OrderStatusWidget._statusList.length,
         separatorBuilder: (context, index) => 15.width,
         itemBuilder: (context, index) {
@@ -61,7 +61,7 @@ class _OrderStatusWidgetState extends State<OrderStatusWidget> {
             ),
           );
         },
-      ),
+      ).paddingSymmetric(horizontal: 15.w),
     );
   }
 }

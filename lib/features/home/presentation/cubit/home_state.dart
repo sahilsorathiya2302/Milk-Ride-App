@@ -3,7 +3,6 @@ import 'package:milk_ride_live_wc/features/auth/domain/entities/customer.dart';
 import 'package:milk_ride_live_wc/features/home/domain/entities/banners.dart';
 import 'package:milk_ride_live_wc/features/home/domain/entities/home_response.dart';
 import 'package:milk_ride_live_wc/features/product/domain/entities/cetegories.dart';
-import 'package:milk_ride_live_wc/features/product/domain/entities/filtered_packages.dart';
 import 'package:milk_ride_live_wc/features/product/domain/entities/product_data.dart';
 
 class HomeState extends Equatable {

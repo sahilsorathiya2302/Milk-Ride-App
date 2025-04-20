@@ -45,17 +45,18 @@ class ReasonSheetWidget extends StatelessWidget {
                         child: Row(
                           children: [
                             CustomText(
-                              text: reason?.name ?? "",
+                              text: reason?.name ?? AppString.empty,
                               fontSize: AppTextSize.s13,
                               fontWeight: FontWeight.w700,
                             ).paddingSymmetric(horizontal: 10),
                           ],
                         ),
                         onTap: () {
-                          final selectedReason = reason?.name ?? "";
-                          context
-                              .read<OrderCubit>()
-                              .selectReason(selectedReason); // pass to Cubit
+                          final selectedReason =
+                              reason?.name ?? AppString.empty;
+                          final int reasonId = reason?.id ?? 0;
+                          context.read<OrderCubit>().selectReason(
+                              selectedReason, reasonId); // pass to Cubit
                           Get.back(result: selectedReason);
                           // pass back to previous screen
                         },

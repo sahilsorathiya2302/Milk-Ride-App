@@ -158,7 +158,7 @@ class _CardWidgetState extends State<CardWidget> {
             )),
           );
         },
-      ).paddingOnly(left: 10.w),
+      ).paddingOnly(left: 10.w, right: 10.w),
     );
   }
 }

@@ -60,7 +60,6 @@ class _CartScreenState extends State<CartScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CartItemWidget(
-                                customerId: customerId ?? 0,
                                 packageState:
                                     state.cartResponse.data?.package ?? [],
                               ),

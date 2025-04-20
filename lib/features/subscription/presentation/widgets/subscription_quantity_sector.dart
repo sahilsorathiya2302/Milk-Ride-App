@@ -71,8 +71,8 @@ class _SubscriptionQuantitySectorState
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: 40,
-        height: 40,
+        width: 40.w,
+        height: 40.h,
         alignment: Alignment.center,
         child:
             Icon(icon, color: onPressed == null ? Colors.grey : Colors.black),

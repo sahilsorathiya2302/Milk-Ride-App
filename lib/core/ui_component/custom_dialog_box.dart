@@ -7,7 +7,10 @@ import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
 import 'package:milk_ride_live_wc/core/theme/app_text_size.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_text.dart';
 
-void showDeleteConfirmationDialog({required void Function()? onPressed}) {
+showDeleteConfirmationDialog(
+    {required void Function()? onPressed,
+    required String title,
+    required String subTitle}) {
   showDialog(
     context: Get.context!,
     builder: (BuildContext context) {
@@ -28,7 +31,7 @@ void showDeleteConfirmationDialog({required void Function()? onPressed}) {
               ),
               30.height,
               CustomText(
-                text: AppString.removeCartItemConfirm,
+                text: title,
                 fontWeight: FontWeight.w600,
                 fontSize: AppTextSize.s14,
               ),
@@ -38,7 +41,7 @@ void showDeleteConfirmationDialog({required void Function()? onPressed}) {
                 child: CustomText(
                   textAlign: TextAlign.center,
                   maxLine: 2,
-                  text: AppString.removeCartProductConfirm,
+                  text: subTitle,
                   color: AppColors.darkGrey,
                   fontWeight: FontWeight.w600,
                 ),

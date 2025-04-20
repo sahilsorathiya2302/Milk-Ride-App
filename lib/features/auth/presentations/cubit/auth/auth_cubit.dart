@@ -88,7 +88,7 @@ class AuthCubit extends Cubit<AuthState> {
           StorageManager.saveData(StorageKeys.tokenKey, result.appToken);
           StorageManager.saveData(StorageKeys.mobileNumber, mobileNumber);
           StorageManager.saveData(StorageKeys.userId, userId);
-          Get.toNamed(AppRoutesNames.bottomNavScreen,
+          Get.offAllNamed(AppRoutesNames.bottomNavScreen,
               arguments: {ArgumentKey.customerId: result.customer?.id});
         }
       } else if (result.status == AppString.error) {
@@ -170,7 +170,7 @@ class AuthCubit extends Cubit<AuthState> {
           title: AppString.error, message: failure.message),
       (result) {
         if (result.status == AppString.success) {
-          Get.toNamed(AppRoutesNames.bottomNavScreen,
+          Get.offAllNamed(AppRoutesNames.bottomNavScreen,
               arguments: {ArgumentKey.customerId: result.customer?.id});
           print(result.appToken);
           StorageManager.saveData(StorageKeys.tokenKey, result.appToken);

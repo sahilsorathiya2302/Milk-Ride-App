@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:milk_ride_live_wc/core/constants/app_string.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
@@ -14,10 +13,10 @@ import 'package:milk_ride_live_wc/features/order/presentation/cubit/order/order_
 import 'package:milk_ride_live_wc/features/order/presentation/widgets/delivered_widget.dart';
 import 'package:milk_ride_live_wc/features/order/presentation/widgets/order_status_widget.dart';
 import 'package:milk_ride_live_wc/features/order/presentation/widgets/refund_widget.dart';
-import 'package:milk_ride_live_wc/features/order/presentation/widgets/shimmer_list_placeholder_widget.dart';
 import 'package:milk_ride_live_wc/features/order/presentation/widgets/to_be_delivered_info_widget.dart';
 
 import 'widgets/custom_date_listview_widget.dart';
+import 'widgets/shimmer_list_placeholder_widget.dart';
 
 class OrderScreen extends StatefulWidget {
   const OrderScreen({super.key});
@@ -27,30 +26,46 @@ class OrderScreen extends StatefulWidget {
 }
 
 class _OrderScreenState extends State<OrderScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    final orderCubit = context.read<OrderCubit>();
+    final homeCubit = context.read<HomeCubit>();
+
+    DateTime selectedDate = orderCubit.state.selectedDate;
+
+    String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
+    final customerId = homeCubit.customerData?.id ?? 1;
+
+    orderCubit.order(
+      deliveryDate: formattedDate,
+      customerId: customerId,
+    );
+  }
+
   void _openDatePicker(BuildContext context) async {
-    final baseDate = context.read<OrderCubit>().state.baseDate;
+    final orderCubit = context.read<OrderCubit>();
+    final homeCubit = context.read<HomeCubit>();
+
+    final baseDate = orderCubit.state.selectedDate;
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: baseDate,
       firstDate: DateTime(2020),
       lastDate: DateTime(2035),
     );
+
     if (picked != null) {
-      Get.context?.read<OrderCubit>().changeBaseDate(picked);
+      orderCubit.selectDate(picked);
+      String formattedDate = DateFormat('yyyy-MM-dd').format(picked);
+      final customerId = homeCubit.customerData?.id ?? 1;
+
+      orderCubit.order(
+        deliveryDate: formattedDate,
+        customerId: customerId,
+      );
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    final customerId = context.read<HomeCubit>().customerData?.id;
-    String formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
-
-    // Trigger order loading with the initial data
-    context.read<OrderCubit>().order(
-          deliveryDate: formattedDate,
-          customerId: customerId ?? 1,
-        );
   }
 
   @override
@@ -68,9 +83,7 @@ class _OrderScreenState extends State<OrderScreen> {
             if (state is OrderLoadingState) {
               return ShimmerListPlaceholderWidget();
             } else if (state is OrderErrorState) {
-              return NetworkFailCard(
-                message: state.errorMessage,
-              );
+              return NetworkFailCard(message: state.errorMessage);
             } else if (state is OrderLoadedState) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +100,7 @@ class _OrderScreenState extends State<OrderScreen> {
                   else if (state.index == 2)
                     RefundWidget()
                   else
-                    SizedBox(),
+                    const SizedBox(),
                 ],
               );
             }

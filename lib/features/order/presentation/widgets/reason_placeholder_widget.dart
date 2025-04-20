@@ -12,7 +12,7 @@ class ReasonPlaceholderWidget extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: 70,
+          height: 70.h,
           child: ListView.builder(
             scrollDirection: Axis.vertical,
             itemCount: 5,

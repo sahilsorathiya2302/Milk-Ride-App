@@ -14,7 +14,3 @@ class NetworkFailure extends Failure {
 class ServerFailure extends Failure {
   const ServerFailure({required super.message});
 }
-
-class UnexpectedFailure extends Failure {
-  const UnexpectedFailure(String message) : super(message: message);
-}

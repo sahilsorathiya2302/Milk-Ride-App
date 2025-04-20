@@ -44,7 +44,7 @@ class _SubscriptionDeliveryTypeWidgetState
               _deliveryButton(
                   label: AppString.evening, type: AppString.evening),
             ],
-          ).paddingSymmetric(horizontal: 10),
+          ).paddingSymmetric(horizontal: 10.w),
         )
       ],
     );

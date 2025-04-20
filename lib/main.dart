@@ -83,7 +83,7 @@ class MyApp extends StatelessWidget {
         child: GlobalLoaderOverlay(
           child: GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Flutter Demo',
+            title: 'Milk Ride',
             theme: ThemeData(
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,

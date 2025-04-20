@@ -52,7 +52,7 @@ class UserBalanceDetails extends StatelessWidget {
                 fontWeight: FontWeight.w700,
               ),
             ],
-          ).paddingSymmetric(horizontal: 10)
+          ).paddingSymmetric(horizontal: 10.w)
         ],
       ),
     );

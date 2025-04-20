@@ -6,6 +6,7 @@ import 'package:milk_ride_live_wc/features/bottom_nav/bottom_nav_screen.dart';
 import 'package:milk_ride_live_wc/features/cart/presentation/cart_screen.dart';
 import 'package:milk_ride_live_wc/features/cart/presentation/widgets/success_widgets.dart';
 import 'package:milk_ride_live_wc/features/home/presentation/home_screen.dart';
+import 'package:milk_ride_live_wc/features/order/presentation/order_screen.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/categories/view_categories_screen.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/categories_products/categories_products_screen.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/product_details/product_details_screen.dart';
@@ -15,6 +16,8 @@ import 'package:milk_ride_live_wc/features/subscription/presentation/subscriptio
 import '../../features/auth/presentations/register/register_screen.dart';
 
 class AppRoutesPages {
+  AppRoutesPages._();
+
   static List<GetPage> pages = [
     GetPage(
       name: AppRoutesNames.splashScreen,
@@ -73,6 +76,10 @@ class AppRoutesPages {
     GetPage(
       name: AppRoutesNames.successScreen,
       page: () => SuccessWidgets(),
+    ),
+    GetPage(
+      name: AppRoutesNames.orderScreen,
+      page: () => OrderScreen(),
     ),
   ];
 }

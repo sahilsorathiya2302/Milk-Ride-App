@@ -30,16 +30,20 @@ class PayableAmountWidget extends StatelessWidget {
       child: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              BlocBuilder<CartCubit, CartState>(
-                builder: (context, state) {
-                  double total = 0.0;
-                  if (state is CartLoadedState) {
-                    total = state.totalPrice;
-                  }
-                  return Column(
+          child: BlocBuilder<CartCubit, CartState>(
+            builder: (context, state) {
+              double total = 0.0;
+              bool showUpdateButton = false;
+
+              if (state is CartLoadedState) {
+                total = state.totalPrice;
+                showUpdateButton = context.read<CartCubit>().isCartUpdated();
+              }
+
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText(
@@ -54,46 +58,38 @@ class PayableAmountWidget extends StatelessWidget {
                         fontSize: AppTextSize.s14,
                       ),
                     ],
-                  );
-                },
-              ),
-              BlocBuilder<CartCubit, CartState>(builder: (context, state) {
-                bool showUpdateButton = false;
-                if (state is CartLoadedState) {
-                  showUpdateButton = context.read<CartCubit>().isCartUpdated();
-                }
-
-                return showUpdateButton
-                    ? CustomButton(
-                        onPressed: () {
-                          print("This");
-                          final cartList =
-                              context.read<CartCubit>().getFinalCartOrderList();
-                          final cartJsonString = jsonEncode(cartList);
-                          print(cartJsonString);
-                          if (cartList.isNotEmpty) {
-                            context.read<CartCubit>().updateQty(
-                                cart: cartJsonString, customerId: customerId);
-                          }
-                        },
-                        text: AppString.updateQuantity,
-                        color: AppColors.orange,
-                        height: 30.h,
-                        textSize: AppTextSize.s12,
-                        width: 150.w,
-                      )
-                    : CustomButton(
-                        onPressed: () {
-                          context.read<PlaceOrderCubit>().placeOrder(
-                              userId: userId, customerId: customerId);
-                        },
-                        text: AppString.placeOrder,
-                        height: 30.h,
-                        textSize: AppTextSize.s12,
-                        width: 120.w,
-                      );
-              }),
-            ],
+                  ),
+                  showUpdateButton
+                      ? CustomButton(
+                          onPressed: () {
+                            final cartList = context
+                                .read<CartCubit>()
+                                .getFinalCartOrderList();
+                            final cartJsonString = jsonEncode(cartList);
+                            if (cartList.isNotEmpty) {
+                              context.read<CartCubit>().updateQty(
+                                  cart: cartJsonString, customerId: customerId);
+                            }
+                          },
+                          text: AppString.updateQuantity,
+                          color: AppColors.orange,
+                          height: 30.h,
+                          textSize: AppTextSize.s12,
+                          width: 150.w,
+                        )
+                      : CustomButton(
+                          onPressed: () {
+                            context.read<PlaceOrderCubit>().placeOrder(
+                                userId: userId, customerId: customerId);
+                          },
+                          text: AppString.placeOrder,
+                          height: 30.h,
+                          textSize: AppTextSize.s12,
+                          width: 120.w,
+                        ),
+                ],
+              );
+            },
           ),
         ),
       ),

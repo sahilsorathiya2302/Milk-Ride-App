@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:milk_ride_live_wc/core/theme/app_border_radius.dart';
+import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ShimmerListPlaceholderWidget extends StatelessWidget {
@@ -10,43 +11,33 @@ class ShimmerListPlaceholderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Horizontal shimmer list
           SizedBox(
-            height: 70,
+            height: 70.h,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: 5,
               itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 12),
-                  child: dateCard(),
-                );
+                return dateCard().paddingOnly(right: 16.h);
               },
             ),
           ),
-
-          const SizedBox(height: 24),
+          24.height,
           status(),
-          const SizedBox(height: 24),
-          // Vertical shimmer list
+          24.height,
           ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: 5,
             itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: shimmerCard(),
-              );
+              return shimmerCard().paddingOnly(bottom: 16.h);
             },
           ),
         ],
       ),
-    );
+    ).paddingAll(16);
   }
 
   Widget dateCard() {
@@ -82,13 +73,13 @@ class ShimmerListPlaceholderWidget extends StatelessWidget {
   Widget shimmerCard() {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(AppBorderRadius.r12),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           shimmerBox(
-            height: 90,
+            height: 90.h,
             width: Get.context!.width * 0.88,
             borderRadius: BorderRadius.circular(AppBorderRadius.r5),
           ),
@@ -110,7 +101,8 @@ class ShimmerListPlaceholderWidget extends StatelessWidget {
         width: width,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: borderRadius ?? BorderRadius.circular(8),
+          borderRadius:
+              borderRadius ?? BorderRadius.circular(AppBorderRadius.r8),
         ),
       ),
     );

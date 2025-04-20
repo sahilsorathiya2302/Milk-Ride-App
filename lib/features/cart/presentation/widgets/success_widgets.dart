@@ -12,7 +12,9 @@ import 'package:milk_ride_live_wc/core/ui_component/custom_text.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_title.dart';
 
 class SuccessWidgets extends StatefulWidget {
-  const SuccessWidgets({super.key});
+  const SuccessWidgets({
+    super.key,
+  });
 
   @override
   State<SuccessWidgets> createState() => _SuccessWidgetsState();
@@ -44,7 +46,7 @@ class _SuccessWidgetsState extends State<SuccessWidgets> {
             100.height,
             CustomButton(
               onPressed: () {
-                Get.toNamed(AppRoutesNames.bottomNavScreen);
+                Get.offAllNamed(AppRoutesNames.bottomNavScreen);
               },
               text: AppString.continuesShopping,
             )

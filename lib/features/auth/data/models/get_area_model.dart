@@ -1,7 +1,7 @@
 import '../../domain/entities/area_response.dart';
 
 class GetAreaModel extends AreaResponse {
-  GetAreaModel({int? id, String? name}) : super(id: id, name: name);
+  GetAreaModel({super.id, super.name});
 
   // Factory constructor to create an instance from JSON
   factory GetAreaModel.fromJson(Map<String, dynamic> json) {

@@ -42,7 +42,6 @@ class _SelectDateWidgetState extends State<SelectDateWidget> {
           ? today
           : DateFormat('dd-MM-yyyy').parse(startDateController.text);
     } catch (e) {
-      print("⚠️ Invalid start date, fallback to today: $e");
       minDate = today;
     }
 
@@ -66,22 +65,18 @@ class _SelectDateWidgetState extends State<SelectDateWidget> {
     );
 
     if (pickedDate != null) {
-      print("===========>Hello");
       String uiFormatted = DateFormat('dd-MM-yyyy').format(pickedDate);
       controller.text = uiFormatted;
-
       String apiFormatted = DateFormat('yyyy-MM-dd').format(pickedDate);
 
       final cubit = context.read<SubscriptionCubit>();
 
       if (isStartDate == true) {
-        print(startDateController.text);
-        print(apiFormatted);
-        cubit.setStartDate(apiFormatted); // Send to API
-        endDateController.clear(); // Clear UI end date
-        cubit.setEndDate(''); // Reset in Cubit too
+        cubit.setStartDate(apiFormatted);
+        endDateController.clear();
+        cubit.setEndDate('');
       } else {
-        cubit.setEndDate(apiFormatted); // Send to API
+        cubit.setEndDate(apiFormatted);
       }
     }
   }

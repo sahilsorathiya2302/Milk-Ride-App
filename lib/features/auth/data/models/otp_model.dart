@@ -2,38 +2,6 @@ import 'package:milk_ride_live_wc/features/auth/domain/entities/otp_response.dar
 
 import '../../domain/entities/customer.dart';
 
-// class OtpModel extends OtpResponse {
-//   OtpModel(
-//     super.userId,
-//     super.otp,
-//     super.status,
-//     super.statusCode,
-//     super.message,
-//     super.data,
-//   );
-//
-//   factory OtpModel.fromJson(Map<String, dynamic> json) {
-//     return OtpModel(
-//       json['userId'],
-//       json['otp'],
-//       json['status'],
-//       json['statusCode'],
-//       json['message'],
-//       json['data'],
-//     );
-//   }
-//
-//   Map<String, dynamic> toJson() {
-//     return {
-//       'userId': userId,
-//       'otp': otp,
-//       'status': status,
-//       'statusCode': statusCode,
-//       'message': message,
-//       'data': data,
-//     };
-//   }
-// }
 class OtpVerifyModel extends OtpResponse {
   OtpVerifyModel(
     super.status,

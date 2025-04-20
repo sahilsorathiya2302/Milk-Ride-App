@@ -15,31 +15,38 @@ class OrderCubit extends Cubit<OrderState> {
           selectedDate: DateTime.now(),
           index: 0,
           cancelReason: '',
+          reasonId: 39,
         ));
 
   OrderData? orderData;
   OrderResponse? orderDetails;
 
-  Future<void> order(
-      {required String deliveryDate, required int customerId}) async {
+  Future<void> order({
+    required String deliveryDate,
+    required int customerId,
+  }) async {
     emit(OrderLoadingState(
       baseDate: state.baseDate,
       selectedDate: state.selectedDate,
       index: state.index,
       cancelReason: state.cancelReason,
+      reasonId: state.reasonId,
     ));
 
-    final result = await orderUseCase
-        .call(OrderParam(deliveryDate: deliveryDate, customerId: customerId));
+    final result = await orderUseCase.call(
+      OrderParam(deliveryDate: deliveryDate, customerId: customerId),
+    );
 
     result.fold(
       (failure) {
         emit(OrderErrorState(
-            baseDate: state.baseDate,
-            selectedDate: state.selectedDate,
-            index: state.index,
-            cancelReason: state.cancelReason,
-            errorMessage: failure.message));
+          baseDate: state.baseDate,
+          selectedDate: state.selectedDate,
+          index: state.index,
+          cancelReason: state.cancelReason,
+          errorMessage: failure.message,
+          reasonId: state.reasonId,
+        ));
       },
       (result) {
         if (result.status == AppString.success) {
@@ -47,11 +54,13 @@ class OrderCubit extends Cubit<OrderState> {
           orderDetails = result;
 
           emit(OrderLoadedState(
-              cancelReason: state.cancelReason,
-              baseDate: state.baseDate,
-              selectedDate: state.selectedDate,
-              index: state.index,
-              orderResponse: result));
+            cancelReason: state.cancelReason,
+            baseDate: state.baseDate,
+            selectedDate: state.selectedDate,
+            index: state.index,
+            reasonId: state.reasonId,
+            orderResponse: result,
+          ));
         } else if (result.status == AppString.error) {
           FunctionalComponent.errorMessageSnackbar(
               message: result.message ?? "");
@@ -65,7 +74,10 @@ class OrderCubit extends Cubit<OrderState> {
   }
 
   void selectDate(DateTime date) {
-    emit(state.copyWith(selectedDate: date));
+    emit(state.copyWith(
+      selectedDate: date,
+      baseDate: date,
+    ));
   }
 
   void selectedStatus(int index) {
@@ -74,18 +86,19 @@ class OrderCubit extends Cubit<OrderState> {
     }
   }
 
-  void selectReason(String cancelReason) {
+  void selectReason(String cancelReason, int id) {
     if (state is OrderLoadedState) {
-      emit(state.copyWith(cancelReason: cancelReason));
+      emit(state.copyWith(cancelReason: cancelReason, reasonId: id));
     }
   }
 
   void setCurrent() {
     final now = DateTime.now();
     emit(state.copyWith(
-        baseDate: now,
-        selectedDate: now,
-        index: state.index,
-        cancelReason: state.cancelReason));
+      baseDate: now,
+      selectedDate: now,
+      index: state.index,
+      cancelReason: state.cancelReason,
+    ));
   }
 }

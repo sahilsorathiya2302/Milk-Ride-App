@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:milk_ride_live_wc/core/theme/app_border_radius.dart';
@@ -15,7 +16,7 @@ class SelectItemAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: 50.h,
       decoration: BoxDecoration(
         color: AppColors.primaryLightColor,
         borderRadius: BorderRadius.vertical(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_order_info.dart';
 import 'package:milk_ride_live_wc/features/order/presentation/cubit/order/order_cubit.dart';
@@ -20,7 +21,6 @@ class _ToBeDeliveredInfoWidgetState extends State<ToBeDeliveredInfoWidget> {
   Widget build(BuildContext context) {
     final cubit = context.read<OrderCubit>().orderData;
     final orderDetailsCubit = context.read<OrderCubit>().orderDetails;
-    print(cubit?.toBeDelivered);
     return Column(
       children: [
         cubit?.toBeDelivered?.isNotEmpty ?? false
@@ -28,7 +28,7 @@ class _ToBeDeliveredInfoWidgetState extends State<ToBeDeliveredInfoWidget> {
                 children: [
                   CustomOrderInfo(
                     cubit:
-                        context.read<OrderCubit>().orderData!.toBeDelivered ??
+                        context.read<OrderCubit>().orderData?.toBeDelivered ??
                             [],
                   ),
                   CustomOrderDetails(
@@ -39,6 +39,6 @@ class _ToBeDeliveredInfoWidgetState extends State<ToBeDeliveredInfoWidget> {
               )
             : NotOrderFoundWidget()
       ],
-    ).paddingSymmetric(horizontal: 15);
+    ).paddingSymmetric(horizontal: 15.w);
   }
 }

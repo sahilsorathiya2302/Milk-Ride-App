@@ -137,7 +137,7 @@ class _SideMenuWidgetState extends State<SideMenuWidget> {
             text: AppString.myProfile,
             icon: AppIcons.person,
             onTap: () {
-              Get.back(); // Close the drawer
+              Get.back();
               Future.delayed(Duration(milliseconds: 100), () {
                 showProfileBottomSheet();
               });
@@ -173,7 +173,7 @@ class _SideMenuWidgetState extends State<SideMenuWidget> {
             text: AppString.myOrder,
             icon: AppIcons.order,
             onTap: () {
-              Get.back();
+              Get.toNamed(AppRoutesNames.orderScreen);
             },
           ),
           Divider(),
@@ -197,21 +197,28 @@ class _SideMenuWidgetState extends State<SideMenuWidget> {
     );
   }
 
-  ListTile buildListTile(
+  Widget buildListTile(
       {required IconData icon,
       required String text,
       required void Function()? onTap}) {
-    return ListTile(
-      leading: Icon(
-        icon,
-        color: AppColors.black,
+    return SizedBox(
+      height: 40,
+      child: InkWell(
+        onTap: onTap,
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              color: AppColors.black,
+            ),
+            CustomText(
+              text: text,
+              fontSize: AppTextSize.s14,
+              fontWeight: FontWeight.w700,
+            ),
+          ],
+        ),
       ),
-      title: CustomText(
-        text: text,
-        fontSize: AppTextSize.s14,
-        fontWeight: FontWeight.w700,
-      ),
-      onTap: onTap,
-    );
+    ).paddingSymmetric(horizontal: 10);
   }
 }

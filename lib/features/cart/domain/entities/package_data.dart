@@ -65,24 +65,24 @@ class PackageData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['product_id'] = this.productId;
-    data['cart_id'] = this.cartId;
-    data['name'] = this.name;
-    data['min_qty_allow'] = this.minQtyAllow;
-    data['max_qty_allow'] = this.maxQtyAllow;
-    data['package_size'] = this.packageSize;
-    data['image_url'] = this.imageUrl;
-    data['brand'] = this.brand;
-    data['volume'] = this.volume;
-    data['qty'] = this.qty;
-    data['delivery_type'] = this.deliveryType;
-    data['price'] = this.price;
-    data['price_decimal'] = this.priceDecimal;
-    data['total_price'] = this.totalPrice;
-    data['total_price_decimal'] = this.totalPriceDecimal;
-    data['delivery_date'] = this.deliveryDate;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['product_id'] = productId;
+    data['cart_id'] = cartId;
+    data['name'] = name;
+    data['min_qty_allow'] = minQtyAllow;
+    data['max_qty_allow'] = maxQtyAllow;
+    data['package_size'] = packageSize;
+    data['image_url'] = imageUrl;
+    data['brand'] = brand;
+    data['volume'] = volume;
+    data['qty'] = qty;
+    data['delivery_type'] = deliveryType;
+    data['price'] = price;
+    data['price_decimal'] = priceDecimal;
+    data['total_price'] = totalPrice;
+    data['total_price_decimal'] = totalPriceDecimal;
+    data['delivery_date'] = deliveryDate;
     data['mrp_price'] = mrpPrice;
     data['sale_price'] = salePrice;
     data['percentage_difference'] = percentageDifference;

@@ -12,7 +12,7 @@ class AreaCubit extends Cubit<AreaState> {
   AreaCubit({required this.areaUseCase}) : super(AreaInitial());
 
   void resetArea() {
-    emit(AreaInitial()); // Reset the area state
+    emit(AreaInitial());
   }
 
   Future<void> getArea({required int id}) async {
