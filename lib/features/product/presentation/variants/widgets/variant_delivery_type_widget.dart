@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:milk_ride_live_wc/core/constants/app_string.dart';
 import 'package:milk_ride_live_wc/core/theme/app_border_radius.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
@@ -24,7 +25,7 @@ class _VariantDeliveryTypeWidgetState extends State<VariantDeliveryTypeWidget> {
     super.initState();
 
     Future.microtask(() {
-      context.read<VariantsCubit>().changeDeliveryType(AppString.morning);
+      Get.context?.read<VariantsCubit>().changeDeliveryType(AppString.morning);
     });
   }
 

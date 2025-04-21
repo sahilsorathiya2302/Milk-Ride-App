@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:milk_ride_live_wc/core/constants/app_string.dart';
 import 'package:milk_ride_live_wc/core/theme/app_border_radius.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
 import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
@@ -13,9 +14,9 @@ class OrderStatusWidget extends StatefulWidget {
   const OrderStatusWidget({super.key});
 
   static const List<String> _statusList = [
-    "To be delivered",
-    "Delivered",
-    "Refund"
+    AppString.orderStatusTobeDelivered,
+    AppString.orderStatusDelivered,
+    AppString.orderStatusRefund,
   ];
 
   @override

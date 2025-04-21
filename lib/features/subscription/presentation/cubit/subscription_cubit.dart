@@ -173,8 +173,6 @@ class SubscriptionCubit extends Cubit<SubscriptionState> {
   }
 
   void setStartDate(String startDate) {
-    print("1===========>$startDate");
-
     if (state is SubscriptionLoaded) {
       emit((state as SubscriptionLoaded).copyWith(startDate: startDate));
     } else {
@@ -232,25 +230,25 @@ class SubscriptionCubit extends Cubit<SubscriptionState> {
   }
 
   void changeDeliverySchedule(String schedule) {
-    String frequencyType = '';
+    String frequencyType = AppString.empty;
     dynamic frequencyValue;
     List<int> dayWiseQuantity = [];
 
     switch (schedule) {
       case "Every Day":
-        frequencyType = "every_day";
+        frequencyType = AppString.everyDay;
         frequencyValue = 1;
         break;
       case "Alternate Day":
-        frequencyType = "alternate_day";
+        frequencyType = AppString.alternateDay;
         frequencyValue = 2;
         break;
       case "Every 3 Day":
-        frequencyType = "every_3_day";
+        frequencyType = AppString.everyThreeDay;
         frequencyValue = 3;
         break;
       case "Day Wise":
-        frequencyType = "day_wise";
+        frequencyType = AppString.dayWiseSub;
         frequencyValue = [1, 0, 1, 0, 0, 0, 1];
         dayWiseQuantity = [1, 0, 1, 0, 0, 0, 1];
         break;
@@ -306,10 +304,8 @@ class SubscriptionCubit extends Cubit<SubscriptionState> {
       emit(currentState.copyWith(
         startDate: currentState.startDate,
         endDate: currentState.endDate,
-        // other properties...
       ));
     } else if (state is SubscriptionLoading) {
-      // Handle SubscriptionLoading state
       final currentState = state;
       emit(SubscriptionLoading(
         startDate: currentState.startDate,

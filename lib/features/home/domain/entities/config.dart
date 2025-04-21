@@ -45,20 +45,20 @@ class Config {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['vendor_title'] = this.vendorTitle;
-    data['vendor_display_name'] = this.vendorDisplayName;
-    data['logo_url'] = this.logoUrl;
-    data['is_branded_app'] = this.isBrandedApp;
-    data['is_android_app'] = this.isAndroidApp;
-    data['is_ios_app'] = this.isIosApp;
-    data['order_before'] = this.orderBefore;
-    data['force_update_android'] = this.forceUpdateAndroid;
-    data['version_code_android'] = this.versionCodeAndroid;
-    data['force_update_ios'] = this.forceUpdateIos;
-    data['version_code_ios'] = this.versionCodeIos;
-    data['is_maintenance_mode'] = this.isMaintenanceMode;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['vendor_title'] = vendorTitle;
+    data['vendor_display_name'] = vendorDisplayName;
+    data['logo_url'] = logoUrl;
+    data['is_branded_app'] = isBrandedApp;
+    data['is_android_app'] = isAndroidApp;
+    data['is_ios_app'] = isIosApp;
+    data['order_before'] = orderBefore;
+    data['force_update_android'] = forceUpdateAndroid;
+    data['version_code_android'] = versionCodeAndroid;
+    data['force_update_ios'] = forceUpdateIos;
+    data['version_code_ios'] = versionCodeIos;
+    data['is_maintenance_mode'] = isMaintenanceMode;
     return data;
   }
 }

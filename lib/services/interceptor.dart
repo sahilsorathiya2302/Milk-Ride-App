@@ -15,8 +15,6 @@ class DefaultInterceptor extends Interceptor {
     options.receiveTimeout = const Duration(seconds: 200);
 
     final String? token = StorageManager.readData("token");
-    //
-    print("===================================>$token");
     if (token != null) {
       options.headers["Authorization"] = "Bearer $token";
     }

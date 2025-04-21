@@ -98,7 +98,6 @@ class CartCubit extends Cubit<CartState> {
               message: result.message.toString());
           Get.context?.loaderOverlay.hide();
 
-          print(customerId);
           await addToCart(customerId: customerId);
         } else {
           FunctionalComponent.errorSnackbar(

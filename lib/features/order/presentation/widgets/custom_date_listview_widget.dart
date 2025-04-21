@@ -36,7 +36,7 @@ class _CustomDateListViewState extends State<CustomDateListView> {
           date.day == selectedDate.day);
 
       if (selectedIndex != -1) {
-        final itemWidth = 75.w; // Approximate width of each item
+        final itemWidth = 75.w;
         final screenWidth = MediaQuery.of(context).size.width;
         final scrollTo =
             (selectedIndex * itemWidth) - (screenWidth / 2) + (itemWidth / 2);

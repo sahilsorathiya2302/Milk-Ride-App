@@ -66,7 +66,7 @@ class _VariantSpecialOfferWidgetState extends State<VariantSpecialOfferWidget> {
                           child: Center(
                             child: CustomText(
                               text:
-                                  "${package.percentageDifference.toStringAsFixed(0)}% OFF",
+                                  "${package.percentageDifference.toStringAsFixed(0)}${AppString.off}",
                               fontWeight: FontWeight.w700,
                             ),
                           ),
@@ -82,7 +82,8 @@ class _VariantSpecialOfferWidgetState extends State<VariantSpecialOfferWidget> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             CustomText(
-                              text: "₹${package.salePrice.toString()}",
+                              text:
+                                  "${AppString.rupeeSymbol}${package.salePrice.toString()}",
                               fontWeight: FontWeight.w700,
                               fontSize: AppTextSize.s12,
                             ),

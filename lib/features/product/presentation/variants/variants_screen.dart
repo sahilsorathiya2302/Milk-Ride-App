@@ -88,9 +88,9 @@ void variantSheet({
                               children: [
                                 CustomText(
                                   text: isLoading
-                                      ? "Loading..."
+                                      ? AppString.loading
                                       : variantInformation?.data?.first.name ??
-                                          "No Name",
+                                          AppString.noName,
                                   fontSize: AppTextSize.s16,
                                   fontWeight: FontWeight.w700,
                                 ).paddingSymmetric(horizontal: 10),

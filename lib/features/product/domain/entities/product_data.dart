@@ -51,22 +51,22 @@ class ProductData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['sale_price'] = this.salePrice;
-    data['sale_price_decimal'] = this.salePriceDecimal;
-    data['mrp_price'] = this.mrpPrice;
-    data['mrp_price_decimal'] = this.mrpPriceDecimal;
-    data['index_type'] = this.indexType;
-    data['product_id'] = this.productId;
-    data['package_size'] = this.packageSize;
-    data['image_url'] = this.imageUrl;
-    data['brand'] = this.brand;
-    data['volume'] = this.volume;
-    data['food_type'] = this.foodType;
-    data['is_eggless'] = this.isEggless;
-    data['must_try'] = this.mustTry;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['sale_price'] = salePrice;
+    data['sale_price_decimal'] = salePriceDecimal;
+    data['mrp_price'] = mrpPrice;
+    data['mrp_price_decimal'] = mrpPriceDecimal;
+    data['index_type'] = indexType;
+    data['product_id'] = productId;
+    data['package_size'] = packageSize;
+    data['image_url'] = imageUrl;
+    data['brand'] = brand;
+    data['volume'] = volume;
+    data['food_type'] = foodType;
+    data['is_eggless'] = isEggless;
+    data['must_try'] = mustTry;
     return data;
   }
 }

@@ -51,7 +51,6 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
               final categories = widget.state![index];
               return GestureDetector(
                 onTap: () {
-                  print("===============>${categories.name.toString()}");
                   Get.toNamed(AppRoutesNames.categoryProduct, arguments: {
                     ArgumentKey.categoryId: categories.id,
                     ArgumentKey.customerId: widget.customerId,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:milk_ride_live_wc/features/subscription/presentation/cubit/subscription_cubit.dart';
 
 import '../cubit/subscription_state.dart';
@@ -28,7 +29,9 @@ class _SubscriptionQuantitySectorState
   void initState() {
     super.initState();
     Future.microtask(() {
-      context.read<SubscriptionCubit>().setQuantity(widget.instantlyQuantity);
+      Get.context
+          ?.read<SubscriptionCubit>()
+          .setQuantity(widget.instantlyQuantity);
     });
   }
 

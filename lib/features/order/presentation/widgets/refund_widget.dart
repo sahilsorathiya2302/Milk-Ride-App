@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:milk_ride_live_wc/core/constants/app_string.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_order_details.dart';
@@ -35,6 +36,6 @@ class _RefundWidgetState extends State<RefundWidget> {
               )
             : NotOrderFoundWidget()
       ],
-    ).paddingSymmetric(horizontal: 15);
+    ).paddingSymmetric(horizontal: 15.w);
   }
 }

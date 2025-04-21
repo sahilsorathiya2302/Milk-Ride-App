@@ -10,16 +10,16 @@ class ProductModel extends ProductResponse {
       statusCode: json['statusCode'],
       message: json['message'],
       data: json['data'] != null
-          ? new ProductDetailsEntity.fromJson(json['data'])
+          ? ProductDetailsEntity.fromJson(json['data'])
           : null,
     );
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['statusCode'] = this.statusCode;
-    data['message'] = this.message;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    data['statusCode'] = statusCode;
+    data['message'] = message;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }

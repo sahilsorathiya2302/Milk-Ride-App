@@ -163,7 +163,18 @@ class AppString {
   static const String refundAmount = "Refunded Amount";
   static const String delivered = "delivered";
   static const String ok = "OK";
+  static const String off = "% OFF";
+  static const String loading = "Loading....";
+  static const String noName = "No Name";
+  static const String everyDay = "every_day";
+  static const String alternateDay = "alternate_day";
+  static const String everyThreeDay = "every_3_day";
+  static const String dayWiseSub = "day_wise";
+
   static const String orderCancelled = "Order Cancelled";
+  static const String orderStatusTobeDelivered = "To be delivered";
+  static const String orderStatusDelivered = "Delivered";
+  static const String orderStatusRefund = "Refund";
   static const String orderCancelledMessage =
       "Your Order has been cancelled successfully";
 }

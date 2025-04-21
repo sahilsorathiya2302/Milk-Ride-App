@@ -14,7 +14,7 @@ class OrderCubit extends Cubit<OrderState> {
           baseDate: DateTime.now(),
           selectedDate: DateTime.now(),
           index: 0,
-          cancelReason: '',
+          cancelReason: AppString.empty,
           reasonId: 39,
         ));
 

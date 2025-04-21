@@ -12,7 +12,7 @@ class SplashCubit extends Cubit<SplashState> {
   Future<void> checkUserAuth() async {
     await Future.delayed(const Duration(seconds: 2));
     String? token = StorageManager.readData(StorageKeys.tokenKey);
-    print(token);
+
     if (token != null) {
       Get.offAllNamed(AppRoutesNames.bottomNavScreen);
     } else {

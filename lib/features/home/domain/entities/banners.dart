@@ -16,12 +16,12 @@ class Banners {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['image_url'] = this.imageUrl;
-    data['section'] = this.section;
-    data['link'] = this.link;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['image_url'] = imageUrl;
+    data['section'] = section;
+    data['link'] = link;
     return data;
   }
 }

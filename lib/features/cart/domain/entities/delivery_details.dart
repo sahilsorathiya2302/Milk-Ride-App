@@ -12,10 +12,10 @@ class DeliveryDetails {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['delivery_date'] = this.deliveryDate;
-    data['delivery_address'] = this.deliveryAddress;
-    data['customer_id'] = this.customerId;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['delivery_date'] = deliveryDate;
+    data['delivery_address'] = deliveryAddress;
+    data['customer_id'] = customerId;
     return data;
   }
 }

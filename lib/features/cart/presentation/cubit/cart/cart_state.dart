@@ -21,6 +21,7 @@ class CartLoadedState extends CartState {
     required this.totalPrice,
   });
 
+  @override
   List<Object?> get props => [cartResponse, productQuantities, totalPrice];
 }
 
@@ -30,5 +31,5 @@ class CartErrorState extends CartState {
   CartErrorState({required this.errorMessage});
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [errorMessage];
 }

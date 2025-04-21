@@ -43,7 +43,8 @@ class _OrderCancelDialogState extends State<OrderCancelDialog> {
     return AlertDialog(
       backgroundColor: AppColors.homeBG,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppBorderRadius.r12)),
+        borderRadius: BorderRadius.circular(AppBorderRadius.r12),
+      ),
       title: CustomText(
         text: AppString.requiredSelectReason,
         fontWeight: FontWeight.w700,

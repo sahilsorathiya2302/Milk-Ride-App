@@ -27,13 +27,10 @@ class _SubscriptionButtonWidgetState extends State<SubscriptionButtonWidget> {
 
     return CustomButton(
         onPressed: () {
-          print("=================>Start Date${cubit.state.startDate}");
           if (cubit.state.deliverySchedule.isEmpty) {
             FunctionalComponent.errorMessageSnackbar(
                 message: AppString.emptySchedule);
           } else if (cubit.state.deliverySchedule.isNotEmpty) {
-            print("=================>Start Date${cubit.state.startDate}");
-            print("=================>End Date${cubit.state.endDate}");
             context.read<SubscriptionCubit>().subscriptionCreate(
                   packageId: widget.subscriptionArgument[ArgumentKey.packageId],
                   customerId:

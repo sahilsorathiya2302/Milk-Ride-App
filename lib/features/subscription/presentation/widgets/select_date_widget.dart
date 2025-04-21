@@ -69,14 +69,14 @@ class _SelectDateWidgetState extends State<SelectDateWidget> {
       controller.text = uiFormatted;
       String apiFormatted = DateFormat('yyyy-MM-dd').format(pickedDate);
 
-      final cubit = context.read<SubscriptionCubit>();
+      final cubit = Get.context?.read<SubscriptionCubit>();
 
       if (isStartDate == true) {
-        cubit.setStartDate(apiFormatted);
+        cubit?.setStartDate(apiFormatted);
         endDateController.clear();
-        cubit.setEndDate('');
+        cubit?.setEndDate('');
       } else {
-        cubit.setEndDate(apiFormatted);
+        cubit?.setEndDate(apiFormatted);
       }
     }
   }
@@ -92,7 +92,7 @@ class _SelectDateWidgetState extends State<SelectDateWidget> {
           fontSize: AppTextSize.s14,
         ).paddingSymmetric(horizontal: 10.w, vertical: 5.h),
         Container(
-          height: 70,
+          height: 70.h,
           width: context.width,
           decoration: BoxDecoration(color: AppColors.white),
           child: Row(

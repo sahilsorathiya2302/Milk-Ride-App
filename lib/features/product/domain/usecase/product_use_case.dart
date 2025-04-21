@@ -1,4 +1,4 @@
-import 'package:fpdart/src/either.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:milk_ride_live_wc/core/failures/failure.dart';
 import 'package:milk_ride_live_wc/core/usecases/use_case.dart';
 import 'package:milk_ride_live_wc/features/product/domain/entities/product_response.dart';

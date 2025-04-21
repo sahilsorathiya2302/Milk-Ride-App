@@ -172,7 +172,7 @@ class AuthCubit extends Cubit<AuthState> {
         if (result.status == AppString.success) {
           Get.offAllNamed(AppRoutesNames.bottomNavScreen,
               arguments: {ArgumentKey.customerId: result.customer?.id});
-          print(result.appToken);
+
           StorageManager.saveData(StorageKeys.tokenKey, result.appToken);
           StorageManager.saveData(StorageKeys.mobileNumber, mobileNumber);
           StorageManager.saveData(StorageKeys.userId, userId);

@@ -9,7 +9,6 @@ class StorageManager {
 
   static removeData(String key) async {
     await box.remove(key);
-    print("Removed: $key -> ${box.read(key)}");
   }
 
   static readData(String key) {
@@ -18,6 +17,5 @@ class StorageManager {
 
   static clearData() async {
     await box.erase(); // This clears all stored data
-    print("All storage cleared.");
   }
 }
