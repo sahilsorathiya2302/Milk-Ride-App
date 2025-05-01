@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:milk_ride_live_wc/core/constants/app_string.dart';
 import 'package:milk_ride_live_wc/core/key/app_images_key.dart';
+import 'package:milk_ride_live_wc/core/routes/app_routes_names.dart';
 import 'package:milk_ride_live_wc/core/storage/storage_keys.dart';
 import 'package:milk_ride_live_wc/core/storage/storage_manager.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
@@ -38,14 +39,15 @@ class _HomeScreenState extends State<HomeScreen> {
   bool showBottomSheet = false;
 
   void sendData() async {
-    final userId = StorageManager.readData(StorageKeys.userId);
+    final userId = StorageManager.readData(StorageKeys.userId) ?? 0;
+
     final mobileNumber = StorageManager.readData(StorageKeys.mobileNumber);
 
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
-    Get.context!.read<HomeCubit>().getHomeData(
+    Get.context?.read<HomeCubit>().getHomeData(
           HomeParam(
             mobileNumber: mobileNumber,
             userId: userId,
@@ -68,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        final shouldExit = await showDeleteConfirmationDialog(
+        final shouldExit = await showConfirmationDialog(
           title: AppString.appCloseConfirm,
           subTitle: AppString.appCloseConfirmMessage,
           onPressed: () {
@@ -89,6 +91,9 @@ class _HomeScreenState extends State<HomeScreen> {
           imageName: AppImagesKey.logo,
           leadingIcon: AppIcons.menuIcons,
           actionIcon: AppIcons.walletIcons,
+          actionOnPressed: () {
+            Get.toNamed(AppRoutesNames.walletScreen);
+          },
         ),
         drawer: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {

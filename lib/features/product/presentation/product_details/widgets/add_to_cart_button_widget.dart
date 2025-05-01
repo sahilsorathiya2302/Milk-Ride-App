@@ -7,8 +7,8 @@ import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
 import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
 import 'package:milk_ride_live_wc/core/theme/app_text_size.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_text.dart';
+import 'package:milk_ride_live_wc/features/create_subscription/presentation/cubit/create_subscription_cubit.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/product_details/product_details_cubit.dart';
-import 'package:milk_ride_live_wc/features/subscription/presentation/cubit/subscription_cubit.dart';
 
 class AddToCartButtonWidget extends StatelessWidget {
   final int customerId;
@@ -41,7 +41,7 @@ class AddToCartButtonWidget extends StatelessWidget {
                   60.h,
                 )),
             onPressed: () {
-              context.read<SubscriptionCubit>().addToCart(
+              context.read<CreateSubscriptionCubit>().addToCart(
                   packageId: cubit.selectedProduct?.id ?? 1,
                   customerId: customerId,
                   userId: userId,

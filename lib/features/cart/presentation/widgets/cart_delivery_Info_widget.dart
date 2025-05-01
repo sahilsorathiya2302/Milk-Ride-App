@@ -10,8 +10,9 @@ import 'package:milk_ride_live_wc/core/theme/app_icons.dart';
 import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_dialog_box.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_text.dart';
-import 'package:milk_ride_live_wc/features/home/presentation/cubit/home_cubit.dart';
 
+import '../../../../core/storage/storage_keys.dart';
+import '../../../../core/storage/storage_manager.dart';
 import '../../../../core/theme/app_text_size.dart';
 import '../cubit/cart/cart_cubit.dart';
 
@@ -26,7 +27,7 @@ class CartDeliveryInfoWidget extends StatefulWidget {
 }
 
 class _CartDeliveryInfoWidgetState extends State<CartDeliveryInfoWidget> {
-  final customerId = Get.context!.read<HomeCubit>().customerData?.id;
+  final customerId = StorageManager.readData(StorageKeys.customerId);
   @override
   Widget build(BuildContext context) {
     final cartInfo = widget.packageState[widget.index];
@@ -76,7 +77,7 @@ class _CartDeliveryInfoWidgetState extends State<CartDeliveryInfoWidget> {
         ),
         GestureDetector(
           onTap: () {
-            showDeleteConfirmationDialog(
+            showConfirmationDialog(
               title: AppString.removeCartItemConfirm,
               subTitle: AppString.removeCartProductConfirm,
               onPressed: () {

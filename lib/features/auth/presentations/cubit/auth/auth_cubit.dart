@@ -32,7 +32,7 @@ class AuthCubit extends Cubit<AuthState> {
     required String mobileNumber,
     required String userId,
   }) async {
-    Get.context!.loaderOverlay.show();
+    Get.context?.loaderOverlay.show();
     final result = await signInUseCase
         .call(SignInParam(mobileNumber: mobileNumber, userId: userId));
 
@@ -58,7 +58,7 @@ class AuthCubit extends Cubit<AuthState> {
         }
       },
     );
-    Get.context!.loaderOverlay.hide();
+    Get.context?.loaderOverlay.hide();
   }
 
   Future<void> otpCheck({
@@ -66,7 +66,7 @@ class AuthCubit extends Cubit<AuthState> {
     required int userId,
     required String otp,
   }) async {
-    Get.context!.loaderOverlay.show();
+    Get.context?.loaderOverlay.show();
     final result = await otpUseCase
         .call(OtpParam(mobileNumber: mobileNumber, userId: userId, otp: otp));
 
@@ -88,6 +88,7 @@ class AuthCubit extends Cubit<AuthState> {
           StorageManager.saveData(StorageKeys.tokenKey, result.appToken);
           StorageManager.saveData(StorageKeys.mobileNumber, mobileNumber);
           StorageManager.saveData(StorageKeys.userId, userId);
+          StorageManager.saveData(StorageKeys.customerId, result.customer?.id);
           Get.offAllNamed(AppRoutesNames.bottomNavScreen,
               arguments: {ArgumentKey.customerId: result.customer?.id});
         }
@@ -97,7 +98,7 @@ class AuthCubit extends Cubit<AuthState> {
             message: result.message.toString());
       }
     });
-    Get.context!.loaderOverlay.hide();
+    Get.context?.loaderOverlay.hide();
   }
 
   Future<void> resendOtp(
@@ -137,14 +138,14 @@ class AuthCubit extends Cubit<AuthState> {
     required String area,
     required String pinCode,
     required String regionId,
-    required String userId,
+    required int userId,
     required String referrerCode,
     required String agentCode,
     required String deliveryType,
     required String gender,
     required String mobileNumber,
   }) async {
-    Get.context!.loaderOverlay.show();
+    Get.context?.loaderOverlay.show();
     final result = await registerUseCase.call(RegisterParam(
         name: name,
         email: email,
@@ -176,6 +177,7 @@ class AuthCubit extends Cubit<AuthState> {
           StorageManager.saveData(StorageKeys.tokenKey, result.appToken);
           StorageManager.saveData(StorageKeys.mobileNumber, mobileNumber);
           StorageManager.saveData(StorageKeys.userId, userId);
+          StorageManager.saveData(StorageKeys.customerId, result.customer?.id);
           FunctionalComponent.successSnackbar(
               title: AppString.success, message: result.message.toString());
         } else if (result.status == AppString.error) {
@@ -184,6 +186,6 @@ class AuthCubit extends Cubit<AuthState> {
         }
       },
     );
-    Get.context!.loaderOverlay.hide();
+    Get.context?.loaderOverlay.hide();
   }
 }

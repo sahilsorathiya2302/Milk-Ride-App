@@ -7,12 +7,15 @@ import 'package:milk_ride_live_wc/core/routes/app_routes_names.dart';
 import 'package:milk_ride_live_wc/core/theme/app_border_radius.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
 import 'package:milk_ride_live_wc/core/theme/app_icons.dart';
+import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
 import 'package:milk_ride_live_wc/core/theme/app_text_size.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_text.dart';
 import 'package:milk_ride_live_wc/features/home/presentation/cubit/home_cubit.dart';
 import 'package:milk_ride_live_wc/features/home/presentation/cubit/home_state.dart';
 import 'package:milk_ride_live_wc/features/profile/profile_screen.dart';
-import 'package:milk_ride_live_wc/services/injection.dart';
+
+import '../../../../core/storage/storage_keys.dart';
+import '../../../../core/storage/storage_manager.dart';
 
 class SideMenuWidget extends StatefulWidget {
   final VoidCallback onProfileTap;
@@ -156,7 +159,8 @@ class _SideMenuWidgetState extends State<SideMenuWidget> {
             text: AppString.myCart,
             icon: AppIcons.cart,
             onTap: () {
-              final customerId = getIt<HomeCubit>().customerData?.id;
+              final customerId =
+                  StorageManager.readData(StorageKeys.customerId);
               Get.toNamed(AppRoutesNames.cartScreen, arguments: customerId);
             },
           ),
@@ -202,7 +206,7 @@ class _SideMenuWidgetState extends State<SideMenuWidget> {
       required String text,
       required void Function()? onTap}) {
     return SizedBox(
-      height: 40,
+      height: 40.h,
       child: InkWell(
         onTap: onTap,
         child: Row(
@@ -211,6 +215,7 @@ class _SideMenuWidgetState extends State<SideMenuWidget> {
               icon,
               color: AppColors.black,
             ),
+            10.width,
             CustomText(
               text: text,
               fontSize: AppTextSize.s14,
@@ -219,6 +224,6 @@ class _SideMenuWidgetState extends State<SideMenuWidget> {
           ],
         ),
       ),
-    ).paddingSymmetric(horizontal: 10);
+    ).paddingSymmetric(horizontal: 10.w);
   }
 }

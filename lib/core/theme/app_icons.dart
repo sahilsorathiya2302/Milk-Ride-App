@@ -34,4 +34,11 @@ class AppIcons {
   static const IconData productIcons = Icons.grid_view;
   static const IconData home = Icons.home;
   static const IconData calendar = Icons.calendar_month;
+  static const IconData pause = Icons.pause;
+  static const IconData resume = Icons.play_arrow;
+  static const IconData restore = Icons.restore;
+  static const IconData wallet2 = Icons.account_balance_wallet_outlined;
+  static const IconData currencyRupee = Icons.currency_rupee;
+  static const IconData email = Icons.mail;
+  static const IconData forwardArrow = Icons.arrow_forward;
 }

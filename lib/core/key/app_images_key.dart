@@ -9,4 +9,5 @@ class AppImagesKey {
   static const String logo = "$path/app_logo.png";
   static const String notFound = "$path/box.png";
   static const String verified = "$path/verified.png";
+  static const String bucket = "$path/bucket.png";
 }

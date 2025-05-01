@@ -28,8 +28,10 @@ class _RefundWidgetState extends State<RefundWidget> {
                 children: [
                   CustomOrderInfo(cubit: cubit?.refund),
                   CustomOrderDetails(
-                    subTotal: orderDetailsCubit?.refundGrandTotal ?? 0,
-                    amount: orderDetailsCubit?.refundGrandTotal ?? 0,
+                    subTotal:
+                        orderDetailsCubit?.refundGrandTotal.toString() ?? "0",
+                    amount:
+                        orderDetailsCubit?.refundGrandTotal.toString() ?? "0",
                     amountTitle: AppString.refundAmount,
                   )
                 ],

@@ -7,9 +7,11 @@ import 'package:milk_ride_live_wc/core/constants/app_string.dart';
 import 'package:milk_ride_live_wc/core/theme/app_border_radius.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
 import 'package:milk_ride_live_wc/core/theme/app_text_size.dart';
-import 'package:milk_ride_live_wc/features/home/presentation/cubit/home_cubit.dart';
 import 'package:milk_ride_live_wc/features/order/presentation/cubit/order/order_cubit.dart';
 import 'package:milk_ride_live_wc/features/order/presentation/cubit/order/order_state.dart';
+
+import '../../../../core/storage/storage_keys.dart';
+import '../../../../core/storage/storage_manager.dart';
 
 class CustomDateListView extends StatefulWidget {
   const CustomDateListView({super.key});
@@ -70,7 +72,8 @@ class _CustomDateListViewState extends State<CustomDateListView> {
 
               return GestureDetector(
                 onTap: () {
-                  final customerId = context.read<HomeCubit>().customerData?.id;
+                  final customerId =
+                      StorageManager.readData(StorageKeys.customerId);
                   String formattedDate = DateFormat('yyyy-MM-dd').format(date);
 
                   context.read<OrderCubit>().order(

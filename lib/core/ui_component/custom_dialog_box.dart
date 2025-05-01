@@ -7,8 +7,11 @@ import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
 import 'package:milk_ride_live_wc/core/theme/app_text_size.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_text.dart';
 
-showDeleteConfirmationDialog(
-    {required void Function()? onPressed,
+showConfirmationDialog(
+    {void Function()? onPressed,
+    IconData? icon,
+    String? buttonText,
+    Widget? widget,
     required String title,
     required String subTitle}) {
   showDialog(
@@ -27,10 +30,13 @@ showDeleteConfirmationDialog(
               CircleAvatar(
                 radius: 30,
                 backgroundColor: AppColors.primaryLightColor,
-                child: Icon(Icons.help, size: 30, color: AppColors.white),
+                child:
+                    Icon(icon ?? Icons.help, size: 30, color: AppColors.white),
               ),
               30.height,
               CustomText(
+                textAlign: TextAlign.center,
+                maxLine: 2,
                 text: title,
                 fontWeight: FontWeight.w600,
                 fontSize: AppTextSize.s14,
@@ -47,47 +53,48 @@ showDeleteConfirmationDialog(
                 ),
               ),
               30.height,
-              Row(
-                children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () => Navigator.pop(context),
-                      style: OutlinedButton.styleFrom(
-                        side: BorderSide(color: AppColors.primaryColor),
-                        shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(AppBorderRadius.r10),
+              widget ??
+                  Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton(
+                          onPressed: () => Navigator.pop(context),
+                          style: OutlinedButton.styleFrom(
+                            side: BorderSide(color: AppColors.primaryColor),
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(AppBorderRadius.r10),
+                            ),
+                          ),
+                          child: CustomText(
+                            text: AppString.cancel,
+                            fontWeight: FontWeight.w600,
+                            fontSize: AppTextSize.s14,
+                            color: AppColors.black,
+                          ),
                         ),
                       ),
-                      child: CustomText(
-                        text: AppString.cancel,
-                        fontWeight: FontWeight.w600,
-                        fontSize: AppTextSize.s14,
-                        color: AppColors.black,
-                      ),
-                    ),
-                  ),
-                  10.width,
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: onPressed,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(AppBorderRadius.r10),
+                      10.width,
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: onPressed,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primaryColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(AppBorderRadius.r10),
+                            ),
+                          ),
+                          child: CustomText(
+                            text: buttonText ?? AppString.yes,
+                            fontWeight: FontWeight.w600,
+                            fontSize: AppTextSize.s14,
+                            color: AppColors.white,
+                          ),
                         ),
                       ),
-                      child: CustomText(
-                        text: AppString.yes,
-                        fontWeight: FontWeight.w600,
-                        fontSize: AppTextSize.s14,
-                        color: AppColors.white,
-                      ),
-                    ),
-                  ),
-                ],
-              )
+                    ],
+                  )
             ],
           ),
         ),

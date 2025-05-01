@@ -7,7 +7,7 @@ class Customer {
   String? deliveryType;
   int? isPostpaid;
   String? customerReferrerCode;
-  String? wallet;
+  dynamic wallet;
   int? creditLimit;
 
   Customer({

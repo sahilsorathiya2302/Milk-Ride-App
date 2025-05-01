@@ -34,6 +34,7 @@ class _BannerWidgetState extends State<BannerWidget> {
           options: CarouselOptions(
             height: 130.h,
             viewportFraction: 1.0,
+            aspectRatio: 1.0,
             initialPage: 0,
             enableInfiniteScroll: true,
             reverse: false,
@@ -56,8 +57,8 @@ class _BannerWidgetState extends State<BannerWidget> {
           controller: PageController(initialPage: _currentIndex),
           count: widget.bannerState.length,
           effect: SwapEffect(
-            dotHeight: 10.h,
-            dotWidth: 10.w,
+            dotHeight: 7.h,
+            dotWidth: 7.w,
             dotColor: AppColors.primaryLightColor,
             activeDotColor: Colors.blue,
           ),

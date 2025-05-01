@@ -8,21 +8,36 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final Icon? preFixIcon;
+  final Icon? sufFixIcon;
+  final double? borderRadius;
+  final Color? borderColor;
+  final Color? fillColor;
+  final bool? filled;
   final int? maxLength;
+  final void Function(String)? onChanged;
+
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
-  const CustomTextField(
-      {super.key,
-      required this.controller,
-      required this.hintText,
-      this.preFixIcon,
-      this.validator,
-      this.maxLength,
-      this.keyboardType});
+  const CustomTextField({
+    super.key,
+    required this.controller,
+    required this.hintText,
+    this.preFixIcon,
+    this.validator,
+    this.maxLength,
+    this.keyboardType,
+    this.sufFixIcon,
+    this.borderRadius,
+    this.borderColor,
+    this.fillColor,
+    this.filled,
+    this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
       style: TextStyle(
           fontFamily: AppString.fontFamily, fontWeight: FontWeight.w600),
       keyboardType: keyboardType,
@@ -30,33 +45,38 @@ class CustomTextField extends StatelessWidget {
       validator: validator,
       controller: controller,
       decoration: InputDecoration(
+        filled: filled,
+        fillColor: fillColor,
         errorStyle: TextStyle(
-            color: AppColors.errorColor, fontFamily: AppString.fontFamily),
+            fontSize: 0,
+            color: AppColors.errorColor,
+            fontFamily: AppString.fontFamily),
         counterText: "",
         prefixIcon: preFixIcon,
+        suffixIcon: sufFixIcon,
         hintText: hintText,
         hintStyle: TextStyle(
             color: AppColors.grey,
             fontFamily: AppString.fontFamily,
             fontSize: AppTextSize.s14),
         disabledBorder: buildOutlineInputBorder(
-          radius: AppBorderRadius.r14,
-          color: AppColors.grey,
+          radius: borderRadius ?? AppBorderRadius.r14,
+          color: borderColor ?? AppColors.grey,
         ),
         focusedBorder: buildOutlineInputBorder(
-          radius: AppBorderRadius.r14,
-          color: AppColors.primaryColor,
+          radius: borderRadius ?? AppBorderRadius.r14,
+          color: borderColor ?? AppColors.primaryColor,
         ),
         enabledBorder: buildOutlineInputBorder(
-          radius: AppBorderRadius.r14,
-          color: AppColors.black,
+          radius: borderRadius ?? AppBorderRadius.r14,
+          color: borderColor ?? AppColors.black,
         ),
         errorBorder: buildOutlineInputBorder(
-          radius: AppBorderRadius.r14,
+          radius: borderRadius ?? AppBorderRadius.r14,
           color: AppColors.red,
         ),
         focusedErrorBorder: buildOutlineInputBorder(
-          radius: AppBorderRadius.r14,
+          radius: borderRadius ?? AppBorderRadius.r14,
           color: AppColors.red,
         ),
       ),
@@ -64,9 +84,9 @@ class CustomTextField extends StatelessWidget {
   }
 
   OutlineInputBorder buildOutlineInputBorder(
-      {required double radius, required Color color}) {
+      {required double? radius, required Color color}) {
     return OutlineInputBorder(
-        borderRadius: BorderRadius.circular(radius),
+        borderRadius: BorderRadius.circular(radius ?? AppBorderRadius.r14),
         borderSide: BorderSide(
           color: color,
         ));

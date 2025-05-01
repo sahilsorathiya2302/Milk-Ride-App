@@ -11,9 +11,9 @@ import 'package:milk_ride_live_wc/core/ui_component/custom_text.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_title.dart';
 
 class CustomOrderDetails extends StatelessWidget {
-  final int subTotal;
+  final String subTotal;
   final String? amountTitle;
-  final int amount;
+  final String amount;
   const CustomOrderDetails(
       {super.key,
       required this.subTotal,

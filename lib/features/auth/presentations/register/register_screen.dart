@@ -210,7 +210,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         area: "72.5682748",
         pinCode: pinCode,
         regionId: cityId,
-        userId: widget.getArgument[StorageKeys.userId].toString(),
+        userId: widget.getArgument[StorageKeys.userId],
         referrerCode: referralCode,
         agentCode: agentCode,
         deliveryType: "morning",

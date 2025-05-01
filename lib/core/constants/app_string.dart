@@ -6,7 +6,6 @@ class AppString {
   static const String empty = "";
   static const String signInTitle = "Login/Sign up";
   static const String everMilk = "dairydash";
-
   static const String hintMobile = "Enter Mobile Number";
   static const String hintUserId = "Enter UserId";
   static const String successMessage = "Sign up successfully";
@@ -30,7 +29,6 @@ class AppString {
   static const String titleName = "Name";
   static const String titleEmail = "Email(Optional)";
   static const String resendOtp = "Resend OTP";
-
   static const String titleGender = "Gender";
   static const String titleHouseNo = "House No";
   static const String titleFloor = "Floor(Optional)";
@@ -43,13 +41,11 @@ class AppString {
   static const String titleAgentCode = "Agent Code (Optional)";
   static const String titleFind = "How Did you Find Us ? (Optional)";
   static const String back = "Back";
-
   static const String houseNumber = "A-10 / 10";
   static const String floor = "2nd Floor";
   static const String society = "Radhe Park";
   static const String lendMark = "Sita Ram Nagar";
   static const String city = "Select Your City";
-
   static const String area = "Select Your Area";
   static const String pinCode = "395010";
   static const String hintReferralCode = "GDFCDEW#";
@@ -68,9 +64,9 @@ class AppString {
   static const String myCart = "My Cart";
   static const String mySubscription = "My Subscription";
   static const String myOrder = "My Order";
+  static const String myWallet = "My Wallet";
   static const String invoiceHistory = "Invoice History";
   static const String help = "Help";
-
   static const String notificationTitle =
       "No delivery available at this moment";
   static const String view = "View";
@@ -137,14 +133,14 @@ class AppString {
   static const String updateQuantity = "Update Quantity";
   static const String removeCartItemConfirm = "Remove from Cart?";
   static const String cartEmpty = "Your cart is empty. Add something to it!";
-  static const String emptySchedule = "Please select Delivery Schedule";
+  static const String emptySchedule = "Please select delivery schedule";
+  static const String dayWiseQty = "Please select proper set Delivery Day Qty";
   static const String productNotFound = "Product Not Found";
   static const String removeCartProductConfirm =
       "Are you sure you want to remove this product from cart?";
   static const String appCloseConfirm = "Are you sure want to exit ?";
   static const String appCloseConfirmMessage =
       "All operations will stop if you exit this app.";
-
   static const String home = "Home  ";
   static const String order = "Order";
   static const String cart = "Cart";
@@ -170,11 +166,84 @@ class AppString {
   static const String alternateDay = "alternate_day";
   static const String everyThreeDay = "every_3_day";
   static const String dayWiseSub = "day_wise";
-
   static const String orderCancelled = "Order Cancelled";
   static const String orderStatusTobeDelivered = "To be delivered";
   static const String orderStatusDelivered = "Delivered";
   static const String orderStatusRefund = "Refund";
+  static const String active = "Active";
+  static const String dot = "•";
+  static const String modify = "Modify";
+  static const String pause = "Pause";
+  static const String resume = "Resume";
+  static const String toDate = "To Date";
+  static const String modifyTemporarily = "Modify Temporarily";
+  static const String updatePermanently = "Update Permanently";
+  static const String pauseSubscription = "Pause Subscription";
+  static const String pickType = "Pick Type";
+  static const String singleDay = "Single Day";
+  static const String multipleDay = "Multiple Day";
+  static const String subscriptionChange =
+      "Quantity for subscription changed to";
+  static const String from = "from";
+  static const String stringFor = "for this date";
+  static const String addAmount = "Add Amount";
+  static const String to = "to";
+  static const String date = "date";
+  static const String subscribeNow = "Subscribe Now";
+  static const String updateSubscription = "UPDATE SUBSCRIPTION";
+  static const String subscriptionDelete = "Subscription Deleted.";
+  static const String subscriptionNotFound = "No subscription found";
+  static const String pauseSubscriptionInfoMessage =
+      "Your Subscription paused from";
+  static const String tempChangeSubscriptionTitle = "Temporarily updated.";
+  static const String updatePermanent = "Permanently updated.";
+  static const String updatePermanentMessage =
+      "Your subscription has been successfully updated.";
+  static const String createSubscription = "Subscription created.";
+  static const String createSubscriptionMessage =
+      "You've successfully created a subscription";
+  static const String tempChangeSubscriptionSubTitle =
+      "Your subscription has been successfully updated.";
+  static const String subscriptionNotFoundSubText =
+      "No subscription yet. Check back after subscribing.";
+  static const String subscriptionDeleteMessage =
+      "your subscription has been successfully deleted.";
+  static const String subDeleteMessage = "you won't be able to revert this!";
+  static const String pauseSubscriptionText = "Subscription paused.";
+  static const String pauseSubscriptionMessage =
+      "Your subscription has been successfully paused.";
+  static const String resumeSubscription = "Subscription resumed.";
+  static const String resumeSubscriptionMessage =
+      "Your subscription has been Successfully resumed.";
+  static const String subUpdatePermanentlyMessage =
+      "Your subscription will be update with the new quantity from tomorrow.";
+  static const String subDelete =
+      "Are you sure want to delete this subscription ?";
+  static const String subModify = "Modify Subscription";
+  static const String subModifyMessage =
+      "you can modify your subscription for a time being or permanently";
   static const String orderCancelledMessage =
       "Your Order has been cancelled successfully";
+
+  static const String reserveBalance = "Reserve Balance";
+  static const String rechargeHistory = "Recharge History";
+  static const String billingHistory = "Billing History";
+  static const String resentHistory = "Resent History";
+  static const String payOnline = "Pay Online";
+  static const String requestCash = "Request Cash";
+  static const String payment = "Payment";
+  static const String processToPay = "Proceed to pay";
+  static const String processToRequest = "Proceed to request";
+  static const String paymentRequest = "Payment request";
+  static const String minimumValue = "minimum value ₹";
+  static const String maximumValue = "maximum value ₹";
+  static const String rangeAmount = "Please enter an amount within this range.";
+  static const String online = "online";
+  static const String cash = "cash";
+  static const String credit = "credit";
+  static const String debit = "debit";
+  static const String balance = "Balance";
+  static const String creditIcon = "+";
+  static const String debitIcon = "-";
+  static const String enterAmount = "Please enter valid amount";
 }

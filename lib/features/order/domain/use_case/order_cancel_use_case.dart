@@ -1,17 +1,18 @@
-import 'package:fpdart/src/either.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:milk_ride_live_wc/core/common_model/api_response_model.dart';
 import 'package:milk_ride_live_wc/core/failures/failure.dart';
 import 'package:milk_ride_live_wc/core/usecases/use_case.dart';
-import 'package:milk_ride_live_wc/features/order/data/repositories/order_impl_repository.dart';
+
+import '../repositories/order_repository.dart';
 
 class OrderCancelUseCase
     implements UseCase<ApiResponseModel, OrderCancelParam> {
-  final OrderImplRepository orderImplRepository;
+  final OrderRepository orderRepository;
 
-  OrderCancelUseCase({required this.orderImplRepository});
+  OrderCancelUseCase({required this.orderRepository});
   @override
   Future<Either<Failure, ApiResponseModel>> call(OrderCancelParam param) async {
-    return await orderImplRepository.ordersCancel(param: param);
+    return await orderRepository.ordersCancel(param: param);
   }
 }
 

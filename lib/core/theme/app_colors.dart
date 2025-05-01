@@ -17,13 +17,18 @@ class AppColors {
   static const Color errorColor = Color(0xFFff2b2b);
   static const Color grey = Colors.grey;
   static const Color lightGrey = Color(0xFFECECEC);
+  static const Color lightGrey1 = Color(0xFFD3D3D3);
   static const Color lightOrange = Color(0XFFfdedcc);
+  static const Color lightOrange1 = Color(0XFFfdeeca);
 
   static const Color blue = Colors.blueAccent;
   static const Color shadowColor = Colors.lightBlueAccent;
   static const Color transparent = Colors.transparent;
   static const Color pink = Colors.pink;
   static const Color green = Color(0XFF3CB371);
+  // static const Color lightGreen = Color(0XFF78ECA5);
+  static const Color lightGreen = Color(0XFFe7fdf1);
+  static const Color darkGreen = Color(0XFF007D40);
   static const Color orange = Color(0XFFe05320);
   static const Color darkGrey = Color(0xFF757575);
   static const Color errorSnakbar = Color(0xFFfd5c63);

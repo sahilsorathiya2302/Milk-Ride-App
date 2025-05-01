@@ -8,12 +8,12 @@ import 'package:milk_ride_live_wc/core/storage/storage_keys.dart';
 import 'package:milk_ride_live_wc/core/storage/storage_manager.dart';
 import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
 import 'package:milk_ride_live_wc/core/theme/app_text_size.dart';
-import 'package:milk_ride_live_wc/core/ui_component/custom_app_loader.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_quantity_sector.dart';
 import 'package:milk_ride_live_wc/core/ui_component/network_fail_card.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/product_details/widgets/add_to_cart_button_widget.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/product_details/widgets/delivery_type_widget.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/product_details/widgets/musty_try_egg_less_widget.dart';
+import 'package:milk_ride_live_wc/features/product/presentation/product_details/widgets/product_details_shimmer_place_holder.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/product_details/widgets/product_info_widget.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/product_details/widgets/products_image_widget.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/product_details/widgets/special_offer_list_widget.dart';
@@ -64,7 +64,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         builder: (context, state) {
           final cubit = context.read<ProductDetailsCubit>();
           if (state is ProductDetailsLoading) {
-            return const Center(child: Center(child: CustomAppLoader()));
+            return const Center(
+                child: Center(child: ProductDetailsShimmerPlaceHolder()));
           } else if (state is ProductDetailsError) {
             return NetworkFailCard(message: state.failure);
           } else if (state is ProductDetailsLoaded) {
@@ -129,7 +130,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         PurchaseForWidget(
                           subscribeOnPressed: () {
                             Get.toNamed(
-                              AppRoutesNames.subscriptionScreen,
+                              AppRoutesNames.createSubscriptionScreen,
                               arguments: {
                                 ArgumentKey.customerId:
                                     widget.getArgument[ArgumentKey.customerId],
@@ -175,7 +176,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ],
             );
           }
-          return const Center(child: CustomAppLoader());
+          return const Center(child: ProductDetailsShimmerPlaceHolder());
         },
       ),
     );

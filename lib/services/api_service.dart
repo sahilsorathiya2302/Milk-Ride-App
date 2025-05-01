@@ -8,18 +8,23 @@ import 'package:milk_ride_live_wc/features/auth/data/models/otp_model.dart';
 import 'package:milk_ride_live_wc/features/auth/data/models/regions_source_model.dart';
 import 'package:milk_ride_live_wc/features/auth/data/models/register_model.dart';
 import 'package:milk_ride_live_wc/features/cart/data/models/cart_model.dart';
+import 'package:milk_ride_live_wc/features/create_subscription/data/models/create_subscription_model.dart';
+import 'package:milk_ride_live_wc/features/history/data/models/billing_history_model.dart';
+import 'package:milk_ride_live_wc/features/history/data/models/recharge_history_model.dart';
 import 'package:milk_ride_live_wc/features/home/data/models/home_model.dart';
 import 'package:milk_ride_live_wc/features/order/data/models/order_model.dart';
 import 'package:milk_ride_live_wc/features/product/data/models/categories_product_model.dart';
 import 'package:milk_ride_live_wc/features/product/data/models/product_model.dart';
 import 'package:milk_ride_live_wc/features/product/data/models/variant_model.dart';
 import 'package:milk_ride_live_wc/features/product/data/models/view_category_model.dart';
-import 'package:milk_ride_live_wc/features/subscription/data/models/subscription_model.dart';
+import 'package:milk_ride_live_wc/features/wallet/data/models/pay_online_model.dart';
+import 'package:milk_ride_live_wc/features/wallet/data/models/wallet_model.dart';
 import 'package:milk_ride_live_wc/services/interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../features/auth/data/models/sign_in_model.dart';
+import '../features/subscription/data/models/subscription_model.dart';
 
 part 'api_service.g.dart';
 
@@ -87,7 +92,7 @@ abstract class ApiService {
     @Field("address[longitude]") String? area,
     @Field("address[pincode]") String? pinCode,
     @Field("region_id") String? regionId,
-    @Field("user_id") String? userId,
+    @Field("user_id") int? userId,
     @Field("customer_referrer_code") String? referrerCode,
     @Field("agent_code") String? agentCode,
     @Field("delivery_type") String? deliveryType,
@@ -137,15 +142,15 @@ abstract class ApiService {
   });
 
   @POST(ServerConfig.milkRideVersion + EndPoints.subscription)
-  Future<SubscriptionModel> createSubscription({
+  Future<CreateSubscriptionModel> createSubscription({
     @Field("package_id") required int packageId,
     @Field("customer_id") required int customerId,
     @Field("user_id") required int userId,
     @Field("frequency_type") required String frequencyType,
     @Field("frequency_value") required dynamic frequencyValue,
-    @Field("qty") required int quantity,
+    @Field("qty") required dynamic quantity,
     @Field("schedule") required String schedule,
-    @Field("day_wise_quantity") required List<int> dayWiseQuantity,
+    @Field("day_wise_quantity") required String dayWiseQuantity,
     @Field("delivery_type") required String deliveryType,
     @Field("start_date") required String startDate,
     @Field("end_date") required String endDate,
@@ -172,7 +177,7 @@ abstract class ApiService {
     @Field("user_id") required int userId,
     @Field("customer_id") required int customerId,
   });
-  @POST(ServerConfig.milkRideVersion + EndPoints.orders)
+  @POST(ServerConfig.productVersion + EndPoints.orders)
   Future<OrderModel> orders({
     @Field("delivery_date") required String deliveryDate,
     @Field("customer_id") required int customerId,
@@ -182,5 +187,72 @@ abstract class ApiService {
     @Field("order_id") required int orderId,
     @Field("package_id") required int packageId,
     @Field("reason_id") required int? reasonId,
+  });
+  @POST(ServerConfig.productVersion + EndPoints.mySubscription)
+  Future<SubscriptionModel> mySubscription({
+    @Field("customer_id") required int customerId,
+    @Field("user_id") required int userId,
+  });
+  @POST(ServerConfig.milkRideVersion + EndPoints.temporaryChange)
+  Future<ApiResponseModel> temporaryChangeSubscription({
+    @Field("subscription_id") required int subscriptionId,
+    @Field("temp_start_date") required String tempStartDate,
+    @Field("temp_end_date") required String tempEndDate,
+    @Field("temp_qty") required int tempQty,
+  });
+  @POST(ServerConfig.milkRideVersion + EndPoints.pauseSubscription)
+  Future<ApiResponseModel> pauseSubscription({
+    @Field("subscription_id") required int subscriptionId,
+    @Field("pause_start_date") required String pauseStartDate,
+    @Field("pause_end_date") required String pauseEndDate,
+  });
+
+  @POST(ServerConfig.milkRideVersion + EndPoints.resumeSubscription)
+  Future<ApiResponseModel> resumeSubscription({
+    @Field("subscription_id") required int subscriptionId,
+    @Field("customer_id") required int customerId,
+  });
+  @POST(ServerConfig.milkRideVersion + EndPoints.permanentChangeSubscription)
+  Future<ApiResponseModel> updatePermanentSubscription({
+    @Field("subscription_id") required int subscriptionId,
+    @Field("frequency_type") required String frequencyValue,
+    @Field("quantity") required int qty,
+  });
+
+  @POST(ServerConfig.milkRideVersion + EndPoints.deleteSubscription)
+  Future<ApiResponseModel> deleteSubscription({
+    @Field("subscription_id") required int subscriptionId,
+  });
+  @POST(ServerConfig.milkRideVersion + EndPoints.wallet)
+  Future<WalletModel> wallet({
+    @Field("user_id") required int userId,
+    @Field("customer_id") required int customerId,
+  });
+
+  @POST(ServerConfig.productVersion + EndPoints.rechargeHistory)
+  Future<RechargeHistoryModel> rechargeHistory({
+    @Field("customer_id") required int customerId,
+  });
+
+  @POST(ServerConfig.productVersion + EndPoints.billingHistory)
+  Future<BillingHistoryModel> billingHistory({
+    @Field("customer_id") required int customerId,
+  });
+  @POST(ServerConfig.productVersion + EndPoints.payCash)
+  Future<ApiResponseModel> payCash({
+    @Field("customer_id") required int customerId,
+    @Field("amount") required String amount,
+    @Field("date") required String date,
+  });
+  @POST(ServerConfig.productVersion + EndPoints.payOnline)
+  Future<PayOnlineModel> payOnline({
+    @Field("amount") required String amount,
+    @Field("customer_id") required int customerId,
+  });
+  @POST(ServerConfig.productVersion + EndPoints.verifyPayment)
+  Future<ApiResponseModel> verifyPayment({
+    @Field("transaction_id") required String transactionId,
+    @Field("order_id") required String orderId,
+    @Field("customer_id") required int customerId,
   });
 }

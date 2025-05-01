@@ -10,14 +10,14 @@ import 'package:milk_ride_live_wc/features/order/domain/use_case/order_cancel_us
 import 'package:milk_ride_live_wc/features/order/domain/use_case/order_use_case.dart';
 
 class OrderImplRepository extends OrderRepository {
-  final OrderImplRemoteRepo orderImplRemoteRepo;
+  final OrderRemoteRepo orderRemoteRepo;
 
-  OrderImplRepository({required this.orderImplRemoteRepo});
+  OrderImplRepository({required this.orderRemoteRepo});
   @override
   Future<Either<Failure, OrderResponse>> orders(
       {required OrderParam param}) async {
     try {
-      final result = await orderImplRemoteRepo.order(param: param);
+      final result = await orderRemoteRepo.order(param: param);
       return right(result);
     } on DioException catch (e) {
       return left(ExceptionHandler.handleError(error: e));
@@ -28,7 +28,7 @@ class OrderImplRepository extends OrderRepository {
   Future<Either<Failure, ApiResponseModel>> ordersCancel(
       {required OrderCancelParam param}) async {
     try {
-      final result = await orderImplRemoteRepo.orderCancel(param: param);
+      final result = await orderRemoteRepo.orderCancel(param: param);
       return right(result);
     } on DioException catch (e) {
       return left(ExceptionHandler.handleError(error: e));

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CustomAppLoader extends StatelessWidget {
@@ -20,7 +21,7 @@ class CustomAppLoader extends StatelessWidget {
       highlightColor: Colors.grey.shade100,
       child: Container(
         width: width ?? double.infinity,
-        height: height ?? 700,
+        height: height ?? 700.h,
         decoration: BoxDecoration(
           color: Colors.red,
           borderRadius: borderRadius,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get.dart';
 import 'package:milk_ride_live_wc/core/constants/app_string.dart';
 import 'package:milk_ride_live_wc/core/constants/argument_key.dart';
 import 'package:milk_ride_live_wc/core/routes/app_routes_names.dart';
@@ -59,30 +58,29 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                   });
                 },
                 child: Container(
-                  margin: EdgeInsets.only(left: 15.w),
-                  width: 110,
-                  decoration: BoxDecoration(
-                      color: AppColors.white,
-                      borderRadius: BorderRadius.circular(AppBorderRadius.r10)),
-                  child: Column(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(AppBorderRadius.r10),
-                          topLeft: Radius.circular(AppBorderRadius.r10),
+                    width: 110.w,
+                    decoration: BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius:
+                            BorderRadius.circular(AppBorderRadius.r10)),
+                    child: Column(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(AppBorderRadius.r10),
+                            topLeft: Radius.circular(AppBorderRadius.r10),
+                          ),
+                          child: CustomNetworkImages(
+                            src: categories.imageUrl ?? widget.configImage,
+                            height: 105.h,
+                            width: 110.w,
+                          ),
                         ),
-                        child: CustomNetworkImages(
-                          src: categories.imageUrl ?? widget.configImage,
-                          height: 105.h,
-                          width: 110.w,
+                        CustomViewButton(
+                          text: categories.name.toString(),
                         ),
-                      ),
-                      CustomViewButton(
-                        text: categories.name.toString(),
-                      ),
-                    ],
-                  ),
-                ),
+                      ],
+                    )).paddingSymmetric(horizontal: 10.w),
               );
             },
           ),

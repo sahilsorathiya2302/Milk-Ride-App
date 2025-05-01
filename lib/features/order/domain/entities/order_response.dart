@@ -5,11 +5,11 @@ class OrderResponse {
   final int? statusCode;
   final String? message;
   final OrderData? data;
-  final int? toBeDeliveredGrandTotal;
+  final String? toBeDeliveredGrandTotal;
   final String? toBeDeliveredGrandTotalDecimal;
-  final int? deliveredGrandTotal;
+  final String? deliveredGrandTotal;
   final String? deliveredGrandTotalDecimal;
-  final int? refundGrandTotal;
+  final String? refundGrandTotal;
   final String? refundGrandTotalDecimal;
 
   OrderResponse(

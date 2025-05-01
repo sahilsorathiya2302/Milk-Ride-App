@@ -39,7 +39,7 @@ class PurchaseForWidget extends StatelessWidget {
           text: AppString.subscribe,
           border: true,
           color: AppColors.white,
-          textBlack: true,
+          textColor: AppColors.black,
           onPressed: subscribeOnPressed,
           height: height ?? 10.h,
           width: width ?? 150.w,

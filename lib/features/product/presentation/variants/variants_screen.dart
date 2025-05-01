@@ -16,13 +16,13 @@ import 'package:milk_ride_live_wc/core/ui_component/custom_divider.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_quantity_sector.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_text.dart';
 import 'package:milk_ride_live_wc/core/ui_component/network_fail_card.dart';
+import 'package:milk_ride_live_wc/features/create_subscription/presentation/cubit/create_subscription_cubit.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/categories_products/widgets/purchase_for_widget.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/variants/variants_cubit.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/variants/variants_state.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/variants/widgets/total_amount_widget.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/variants/widgets/variant_delivery_type_widget.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/variants/widgets/variant_special_offer_widget.dart';
-import 'package:milk_ride_live_wc/features/subscription/presentation/cubit/subscription_cubit.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 void variantSheet({
@@ -145,7 +145,7 @@ void variantSheet({
                                       final cubit =
                                           context.read<VariantsCubit>();
                                       Get.toNamed(
-                                        AppRoutesNames.subscriptionScreen,
+                                        AppRoutesNames.createSubscriptionScreen,
                                         arguments: {
                                           ArgumentKey.customerId: customerId,
                                           ArgumentKey.productId:
@@ -174,7 +174,7 @@ void variantSheet({
                                     onPressed: () {
                                       Get.back();
                                       context
-                                          .read<SubscriptionCubit>()
+                                          .read<CreateSubscriptionCubit>()
                                           .addToCart(
                                             packageId:
                                                 cubit.selectedVariant?.id ?? 0,

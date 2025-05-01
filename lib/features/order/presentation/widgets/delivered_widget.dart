@@ -29,8 +29,12 @@ class _DeliveredWidgetState extends State<DeliveredWidget> {
                     children: [
                       CustomOrderInfo(cubit: cubit?.delivered),
                       CustomOrderDetails(
-                          subTotal: orderDetailsCubit?.deliveredGrandTotal ?? 0,
-                          amount: orderDetailsCubit?.deliveredGrandTotal ?? 0)
+                          subTotal: orderDetailsCubit?.deliveredGrandTotal
+                                  .toString() ??
+                              "0",
+                          amount: orderDetailsCubit?.deliveredGrandTotal
+                                  .toString() ??
+                              "0")
                     ],
                   )
                 : NotOrderFoundWidget(),

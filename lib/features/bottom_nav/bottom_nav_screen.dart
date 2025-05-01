@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milk_ride_live_wc/core/constants/app_string.dart';
+import 'package:milk_ride_live_wc/core/constants/argument_key.dart';
 import 'package:milk_ride_live_wc/core/routes/app_routes_names.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
 import 'package:milk_ride_live_wc/core/theme/app_icons.dart';
 import 'package:milk_ride_live_wc/core/theme/app_text_size.dart';
 import 'package:milk_ride_live_wc/features/home/presentation/home_screen.dart';
 import 'package:milk_ride_live_wc/features/order/presentation/order_screen.dart';
+import 'package:milk_ride_live_wc/features/subscription/presentation/subscription_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class BottomNavScreen extends StatefulWidget {
@@ -18,17 +20,29 @@ class BottomNavScreen extends StatefulWidget {
 }
 
 class _BottomNavScreenState extends State<BottomNavScreen> {
-  final PersistentTabController _controller =
-      PersistentTabController(initialIndex: 0);
+  late PersistentTabController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    int initialIndex = 0;
+    final args = Get.arguments;
+    if (args != null &&
+        args is Map &&
+        args[ArgumentKey.selectedIndex] != null) {
+      initialIndex = args[ArgumentKey.selectedIndex];
+    }
+
+    _controller = PersistentTabController(initialIndex: initialIndex);
+  }
 
   List<Widget> _buildScreens() {
     return [
       const HomeScreen(),
       const Scaffold(body: Center(child: Text("Products"))),
-      Builder(
-        builder: (context) => OrderScreen(),
-      ),
-      const Scaffold(body: Center(child: Text("Subscriptions"))),
+      Builder(builder: (context) => OrderScreen()),
+      Builder(builder: (context) => SubscriptionScreen()),
       SizedBox()
     ];
   }

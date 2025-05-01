@@ -1,18 +1,18 @@
 class OrderPackage {
   int? subscriptionId;
-  int? subscriptionType;
+  String? subscriptionType;
   int? orderId;
   String? deliveryType;
-  int? totalSalePrice;
+  String? totalSalePrice;
   String? totalSalePriceDecimal;
   int? packageId;
   String? name;
   int? orderPackageId;
   String? packageSize;
   int? qty;
-  int? dayQty;
+  String? dayQty;
   String? refundStatus;
-  int? salePrice;
+  String? salePrice;
   String? salePriceDecimal;
   String? volume;
   String? imageUrl;

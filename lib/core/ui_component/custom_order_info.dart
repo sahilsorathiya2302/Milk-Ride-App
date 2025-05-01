@@ -52,10 +52,15 @@ class CustomOrderInfo extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        recommended(
-                            title: orderData?.subscriptionType == null
-                                ? AppString.buy
-                                : orderData!.subscriptionType.toString()),
+                        orderData?.subscriptionType != null
+                            ? recommended(title: AppString.subscription)
+                            : SizedBox(),
+                        orderData?.subscriptionType == null
+                            ? recommended(
+                                title: orderData?.subscriptionType == null
+                                    ? AppString.buy
+                                    : orderData!.subscriptionType.toString())
+                            : SizedBox(),
                         5.width,
                         recommended(
                             title: orderData?.deliveryType ?? AppString.empty),
@@ -77,7 +82,9 @@ class CustomOrderInfo extends StatelessWidget {
                             : SizedBox(),
                         Spacer(),
                         orderData.refundStatus == null &&
-                                orderData.packageStatus != AppString.delivered
+                                orderData.packageStatus !=
+                                    AppString.delivered &&
+                                orderData.subscriptionType == null
                             ? SizedBox(
                                 width: 30.w,
                                 height: 30.h,
@@ -126,12 +133,12 @@ class CustomOrderInfo extends StatelessWidget {
                       children: [
                         CustomText(
                           text:
-                              "${AppString.rupeeSymbol}${orderData?.salePrice} X ${orderData?.qty}",
+                              "${AppString.rupeeSymbol}${double.parse(orderData?.salePrice).toStringAsFixed(0)} X ${orderData?.qty}",
                           color: AppColors.darkGrey,
                         ),
                         CustomText(
                           text:
-                              "${AppString.rupeeSymbol}${orderData?.salePrice}",
+                              "${AppString.rupeeSymbol}${double.parse(orderData?.totalSalePrice).toStringAsFixed(0)}",
                           fontWeight: FontWeight.w600,
                         ),
                       ],
@@ -142,7 +149,7 @@ class CustomOrderInfo extends StatelessWidget {
               20.width,
             ],
           ),
-        ).paddingSymmetric(vertical: 10);
+        ).paddingSymmetric(vertical: 10.h);
       },
     );
   }
@@ -154,17 +161,17 @@ Container recommended({
   Color? textColor,
 }) {
   return Container(
-    height: 18,
+    height: 18.h,
     decoration: BoxDecoration(
       color: color ?? AppColors.lightGrey,
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(AppBorderRadius.r10),
     ),
     child: Center(
       child: CustomText(
         text: title,
         fontSize: AppTextSize.s10,
         color: textColor ?? AppColors.black,
-      ).paddingSymmetric(horizontal: 10),
+      ).paddingSymmetric(horizontal: 10.w),
     ),
   );
 }

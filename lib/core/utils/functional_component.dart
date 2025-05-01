@@ -114,7 +114,7 @@ class FunctionalComponent {
     ));
   }
 
-  static void errorMessageSnackbar({required String message}) {
+  static errorMessageSnackbar({required String message}) {
     Get.showSnackbar(GetSnackBar(
       message: "",
       borderRadius: AppBorderRadius.r10,

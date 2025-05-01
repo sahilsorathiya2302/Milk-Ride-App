@@ -21,8 +21,8 @@ class _OrderDetailsWidgetsState extends State<OrderDetailsWidgets> {
       builder: (context, state) {
         if (state is CartLoadedState) {
           return CustomOrderDetails(
-            subTotal: state.totalPrice.toInt(),
-            amount: state.totalPrice.toInt(),
+            subTotal: state.totalPrice.toString(),
+            amount: state.totalPrice.toString(),
           );
         }
         return SizedBox();

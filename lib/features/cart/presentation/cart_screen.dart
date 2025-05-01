@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_utils/get_utils.dart';
+import 'package:get/get.dart';
 import 'package:milk_ride_live_wc/core/constants/app_string.dart';
 import 'package:milk_ride_live_wc/core/key/app_images_key.dart';
+import 'package:milk_ride_live_wc/core/routes/app_routes_names.dart';
+import 'package:milk_ride_live_wc/core/storage/storage_keys.dart';
+import 'package:milk_ride_live_wc/core/storage/storage_manager.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
 import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_empty_screen.dart';
@@ -13,8 +16,6 @@ import 'package:milk_ride_live_wc/features/cart/presentation/cubit/cart/cart_cub
 import 'package:milk_ride_live_wc/features/cart/presentation/widgets/cart_item_widget.dart';
 import 'package:milk_ride_live_wc/features/cart/presentation/widgets/delivery_address_widgets.dart';
 import 'package:milk_ride_live_wc/features/cart/presentation/widgets/payable_amount_widget.dart';
-import 'package:milk_ride_live_wc/features/home/presentation/cubit/home_cubit.dart';
-import 'package:milk_ride_live_wc/services/injection.dart';
 
 import 'cubit/cart/cart_state.dart';
 import 'widgets/cart_shimmer_place_holder.dart';
@@ -28,7 +29,7 @@ class CartScreen extends StatefulWidget {
   State<CartScreen> createState() => _CartScreenState();
 }
 
-final customerId = getIt<HomeCubit>().customerData?.id;
+final customerId = StorageManager.readData(StorageKeys.customerId);
 
 class _CartScreenState extends State<CartScreen> {
   @override
@@ -79,6 +80,10 @@ class _CartScreenState extends State<CartScreen> {
                       ],
                     )
                   : CustomEmptyScreen(
+                      onPressed: () {
+                        Get.offAllNamed(AppRoutesNames.bottomNavScreen);
+                      },
+                      buttonText: AppString.orderNow,
                       text: AppString.cartEmpty,
                       imagesPath: AppImagesKey.cartEmpty);
             }

@@ -9,6 +9,9 @@ import 'package:milk_ride_live_wc/features/auth/presentations/cubit/area/area_cu
 import 'package:milk_ride_live_wc/features/auth/presentations/cubit/auth/auth_cubit.dart';
 import 'package:milk_ride_live_wc/features/auth/presentations/cubit/regions_and_sources/regions_sources_cubit.dart';
 import 'package:milk_ride_live_wc/features/cart/presentation/cubit/place_order/place_order_cubit.dart';
+import 'package:milk_ride_live_wc/features/create_subscription/presentation/cubit/create_subscription_cubit.dart';
+import 'package:milk_ride_live_wc/features/history/presentation/cubit/billing_history/billing_history_cubit.dart';
+import 'package:milk_ride_live_wc/features/history/presentation/cubit/recharge_history/recharge_history_cubit.dart';
 import 'package:milk_ride_live_wc/features/order/presentation/cubit/order/order_cubit.dart';
 import 'package:milk_ride_live_wc/features/order/presentation/cubit/order_cancel/order_cancel_cubit.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/categories/categories_cubit.dart';
@@ -16,7 +19,12 @@ import 'package:milk_ride_live_wc/features/product/presentation/cubit/categories
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/product_details/product_details_cubit.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/variants/variants_cubit.dart';
 import 'package:milk_ride_live_wc/features/splash/cubit/splash_cubit.dart';
-import 'package:milk_ride_live_wc/features/subscription/presentation/cubit/subscription_cubit.dart';
+import 'package:milk_ride_live_wc/features/subscription/presentation/cubit/modify_temporarily/modify_temporarily_cubit.dart';
+import 'package:milk_ride_live_wc/features/subscription/presentation/cubit/pause_resume_cubit/pause_resume_sub_cubit.dart';
+import 'package:milk_ride_live_wc/features/subscription/presentation/cubit/subscription/subscription_cubit.dart';
+import 'package:milk_ride_live_wc/features/subscription/presentation/cubit/update_permanently/update_permanently_cubit.dart';
+import 'package:milk_ride_live_wc/features/wallet/presentation/cubit/add_balance/add_balance_cubit.dart';
+import 'package:milk_ride_live_wc/features/wallet/presentation/cubit/wallet/wallet_cubit.dart';
 import 'package:milk_ride_live_wc/services/injection.dart';
 
 import 'features/cart/presentation/cubit/cart/cart_cubit.dart';
@@ -24,6 +32,7 @@ import 'features/home/presentation/cubit/home_cubit.dart';
 
 void main() async {
   await GetStorage.init();
+  await getIt.reset(dispose: true);
   setLocator();
   runApp(const MyApp());
 }
@@ -64,7 +73,7 @@ class MyApp extends StatelessWidget {
           BlocProvider<CartCubit>(
             create: (context) => getIt(),
           ),
-          BlocProvider<SubscriptionCubit>(
+          BlocProvider<CreateSubscriptionCubit>(
             create: (context) => getIt(),
           ),
           BlocProvider<VariantsCubit>(
@@ -77,6 +86,30 @@ class MyApp extends StatelessWidget {
             create: (context) => getIt(),
           ),
           BlocProvider<OrderCancelCubit>(
+            create: (context) => getIt(),
+          ),
+          BlocProvider<SubscriptionCubit>(
+            create: (context) => getIt(),
+          ),
+          BlocProvider<ModifyTemporarilyCubit>(
+            create: (context) => getIt(),
+          ),
+          BlocProvider<UpdatePermanentlyCubit>(
+            create: (context) => getIt(),
+          ),
+          BlocProvider<PauseResumeSubCubit>(
+            create: (context) => getIt(),
+          ),
+          BlocProvider<AddBalanceCubit>(
+            create: (context) => getIt(),
+          ),
+          BlocProvider<WalletCubit>(
+            create: (context) => getIt(),
+          ),
+          BlocProvider<BillingHistoryCubit>(
+            create: (context) => getIt(),
+          ),
+          BlocProvider<RechargeHistoryCubit>(
             create: (context) => getIt(),
           ),
         ],

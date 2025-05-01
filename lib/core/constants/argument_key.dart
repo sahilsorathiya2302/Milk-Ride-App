@@ -19,6 +19,12 @@ class ArgumentKey {
   static const String mrpPrice = "mrpPrice";
   static const String volume = "volume";
   static const String selectQuantity = "selectQuantity";
+  static const String frequencyType = "frequencyType";
   static const String deliveryType = "deliveryType";
   static const String configImage = "configImage";
+  static const String startDate = "startDate";
+  static const String endDate = "endDate";
+  static const String subscriptionId = "subscriptionId";
+  static const String selectedIndex = "'selectedIndex'";
+  static const String productData = "productData'";
 }

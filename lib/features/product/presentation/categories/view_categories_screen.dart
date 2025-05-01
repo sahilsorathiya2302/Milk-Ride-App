@@ -23,10 +23,12 @@ class _ViewCategoriesScreenState extends State<ViewCategoriesScreen> {
       ),
       body: Column(
         children: [
-          CategoriesIntoWidget(
-            customerId: widget.getArgument[ArgumentKey.customerId],
-            configImage: widget.getArgument[ArgumentKey.configImage],
-          )
+          Expanded(
+            child: CategoriesIntoWidget(
+              customerId: widget.getArgument[ArgumentKey.customerId],
+              configImage: widget.getArgument[ArgumentKey.configImage],
+            ),
+          ),
         ],
       ),
     );

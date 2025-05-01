@@ -28,7 +28,7 @@ class RegisterParam {
   final String area;
   final String pinCode;
   final String regionId;
-  final String userId;
+  final int userId;
   final String? referrerCode;
   final String? agentCode;
   final String deliveryType;

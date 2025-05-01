@@ -32,8 +32,12 @@ class _ToBeDeliveredInfoWidgetState extends State<ToBeDeliveredInfoWidget> {
                             [],
                   ),
                   CustomOrderDetails(
-                    subTotal: orderDetailsCubit?.toBeDeliveredGrandTotal ?? 0,
-                    amount: orderDetailsCubit?.toBeDeliveredGrandTotal ?? 0,
+                    subTotal:
+                        orderDetailsCubit?.toBeDeliveredGrandTotal.toString() ??
+                            "0",
+                    amount:
+                        orderDetailsCubit?.toBeDeliveredGrandTotal.toString() ??
+                            "0",
                   )
                 ],
               )

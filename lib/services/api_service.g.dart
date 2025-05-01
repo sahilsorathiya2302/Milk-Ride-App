@@ -128,7 +128,7 @@ class _ApiService implements ApiService {
     String? area,
     String? pinCode,
     String? regionId,
-    String? userId,
+    int? userId,
     String? referrerCode,
     String? agentCode,
     String? deliveryType,
@@ -409,15 +409,15 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<SubscriptionModel> createSubscription({
+  Future<CreateSubscriptionModel> createSubscription({
     required int packageId,
     required int customerId,
     required int userId,
     required String frequencyType,
     required dynamic frequencyValue,
-    required int quantity,
+    required dynamic quantity,
     required String schedule,
-    required List<int> dayWiseQuantity,
+    required String dayWiseQuantity,
     required String deliveryType,
     required String startDate,
     required String endDate,
@@ -444,7 +444,7 @@ class _ApiService implements ApiService {
       'no_of_usages': noOfUsages,
       'product_id': productId,
     };
-    final _options = _setStreamType<SubscriptionModel>(
+    final _options = _setStreamType<CreateSubscriptionModel>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -455,9 +455,9 @@ class _ApiService implements ApiService {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late SubscriptionModel _value;
+    late CreateSubscriptionModel _value;
     try {
-      _value = SubscriptionModel.fromJson(_result.data!);
+      _value = CreateSubscriptionModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -589,7 +589,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v1/orders',
+            'milkride/v3/orders',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -627,6 +627,387 @@ class _ApiService implements ApiService {
           .compose(
             _dio.options,
             'milkride/v1/order-cancel',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponseModel _value;
+    try {
+      _value = ApiResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<SubscriptionModel> mySubscription({
+    required int customerId,
+    required int userId,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'customer_id': customerId, 'user_id': userId};
+    final _options = _setStreamType<SubscriptionModel>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'milkride/v3/my-subscription',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SubscriptionModel _value;
+    try {
+      _value = SubscriptionModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ApiResponseModel> temporaryChangeSubscription({
+    required int subscriptionId,
+    required String tempStartDate,
+    required String tempEndDate,
+    required int tempQty,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'subscription_id': subscriptionId,
+      'temp_start_date': tempStartDate,
+      'temp_end_date': tempEndDate,
+      'temp_qty': tempQty,
+    };
+    final _options = _setStreamType<ApiResponseModel>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'milkride/v1/temporary-change',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponseModel _value;
+    try {
+      _value = ApiResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ApiResponseModel> pauseSubscription({
+    required int subscriptionId,
+    required String pauseStartDate,
+    required String pauseEndDate,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'subscription_id': subscriptionId,
+      'pause_start_date': pauseStartDate,
+      'pause_end_date': pauseEndDate,
+    };
+    final _options = _setStreamType<ApiResponseModel>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'milkride/v1/pause-subscription',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponseModel _value;
+    try {
+      _value = ApiResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ApiResponseModel> resumeSubscription({
+    required int subscriptionId,
+    required int customerId,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'subscription_id': subscriptionId,
+      'customer_id': customerId,
+    };
+    final _options = _setStreamType<ApiResponseModel>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'milkride/v1/resume-subscription',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponseModel _value;
+    try {
+      _value = ApiResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ApiResponseModel> updatePermanentSubscription({
+    required int subscriptionId,
+    required String frequencyValue,
+    required int qty,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'subscription_id': subscriptionId,
+      'frequency_type': frequencyValue,
+      'quantity': qty,
+    };
+    final _options = _setStreamType<ApiResponseModel>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'milkride/v1/update-quantity',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponseModel _value;
+    try {
+      _value = ApiResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ApiResponseModel> deleteSubscription({
+    required int subscriptionId,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'subscription_id': subscriptionId};
+    final _options = _setStreamType<ApiResponseModel>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'milkride/v1/delete-subscription',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponseModel _value;
+    try {
+      _value = ApiResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<WalletModel> wallet({
+    required int userId,
+    required int customerId,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'user_id': userId, 'customer_id': customerId};
+    final _options = _setStreamType<WalletModel>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'milkride/v1/wallet',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late WalletModel _value;
+    try {
+      _value = WalletModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<RechargeHistoryModel> rechargeHistory({
+    required int customerId,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'customer_id': customerId};
+    final _options = _setStreamType<RechargeHistoryModel>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'milkride/v3/wallet-history',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late RechargeHistoryModel _value;
+    try {
+      _value = RechargeHistoryModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<BillingHistoryModel> billingHistory({required int customerId}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'customer_id': customerId};
+    final _options = _setStreamType<BillingHistoryModel>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'milkride/v3/billing-history',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BillingHistoryModel _value;
+    try {
+      _value = BillingHistoryModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ApiResponseModel> payCash({
+    required int customerId,
+    required String amount,
+    required String date,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'customer_id': customerId, 'amount': amount, 'date': date};
+    final _options = _setStreamType<ApiResponseModel>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'milkride/v3/payment-request',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponseModel _value;
+    try {
+      _value = ApiResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<PayOnlineModel> payOnline({
+    required String amount,
+    required int customerId,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'amount': amount, 'customer_id': customerId};
+    final _options = _setStreamType<PayOnlineModel>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'milkride/v3/pay-online',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late PayOnlineModel _value;
+    try {
+      _value = PayOnlineModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ApiResponseModel> verifyPayment({
+    required String transactionId,
+    required String orderId,
+    required int customerId,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'transaction_id': transactionId,
+      'order_id': orderId,
+      'customer_id': customerId,
+    };
+    final _options = _setStreamType<ApiResponseModel>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'milkride/v3/verify-payment',
             queryParameters: queryParameters,
             data: _data,
           )
