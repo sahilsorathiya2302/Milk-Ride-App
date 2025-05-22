@@ -114,9 +114,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ? BannerWidget(bannerState: state.headerBanners ?? [])
                 : SizedBox(),
             10.height,
-            TextField(
-              decoration: InputDecoration(),
-            ),
             CategoriesWidget(
               configImage:
                   state.homeResponse.data?.config?.logoUrl ?? AppString.empty,
