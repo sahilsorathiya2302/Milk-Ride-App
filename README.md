@@ -1,4 +1,4 @@
-# milk_ride_live_wc
+# milk_ride_application
 
 A new Flutter project.
 
