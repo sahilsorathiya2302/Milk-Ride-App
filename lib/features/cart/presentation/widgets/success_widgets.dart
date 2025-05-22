@@ -46,7 +46,7 @@ class _SuccessWidgetsState extends State<SuccessWidgets> {
             100.height,
             CustomButton(
               onPressed: () {
-                Get.offAllNamed(AppRoutesNames.bottomNavScreen);
+                Get.offAllNamed(AppRoutesNames.mainScreen);
               },
               text: AppString.continuesShopping,
             )

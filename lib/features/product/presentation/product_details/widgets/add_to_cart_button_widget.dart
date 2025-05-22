@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:milk_ride_live_wc/core/constants/app_string.dart';
+import 'package:milk_ride_live_wc/core/storage/storage_keys.dart';
+import 'package:milk_ride_live_wc/core/storage/storage_manager.dart';
 import 'package:milk_ride_live_wc/core/theme/app_border_radius.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
 import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
@@ -11,15 +13,12 @@ import 'package:milk_ride_live_wc/features/create_subscription/presentation/cubi
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/product_details/product_details_cubit.dart';
 
 class AddToCartButtonWidget extends StatelessWidget {
-  final int customerId;
-
   final int quantity;
   final int userId;
 
   const AddToCartButtonWidget({
     super.key,
     required this.quantity,
-    required this.customerId,
     required this.userId,
   });
 
@@ -37,13 +36,13 @@ class AddToCartButtonWidget extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(AppBorderRadius.r10)),
                 fixedSize: Size(
-                  340.w,
+                  1.sw,
                   60.h,
                 )),
             onPressed: () {
               context.read<CreateSubscriptionCubit>().addToCart(
                   packageId: cubit.selectedProduct?.id ?? 1,
-                  customerId: customerId,
+                  customerId: StorageManager.readData(StorageKeys.customerId),
                   userId: userId,
                   frequencyType: AppString.oneTime,
                   frequencyValue: AppString.empty,

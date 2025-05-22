@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:milk_ride_live_wc/core/constants/app_string.dart';
-import 'package:milk_ride_live_wc/core/storage/storage_keys.dart';
-import 'package:milk_ride_live_wc/core/storage/storage_manager.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_simple_app_bar.dart';
 import 'package:milk_ride_live_wc/core/ui_component/network_fail_card.dart';
@@ -11,6 +8,8 @@ import 'package:milk_ride_live_wc/features/wallet/presentation/cubit/wallet/wall
 import 'package:milk_ride_live_wc/features/wallet/presentation/widgets/history_widgets/history_main_widget.dart';
 import 'package:milk_ride_live_wc/features/wallet/presentation/widgets/wallet/wallet_main_widget.dart';
 import 'package:milk_ride_live_wc/features/wallet/presentation/widgets/wallet/wallet_shimmer_place_holder.dart';
+
+import '../../../core/constants/app_string.dart';
 
 class WalletScreen extends StatefulWidget {
   const WalletScreen({super.key});
@@ -22,9 +21,7 @@ class WalletScreen extends StatefulWidget {
 class _WalletScreenState extends State<WalletScreen> {
   @override
   void initState() {
-    final userId = StorageManager.readData(StorageKeys.userId);
-    final customerId = StorageManager.readData(StorageKeys.customerId);
-    context.read<WalletCubit>().wallet(userId: userId, customerId: customerId);
+    context.read<WalletCubit>().wallet();
     super.initState();
   }
 

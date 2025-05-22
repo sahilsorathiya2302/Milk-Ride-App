@@ -34,6 +34,6 @@ class MainTitleWidget extends StatelessWidget {
           ),
         )
       ],
-    ).paddingSymmetric(horizontal: 15.w);
+    ).paddingOnly(left: 15.w, right: 10.w);
   }
 }

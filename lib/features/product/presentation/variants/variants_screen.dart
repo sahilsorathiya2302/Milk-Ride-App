@@ -29,16 +29,17 @@ void variantSheet({
   required BuildContext context,
   required int productId,
   required int packageId,
-  required int customerId,
 }) {
   final cubit = context.read<VariantsCubit>();
   final userId = StorageManager.readData(StorageKeys.userId);
+  final customerId = StorageManager.readData(StorageKeys.customerId);
 
   context
       .read<VariantsCubit>()
       .variants(customerId: customerId, productId: productId);
   showModalBottomSheet(
     backgroundColor: AppColors.homeBG,
+    useRootNavigator: true,
     context: context,
     shape: RoundedRectangleBorder(
       borderRadius:

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -5,6 +6,7 @@ import 'package:milk_ride_live_wc/core/constants/app_string.dart';
 import 'package:milk_ride_live_wc/core/storage/storage_keys.dart';
 import 'package:milk_ride_live_wc/core/storage/storage_manager.dart';
 import 'package:milk_ride_live_wc/core/utils/functional_component.dart';
+import 'package:milk_ride_live_wc/features/home/presentation/cubit/home_cubit.dart';
 import 'package:milk_ride_live_wc/features/wallet/domain/entities/pay_online_data.dart';
 import 'package:milk_ride_live_wc/features/wallet/domain/use_case/pay_cash_use_case.dart';
 import 'package:milk_ride_live_wc/features/wallet/domain/use_case/pay_online_use_case.dart';
@@ -70,21 +72,19 @@ class AddBalanceCubit extends Cubit<AddBalanceState> {
         orderId: orderId,
         customerId: customerId));
 
-    final userId = StorageManager.readData(StorageKeys.userId);
-
     result.fold(
       (failure) {
         emit(AddBalanceError(errorMessage: failure.message));
       },
       (result) async {
         if (result.status == AppString.success) {
+          debugPrint("Hello");
           Get.context?.loaderOverlay.hide();
           FunctionalComponent.successMessageSnackbar(
               message: result.message ?? AppString.empty);
 
-          await Get.context
-              ?.read<WalletCubit>()
-              .wallet(userId: userId, customerId: customerId);
+          await Get.context?.read<WalletCubit>().wallet();
+          await Get.context?.read<HomeCubit>().getHome();
         } else if (result.status == AppString.error) {
           Get.context?.loaderOverlay.hide();
           FunctionalComponent.errorMessageSnackbar(

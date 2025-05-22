@@ -35,6 +35,7 @@ class _UpdatePermanentlyWidgetState extends State<UpdatePermanentlyWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<UpdatePermanentlyCubit>();
     return Scaffold(
         backgroundColor: AppColors.homeBG,
         appBar: CustomSimpleAppBar(
@@ -46,6 +47,9 @@ class _UpdatePermanentlyWidgetState extends State<UpdatePermanentlyWidget> {
               children: [
                 ModifyProdInfo(
                   argument: widget.subscriptionArgument,
+                  removeOnPressed: cubit.decrementQuantity,
+                  addOnPressed: cubit.incrementQuantity,
+                  qty: cubit.state.quantity,
                 ),
                 10.height,
                 Container(

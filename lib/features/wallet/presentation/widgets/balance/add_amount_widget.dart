@@ -22,7 +22,9 @@ void addAmount({required BuildContext context}) {
 
   showModalBottomSheet(
     isScrollControlled: true,
+    useSafeArea: true,
     backgroundColor: AppColors.homeBG,
+    useRootNavigator: true,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
         top: Radius.circular(AppBorderRadius.r15),
@@ -30,85 +32,80 @@ void addAmount({required BuildContext context}) {
     ),
     context: context,
     builder: (context) {
+      context.read<AddBalanceCubit>().resetState();
+
       return DraggableScrollableSheet(
         initialChildSize: 0.60,
-        maxChildSize: 0.60,
+        maxChildSize: 0.70,
         expand: false,
+        minChildSize: 0.60,
         builder: (context, scrollController) {
           final cubit = context.read<AddBalanceCubit>();
+
           return BlocBuilder<AddBalanceCubit, AddBalanceState>(
             builder: (context, state) {
-              return Stack(
-                children: [
-                  Column(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(AppBorderRadius.r15),
-                          topRight: Radius.circular(AppBorderRadius.r15),
-                        ),
-                        child: CustomSimpleAppBar(
-                          title: AppString.addAmount,
+              return Padding(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ),
+                child: Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(AppBorderRadius.r15),
+                        topRight: Radius.circular(AppBorderRadius.r15),
+                      ),
+                      child: CustomSimpleAppBar(
+                        title: AppString.addAmount,
+                      ),
+                    ),
+                    10.height,
+                    Expanded(
+                      child: SingleChildScrollView(
+                        controller: scrollController,
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                CustomWalletButton(
+                                  onPressed: () {
+                                    cubit.selectMethod(AppString.online);
+                                  },
+                                  icon: AppIcons.wallet2,
+                                  title: AppString.payOnline,
+                                  isSelected:
+                                      state.selectedMethod == AppString.online,
+                                ),
+                                CustomWalletButton(
+                                  onPressed: () {
+                                    cubit.selectMethod(AppString.cash);
+                                  },
+                                  icon: AppIcons.wallet2,
+                                  title: AppString.requestCash,
+                                  isSelected:
+                                      state.selectedMethod == AppString.cash,
+                                ),
+                              ],
+                            ).paddingSymmetric(horizontal: 10.w, vertical: 5.h),
+                            10.height,
+                            EnterAmountWidget(),
+                            10.height,
+                            if (state.selectedMethod == AppString.cash)
+                              CashPayDateWidget(),
+                            30.height, // Extra space above the button
+                          ],
                         ),
                       ),
-                      10.height,
-                      Expanded(
-                        child: SingleChildScrollView(
-                          padding: EdgeInsets.only(
-                            bottom: MediaQuery.of(context).viewInsets.bottom,
-                          ),
-                          controller: scrollController,
-                          child: Column(
-                            children: [
-                              Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      CustomWalletButton(
-                                        onPressed: () {
-                                          context
-                                              .read<AddBalanceCubit>()
-                                              .selectMethod(AppString.online);
-                                        },
-                                        icon: AppIcons.wallet2,
-                                        title: AppString.payOnline,
-                                        isSelected: state.selectedMethod ==
-                                            AppString.online, // NEW
-                                      ),
-                                      CustomWalletButton(
-                                        onPressed: () {
-                                          context
-                                              .read<AddBalanceCubit>()
-                                              .selectMethod(AppString.cash);
-                                        },
-                                        icon: AppIcons.wallet2,
-                                        title: AppString.requestCash,
-                                        isSelected: state.selectedMethod ==
-                                            AppString.cash, // NEW
-                                      ),
-                                    ],
-                                  ).paddingSymmetric(
-                                      horizontal: 10.w, vertical: 5.h),
-                                  10.height,
-                                  EnterAmountWidget(),
-                                  10.height,
-                                  cubit.state.selectedMethod == AppString.cash
-                                      ? CashPayDateWidget()
-                                      : SizedBox(),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  cubit.state.selectedMethod == AppString.cash
-                      ? CashRequestButton()
-                      : AddAmountButton(),
-                ],
+                    ),
+                    SafeArea(
+                      top: false,
+                      child: state.selectedMethod == AppString.cash
+                          ? CashRequestButton()
+                          : AddAmountButton(),
+                    ),
+                  ],
+                ),
               );
             },
           );

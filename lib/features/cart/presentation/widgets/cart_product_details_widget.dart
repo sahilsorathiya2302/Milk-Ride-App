@@ -26,22 +26,24 @@ class CartProductDetailsWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  itemInfo(
-                    text: cartInfo.name.toString(),
-                    textColor: AppColors.black,
-                  ),
-                  itemInfo(
-                    text:
-                        "${cartInfo.packageSize}${cartInfo.volume} x $quantity",
-                  ),
-                  itemInfo(
-                    text: AppString.rupeeSymbol + cartInfo.price.toString(),
-                    textColor: AppColors.black,
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    itemInfo(
+                      text: cartInfo.name.toString(),
+                      textColor: AppColors.black,
+                    ),
+                    itemInfo(
+                      text:
+                          "${cartInfo.packageSize}${cartInfo.volume} x $quantity",
+                    ),
+                    itemInfo(
+                      text: AppString.rupeeSymbol + cartInfo.price.toString(),
+                      textColor: AppColors.black,
+                    ),
+                  ],
+                ),
               ),
               CartQuantitySector(
                 cartId: cartInfo.cartId ?? 0,

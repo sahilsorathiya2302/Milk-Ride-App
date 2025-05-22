@@ -45,7 +45,7 @@ class _CustomDateListViewState extends State<CustomDateListView> {
 
         _scrollController.animateTo(
           scrollTo.clamp(0, _scrollController.position.maxScrollExtent),
-          duration: const Duration(milliseconds: 1),
+          duration: const Duration(microseconds: 1),
           curve: Curves.linear,
         );
       }

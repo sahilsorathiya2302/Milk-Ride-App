@@ -18,6 +18,8 @@ import 'package:milk_ride_live_wc/features/subscription/presentation/widgets/sub
 import '../../../../core/constants/app_string.dart';
 import '../../../../core/key/app_images_key.dart';
 import '../../../../core/routes/app_routes_names.dart';
+import '../../../../core/storage/storage_keys.dart';
+import '../../../../core/storage/storage_manager.dart';
 import '../../../../core/theme/app_border_radius.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/ui_component/custom_divider.dart';
@@ -34,62 +36,75 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
   Widget build(BuildContext context) {
     return BlocBuilder<SubscriptionCubit, SubscriptionState>(
       builder: (context, state) {
-        if (state is SubscriptionError) {
-          return NetworkFailCard(message: state.errorMessage);
+        if (state is SubscriptionLoading) {
+          return SubscriptionShimmerPlaceHolder();
+        } else if (state is SubscriptionError) {
+          return Expanded(
+            child: NetworkFailCard(message: state.errorMessage),
+          );
         } else if (state is SubscriptionLoaded) {
           final subscriptions = state.subscriptionResponse.data;
           if (subscriptions != null && subscriptions.isNotEmpty) {
             return Expanded(
-              child: ListView.builder(
-                itemCount: state.subscriptionResponse.data?.length,
-                itemBuilder: (context, index) {
-                  final subscriptionData =
-                      state.subscriptionResponse.data![index];
-
-                  return Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.circular(
-                          AppBorderRadius.r15,
-                        )),
-                    child: Column(
-                      children: [
-                        SubscriptionTileWidget(
-                          tileState: subscriptionData,
-                        ),
-                        10.height,
-                        SubscriptionProdInfoWidget(
-                          productState: subscriptionData,
-                        ),
-                        5.height,
-                        CustomDivider(),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            DeleteButton(state: subscriptionData),
-                            5.width,
-                            ModifyButtonWidget(state: subscriptionData),
-                            5.width,
-                            PauseResumeButton(state: subscriptionData),
-                            5.width,
-                          ],
-                        ),
-                        10.height,
-                        subscriptionData.pauseSubscription == null
-                            ? SizedBox()
-                            : PauseInfoWidget(
-                                pauseSubscription:
-                                    subscriptionData.pauseSubscription!,
-                              ),
-                      ],
-                    ),
-                  ).paddingSymmetric(
-                    vertical: 10.h,
-                    horizontal: 20.w,
-                  );
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  final customerId =
+                      StorageManager.readData(StorageKeys.customerId);
+                  final userId = StorageManager.readData(StorageKeys.userId);
+                  context.read<SubscriptionCubit>().mySubscription(
+                      customerId: customerId ?? 0, userId: userId);
                 },
+                child: ListView.builder(
+                  itemCount: state.subscriptionResponse.data?.length,
+                  itemBuilder: (context, index) {
+                    final subscriptionData =
+                        state.subscriptionResponse.data![index];
+
+                    return Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius: BorderRadius.circular(
+                            AppBorderRadius.r15,
+                          )),
+                      child: Column(
+                        children: [
+                          SubscriptionTileWidget(
+                            tileState: subscriptionData,
+                          ),
+                          10.height,
+                          SubscriptionProdInfoWidget(
+                            productState: subscriptionData,
+                          ),
+                          5.height,
+                          CustomDivider(),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              DeleteButton(state: subscriptionData),
+                              5.width,
+                              ModifyButtonWidget(state: subscriptionData),
+                              5.width,
+                              PauseResumeButton(state: subscriptionData),
+                              5.width,
+                            ],
+                          ),
+                          10.height,
+                          subscriptionData.pauseSubscription == null
+                              ? SizedBox()
+                              : PauseInfoWidget(
+                                  pauseSubscription:
+                                      subscriptionData.pauseSubscription!,
+                                ),
+                        ],
+                      ),
+                    ).paddingSymmetric(
+                      vertical: 10.h,
+                      horizontal: 20.w,
+                    );
+                  },
+                ),
               ),
             );
           }
@@ -103,7 +118,7 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                   imgWidth: 50.w,
                   buttonText: AppString.subscribeNow,
                   onPressed: () {
-                    Get.offAllNamed(AppRoutesNames.bottomNavScreen);
+                    Get.offAllNamed(AppRoutesNames.mainScreen);
                   },
                   text: AppString.subscriptionNotFound,
                   imagesPath: AppImagesKey.bucket,

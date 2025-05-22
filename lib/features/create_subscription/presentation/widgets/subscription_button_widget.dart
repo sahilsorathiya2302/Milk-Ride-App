@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -34,16 +35,21 @@ class _SubscriptionButtonWidgetState extends State<SubscriptionButtonWidget> {
         final deliverySchedule = cubit.state.deliverySchedule;
         final dayQuantities = cubit.state.dayQuantities;
 
+        print("===============>$deliverySchedule");
+        print("================>$dayQuantities");
         if (deliverySchedule.isEmpty) {
           FunctionalComponent.errorMessageSnackbar(
               message: AppString.emptySchedule);
           return;
         }
 
-        if (deliverySchedule == AppString.dayWiseSub &&
-            dayQuantities.every((qty) => qty == 0)) {
+        final listEquals = const ListEquality().equals;
+
+        if (deliverySchedule == AppString.dayWiseSub1 &&
+            listEquals(dayQuantities, [0, 0, 0, 0, 0, 0, 0])) {
           FunctionalComponent.errorMessageSnackbar(
-              message: AppString.dayWiseQty);
+            message: AppString.dayWiseQty,
+          );
           return;
         }
 
@@ -69,7 +75,7 @@ class _SubscriptionButtonWidgetState extends State<SubscriptionButtonWidget> {
         );
 
         Get.toNamed(
-          AppRoutesNames.bottomNavScreen,
+          AppRoutesNames.mainScreen,
           arguments: {ArgumentKey.selectedIndex: 3},
         );
       },

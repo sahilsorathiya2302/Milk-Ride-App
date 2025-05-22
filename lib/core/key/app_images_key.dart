@@ -10,4 +10,8 @@ class AppImagesKey {
   static const String notFound = "$path/box.png";
   static const String verified = "$path/verified.png";
   static const String bucket = "$path/bucket.png";
+  static const String notificationImage = "$path/notification.png";
+  static const String historyEmpty = "$path/history.png";
+  static const String productGrid = "$path/product_grid.png";
+  static const String vegan = "$path/vegan.png";
 }

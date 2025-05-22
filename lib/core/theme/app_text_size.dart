@@ -5,6 +5,7 @@ class AppTextSize {
 
   static double s0 = 0.sp;
   static double s8 = 8.sp;
+  static double s9 = 9.sp;
   static double s10 = 10.sp;
   static double s11 = 11.sp;
   static double s12 = 12.sp;

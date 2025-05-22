@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:milk_ride_live_wc/core/key/app_images_key.dart';
 
 class CustomNetworkImages extends StatelessWidget {
@@ -21,15 +22,15 @@ class CustomNetworkImages extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: src,
       height: height,
-      width: width,
+      width: width ?? double.infinity,
       fit: fit ?? BoxFit.cover,
       placeholder: (context, url) => SizedBox(
         height: height,
         width: width,
-        child: const Center(
+        child: Center(
           child: SizedBox(
-            height: 20, // smaller spinner height
-            width: 20, // smaller spinner width
+            height: 20.h,
+            width: 20.w,
             child: CircularProgressIndicator(strokeWidth: 2),
           ),
         ),
@@ -40,8 +41,8 @@ class CustomNetworkImages extends StatelessWidget {
         child: Center(
           child: Image.asset(
             AppImagesKey.networkFail,
-            width: 40,
-            height: 40,
+            width: 40.w,
+            height: 40.h,
           ),
         ),
       ),

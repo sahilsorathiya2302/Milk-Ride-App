@@ -14,7 +14,7 @@ class SplashCubit extends Cubit<SplashState> {
     String? token = StorageManager.readData(StorageKeys.tokenKey);
 
     if (token != null) {
-      Get.offAllNamed(AppRoutesNames.bottomNavScreen);
+      Get.offAllNamed(AppRoutesNames.mainScreen);
     } else {
       Get.offAllNamed(AppRoutesNames.signInScreen);
     }

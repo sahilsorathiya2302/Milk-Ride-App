@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:milk_ride_live_wc/core/constants/app_string.dart';
+import 'package:milk_ride_live_wc/core/theme/app_border_radius.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
 import 'package:milk_ride_live_wc/core/theme/app_text_size.dart';
 import 'package:milk_ride_live_wc/core/theme/icon_size.dart';
@@ -12,6 +15,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final IconData? actionIcon;
   final String? imageName;
   final String? titleName;
+  final String? text;
   final bool? centerTitle;
   const CustomAppBar(
       {super.key,
@@ -21,7 +25,8 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
       this.titleName,
       this.actionIcon,
       this.actionOnPressed,
-      this.centerTitle});
+      this.centerTitle,
+      this.text});
 
   @override
   State<CustomAppBar> createState() => _CustomAppBarState();
@@ -55,14 +60,35 @@ class _CustomAppBarState extends State<CustomAppBar> {
             ),
       centerTitle: widget.centerTitle ?? false,
       actions: [
-        IconButton(
-          onPressed: widget.actionOnPressed,
-          icon: Icon(
-            widget.actionIcon,
-            color: AppColors.black,
-            size: IconSize.i30,
-          ),
-        )
+        Stack(
+          alignment: Alignment.topRight,
+          children: [
+            IconButton(
+              onPressed: widget.actionOnPressed,
+              icon: Icon(
+                widget.actionIcon,
+                color: AppColors.black,
+                size: IconSize.i30,
+              ),
+            ),
+            Container(
+              height: 15,
+              width: 55,
+              decoration: BoxDecoration(
+                color: AppColors.primaryColor,
+                borderRadius: BorderRadius.circular(AppBorderRadius.r8),
+              ),
+              child: Center(
+                child: CustomText(
+                  text: "${AppString.rupeeSymbol}${widget.text}",
+                  fontSize: AppTextSize.s9,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                ).paddingSymmetric(horizontal: 5),
+              ),
+            )
+          ],
+        ).paddingOnly(right: 20)
       ],
     );
   }

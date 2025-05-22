@@ -126,6 +126,10 @@ class _OrderCancelDialogState extends State<OrderCancelDialog> {
                       FunctionalComponent.errorMessageSnackbar(
                           message: AppString.emptySelectReasonMsg);
                     } else {
+                      print(widget.orderId);
+                      print(widget.packageId);
+                      print(cubit.state.reasonId);
+
                       context.read<OrderCancelCubit>().orderCancel(
                           orderId: widget.orderId,
                           packageId: widget.packageId,

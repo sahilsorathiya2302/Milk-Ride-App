@@ -11,9 +11,10 @@ class PackageData {
   String? volume;
   int? qty;
   String? deliveryType;
-  int? price;
+  String? price;
+
   String? priceDecimal;
-  int? totalPrice;
+  String? totalPrice;
   String? totalPriceDecimal;
   String? deliveryDate;
   dynamic salePrice;

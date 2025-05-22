@@ -1,7 +1,7 @@
 class CustomerData {
   String? email;
-  int? wallet;
-  int? creditLimit;
+  String? wallet;
+  String? creditLimit;
   bool? acceptByCash;
   bool? acceptByOnline;
   int? minimumCashCollection;

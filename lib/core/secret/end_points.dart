@@ -29,6 +29,9 @@ class EndPoints {
   static const String payCash = "payment-request";
   static const String payOnline = "pay-online";
   static const String verifyPayment = "verify-payment";
+  static const String allProduct = "category-products";
   static const String wallet = "wallet";
+  static const String profile = "profile";
+  static const String vacation = "vacation-update";
   static const String getAreas = "{id}";
 }

@@ -1,10 +1,9 @@
 class ServerConfig {
   ServerConfig._();
 
-  static const String baseUrl = "https://prod.milkride.com/api/";
-  static const String milkRideVersion = "milkride/v1/";
+  static const String baseUrl = "https://dev.milkride.com/api/";
+  static const String milkRideVersion = "milkride/v4/";
   static const String customerVersion = "customer/get-areas-by-region/";
-  static const String productVersion = "milkride/v3/";
 
   static const String contentType = 'Content-Type';
   static const String accept = 'Accept';

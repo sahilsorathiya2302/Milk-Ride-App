@@ -65,7 +65,6 @@ class _CategoriesProductsScreenState extends State<CategoriesProductsScreen> {
                       customerId: widget.getArgument[ArgumentKey.customerId])
                   : CustomEmptyScreen(
                       onPressed: () {},
-                      buttonText: AppString.empty,
                       text: AppString.productNotFound,
                       imagesPath: AppImagesKey.networkFail);
             } else {

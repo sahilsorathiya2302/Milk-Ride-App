@@ -5,12 +5,17 @@ import 'package:milk_ride_live_wc/features/wallet/domain/entities/wallet_data.da
 import 'package:milk_ride_live_wc/features/wallet/domain/use_case/wallet_use_case.dart';
 import 'package:milk_ride_live_wc/features/wallet/presentation/cubit/wallet/wallet_state.dart';
 
+import '../../../../../core/storage/storage_keys.dart';
+import '../../../../../core/storage/storage_manager.dart';
+
 class WalletCubit extends Cubit<WalletState> {
   final WalletUseCase walletUseCase;
   WalletCubit({required this.walletUseCase}) : super(WalletInitial());
 
   WalletData? walletData;
-  Future<void> wallet({required int userId, required int customerId}) async {
+  Future<void> wallet() async {
+    final userId = StorageManager.readData(StorageKeys.userId);
+    final customerId = StorageManager.readData(StorageKeys.customerId);
     final result = await walletUseCase
         .call(WalletUseCaseParam(userId: userId, customerId: customerId));
 

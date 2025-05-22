@@ -24,6 +24,7 @@ class SubscriptionCubit extends Cubit<SubscriptionState> {
     required int customerId,
     required int userId,
   }) async {
+    emit(SubscriptionLoading());
     final result = await subscriptionUseCase
         .call(SubscriptionParam(customerId: customerId, userId: userId));
 

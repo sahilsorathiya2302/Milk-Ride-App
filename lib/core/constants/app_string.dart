@@ -2,10 +2,12 @@ class AppString {
   AppString._();
 
   static const String signUp = "Sign Up";
+  static const String prePaid = "PrePaid";
+  static const String postPaid = "PostPaid";
   static const String verification = "Verification";
   static const String empty = "";
   static const String signInTitle = "Login/Sign up";
-  static const String everMilk = "dairydash";
+  static const String everMilk = "everMilk";
   static const String hintMobile = "Enter Mobile Number";
   static const String hintUserId = "Enter UserId";
   static const String successMessage = "Sign up successfully";
@@ -66,7 +68,7 @@ class AppString {
   static const String myOrder = "My Order";
   static const String myWallet = "My Wallet";
   static const String invoiceHistory = "Invoice History";
-  static const String help = "Help";
+  static const String help = "Help & Support";
   static const String notificationTitle =
       "No delivery available at this moment";
   static const String view = "View";
@@ -78,6 +80,9 @@ class AppString {
   static const String mustTry = "Must Try";
   static const String milkRide = "Milk Ride";
   static const String foodTypeVeg = "veg";
+  static const String foodTypeVegan = "vegan";
+  static const String referEarn = "Refer & Earn";
+
   static const String profileEmail = "Email Address";
   static const String profileMobileNumber = "Mobile Number";
   static const String profileHubName = "Hub Name";
@@ -134,7 +139,7 @@ class AppString {
   static const String removeCartItemConfirm = "Remove from Cart?";
   static const String cartEmpty = "Your cart is empty. Add something to it!";
   static const String emptySchedule = "Please select delivery schedule";
-  static const String dayWiseQty = "Please select proper set Delivery Day Qty";
+  static const String dayWiseQty = "Please select Delivery Day Qty";
   static const String productNotFound = "Product Not Found";
   static const String removeCartProductConfirm =
       "Are you sure you want to remove this product from cart?";
@@ -166,6 +171,7 @@ class AppString {
   static const String alternateDay = "alternate_day";
   static const String everyThreeDay = "every_3_day";
   static const String dayWiseSub = "day_wise";
+  static const String dayWiseSub1 = "Day Wise";
   static const String orderCancelled = "Order Cancelled";
   static const String orderStatusTobeDelivered = "To be delivered";
   static const String orderStatusDelivered = "Delivered";
@@ -246,4 +252,32 @@ class AppString {
   static const String creditIcon = "+";
   static const String debitIcon = "-";
   static const String enterAmount = "Please enter valid amount";
+  static const String allProduct = "All Products";
+  static const String all = "All";
+  static const String add = "Add";
+  static const String search = "Search";
+  static const String registerAddress = "Register Address";
+  static const String hubName = "Hub Name";
+  static const String areaName = "Area Name";
+  static const String deleteAccount = "Delete Account";
+  static const String areYouSure = "Are You Sure ?";
+  static const String retry = "Retry !";
+  static const String version = "Version";
+  static const String orderHistory = "Order History";
+  static const String referralCopy = "Referral code copied";
+  static const String rechargeHistoryNotFound = "No Recharge History Found";
+  static const String searchProductNotFound = "No product found";
+  static const String searchProductNotFoundMsg =
+      "Unfortunately,This product is unavailable right now.Please try aging later!";
+  static const String rechargeHistoryNotFoundMsg =
+      "No transaction history yet.check back after making a transaction.";
+  static const String billingHistoryNotFound = "No Billing History Found";
+  static const String billingHistoryNotFoundMsg =
+      "No billing history yet.check back after making a payment.";
+  static const String vacationModeNotification =
+      "Currently you are on vacation mode.";
+  static const String vacationModeOn =
+      "Your all are temporality stop in vacation.";
+  static const String vacationModeOff =
+      "All your orders will resume once you enable vacation mode.";
 }

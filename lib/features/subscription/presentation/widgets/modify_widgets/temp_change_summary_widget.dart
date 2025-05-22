@@ -18,26 +18,34 @@ class TempChangeSummaryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<ModifyTemporarilyCubit>();
 
-    final DateTime minDate = DateTime.parse(startDate);
+    final DateTime now = DateTime.now();
+    final DateTime parsedStart = DateTime.tryParse(startDate) ?? now;
 
-    final String formattedStart = DateFormat('dd/MM/yyyy').format(minDate);
+// If passed date is before today, use today; else use the passed date
+    final String adjustedStartDate = cubit.state.startDate.isNotEmpty
+        ? cubit.state.startDate
+        : DateFormat('dd/MM/yyyy').format(
+            parsedStart.isBefore(DateTime(now.year, now.month, now.day))
+                ? now
+                : parsedStart,
+          );
+
     return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-          color: AppColors.primaryLightColor,
-          borderRadius: BorderRadius.circular(AppBorderRadius.r10)),
-      child: Column(
-        children: [
-          cubit.state.pickType == AppString.singleDay
-              ? tempInfoText(
-                  text:
-                      "${AppString.subscriptionChange} ${cubit.state.quantity} ${AppString.stringFor} ${cubit.state.startDate.isEmpty ? formattedStart : cubit.state.startDate}")
-              : tempInfoText(
-                  text:
-                      "${AppString.subscriptionChange} ${cubit.state.quantity} ${AppString.from} ${cubit.state.startDate.isEmpty ? formattedStart : cubit.state.startDate} ${AppString.to} ${cubit.state.endDate} ${AppString.date}")
-        ],
-      ),
-    );
+        width: double.infinity,
+        decoration: BoxDecoration(
+            color: AppColors.primaryLightColor,
+            borderRadius: BorderRadius.circular(AppBorderRadius.r10)),
+        child: Column(
+          children: [
+            cubit.state.pickType == AppString.singleDay
+                ? tempInfoText(
+                    text:
+                        "${AppString.subscriptionChange} ${cubit.state.quantity} ${AppString.stringFor} $adjustedStartDate")
+                : tempInfoText(
+                    text:
+                        "${AppString.subscriptionChange} ${cubit.state.quantity} ${AppString.from} $adjustedStartDate ${AppString.to} ${cubit.state.endDate} ${AppString.date}")
+          ],
+        ));
   }
 
   Widget tempInfoText({required String text}) {

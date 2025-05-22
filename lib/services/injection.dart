@@ -26,13 +26,6 @@ import 'package:milk_ride_live_wc/features/create_subscription/data/repositories
 import 'package:milk_ride_live_wc/features/create_subscription/domain/repositories/create_subscription_repository.dart';
 import 'package:milk_ride_live_wc/features/create_subscription/domain/usecase/create_subscription_use_case.dart';
 import 'package:milk_ride_live_wc/features/create_subscription/presentation/cubit/create_subscription_cubit.dart';
-import 'package:milk_ride_live_wc/features/history/data/repositories/history_impl_remote_repo.dart';
-import 'package:milk_ride_live_wc/features/history/data/repositories/history_impl_repository.dart';
-import 'package:milk_ride_live_wc/features/history/domain/repositories/history_repository.dart';
-import 'package:milk_ride_live_wc/features/history/domain/use_case/billing_history_use_case.dart';
-import 'package:milk_ride_live_wc/features/history/domain/use_case/recharge_history_use_case.dart';
-import 'package:milk_ride_live_wc/features/history/presentation/cubit/billing_history/billing_history_cubit.dart';
-import 'package:milk_ride_live_wc/features/history/presentation/cubit/recharge_history/recharge_history_cubit.dart';
 import 'package:milk_ride_live_wc/features/home/data/repositories/home_remote_repo_impl.dart';
 import 'package:milk_ride_live_wc/features/home/data/repositories/home_repository_impl.dart';
 import 'package:milk_ride_live_wc/features/home/domain/repositories/home_repository.dart';
@@ -56,6 +49,15 @@ import 'package:milk_ride_live_wc/features/product/presentation/cubit/categories
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/categories_products/categories_product_cubit.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/product_details/product_details_cubit.dart';
 import 'package:milk_ride_live_wc/features/product/presentation/cubit/variants/variants_cubit.dart';
+import 'package:milk_ride_live_wc/features/profile/data/repositories/profile_impl_remote_repo.dart';
+import 'package:milk_ride_live_wc/features/profile/data/repositories/profile_impl_repository.dart';
+import 'package:milk_ride_live_wc/features/profile/domain/use_case/profile_use_case.dart';
+import 'package:milk_ride_live_wc/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:milk_ride_live_wc/features/side_menu/data/repositories/vacation_impl_remote_repo.dart';
+import 'package:milk_ride_live_wc/features/side_menu/data/repositories/vacation_impl_repository.dart';
+import 'package:milk_ride_live_wc/features/side_menu/domain/repositories/vacation_repository.dart';
+import 'package:milk_ride_live_wc/features/side_menu/domain/use_case/vacation_use_case.dart';
+import 'package:milk_ride_live_wc/features/side_menu/presentation/cubit/vacation/vacation_cubit.dart';
 import 'package:milk_ride_live_wc/features/splash/cubit/splash_cubit.dart';
 import 'package:milk_ride_live_wc/features/subscription/data/repositories/subscription_impl_remote_repo.dart';
 import 'package:milk_ride_live_wc/features/subscription/data/repositories/subscription_impl_repository.dart';
@@ -70,6 +72,12 @@ import 'package:milk_ride_live_wc/features/subscription/presentation/cubit/modif
 import 'package:milk_ride_live_wc/features/subscription/presentation/cubit/pause_resume_cubit/pause_resume_sub_cubit.dart';
 import 'package:milk_ride_live_wc/features/subscription/presentation/cubit/subscription/subscription_cubit.dart';
 import 'package:milk_ride_live_wc/features/subscription/presentation/cubit/update_permanently/update_permanently_cubit.dart';
+import 'package:milk_ride_live_wc/features/view_all_product/data/repositories/view_product_impl_remote_repo.dart';
+import 'package:milk_ride_live_wc/features/view_all_product/data/repositories/view_product_impl_repository.dart';
+import 'package:milk_ride_live_wc/features/view_all_product/domain/repositories/view_product_repository.dart';
+import 'package:milk_ride_live_wc/features/view_all_product/domain/use_case/view_product_use_case.dart';
+import 'package:milk_ride_live_wc/features/view_all_product/presentation/cubit/view_all_product/view_all_product_cubit.dart';
+import 'package:milk_ride_live_wc/features/view_all_product/presentation/cubit/view_all_product_categories/view_all_product_categories_cubit.dart';
 import 'package:milk_ride_live_wc/features/wallet/data/repositories/add_amount_impl_remote_repo.dart';
 import 'package:milk_ride_live_wc/features/wallet/data/repositories/add_amount_impl_repository.dart';
 import 'package:milk_ride_live_wc/features/wallet/data/repositories/wallet_impl_remote_repo.dart';
@@ -82,11 +90,19 @@ import 'package:milk_ride_live_wc/features/wallet/domain/use_case/verify_payment
 import 'package:milk_ride_live_wc/features/wallet/domain/use_case/wallet_use_case.dart';
 import 'package:milk_ride_live_wc/features/wallet/presentation/cubit/add_balance/add_balance_cubit.dart';
 import 'package:milk_ride_live_wc/features/wallet/presentation/cubit/wallet/wallet_cubit.dart';
+import 'package:milk_ride_live_wc/features/wallet_history/data/repositories/history_impl_remote_repo.dart';
+import 'package:milk_ride_live_wc/features/wallet_history/data/repositories/history_impl_repository.dart';
+import 'package:milk_ride_live_wc/features/wallet_history/domain/repositories/history_repository.dart';
+import 'package:milk_ride_live_wc/features/wallet_history/domain/use_case/billing_history_use_case.dart';
+import 'package:milk_ride_live_wc/features/wallet_history/domain/use_case/recharge_history_use_case.dart';
+import 'package:milk_ride_live_wc/features/wallet_history/presentation/cubit/billing_history/billing_history_cubit.dart';
+import 'package:milk_ride_live_wc/features/wallet_history/presentation/cubit/recharge_history/recharge_history_cubit.dart';
 import 'package:milk_ride_live_wc/services/api_service.dart';
 
 import '../features/auth/domain/usecases/otp_use_case.dart';
 import '../features/auth/presentations/cubit/auth/auth_cubit.dart';
 import '../features/auth/presentations/cubit/regions_and_sources/regions_sources_cubit.dart';
+import '../features/profile/domain/repositories/profile_repository.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -350,4 +366,45 @@ void setLocator() {
 
   getIt
       .registerSingleton(RechargeHistoryCubit(rechargeHistoryUseCase: getIt()));
+
+  getIt.registerLazySingleton<ViewProductRemoteRepo>(
+    () => ViewProductImplRemoteRepo(apiService: getIt()),
+  );
+  getIt.registerLazySingleton<ViewProductRepository>(
+    () => ViewProductImplRepository(viewProductRemoteRepo: getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => ViewProductUseCase(viewProductRepository: getIt()),
+  );
+
+  getIt.registerSingleton(ViewAllProductCubit(viewProductUseCase: getIt()));
+  getIt.registerSingleton(ViewAllProductCategoriesCubit());
+
+  getIt.registerLazySingleton<ProfileRemoteRepo>(
+    () => ProfileImplRemoteRepo(apiService: getIt()),
+  );
+
+  getIt.registerLazySingleton<ProfileRepository>(
+    () => ProfileImplRepository(profileRemoteRepo: getIt()),
+  );
+
+  getIt.registerLazySingleton(
+    () => ProfileUseCase(profileRepository: getIt()),
+  );
+
+  getIt.registerSingleton(ProfileCubit(profileUseCase: getIt()));
+
+  getIt.registerLazySingleton<VacationRemoteRepo>(
+    () => VacationImplRemoteRepo(apiService: getIt()),
+  );
+  getIt.registerLazySingleton<VacationRepository>(
+    () => VacationImplRepository(vacationRemoteRepo: getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => VacationUseCase(vacationRepository: getIt()),
+  );
+
+  getIt.registerSingleton(VacationCubit(
+    vacationUseCase: getIt(),
+  ));
 }

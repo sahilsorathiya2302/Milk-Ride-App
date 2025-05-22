@@ -25,16 +25,16 @@ class _CountBalanceWidgetState extends State<CountBalanceWidget> {
       children: [
         buildCounterContainer(
             title: AppString.walletBalance,
-            amount: widget.walletData?.customerData?.wallet ?? 0),
+            amount: widget.walletData?.customerData?.wallet ?? "0"),
         buildCounterContainer(
             title: AppString.reserveBalance,
-            amount: widget.walletData?.customerData?.creditLimit ?? 0),
+            amount: widget.walletData?.customerData?.creditLimit ?? "0"),
       ],
     ).paddingSymmetric(vertical: 10.h);
   }
 
   Container buildCounterContainer(
-      {required int amount, required String title}) {
+      {required String amount, required String title}) {
     return Container(
       height: 80.h,
       width: 140.w,

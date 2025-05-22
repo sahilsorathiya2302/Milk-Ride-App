@@ -33,10 +33,10 @@ class FilterOptionWidget extends StatelessWidget {
         ),
         onPressed: () {
           variantSheet(
-              packageId: packageId,
-              context: context,
-              productId: productId,
-              customerId: customerId);
+            packageId: packageId,
+            context: context,
+            productId: productId,
+          );
         },
         child: SizedBox(
           height: 25.h,

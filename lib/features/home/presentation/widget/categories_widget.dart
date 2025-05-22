@@ -80,7 +80,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                           text: categories.name.toString(),
                         ),
                       ],
-                    )).paddingSymmetric(horizontal: 10.w),
+                    )).paddingOnly(left: index == 0 ? 10.w : 0.w, right: 10.w),
               );
             },
           ),

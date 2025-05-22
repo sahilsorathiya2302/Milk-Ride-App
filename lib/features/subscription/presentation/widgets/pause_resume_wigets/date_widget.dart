@@ -26,13 +26,15 @@ class DateWidget extends StatelessWidget {
   }) async {
     final DateTime subscriptionStart = DateTime.parse(startDate);
     final DateTime subscriptionEnd = DateTime.parse(endDate);
+    final DateTime today = DateTime.now();
+
+    final DateTime initialDate =
+        subscriptionStart.isBefore(today) ? today : subscriptionStart;
 
     final picked = await showDatePicker(
       context: context,
-      initialDate: DateTime.now().isBefore(subscriptionStart)
-          ? subscriptionStart
-          : DateTime.now(),
-      firstDate: subscriptionStart,
+      initialDate: initialDate,
+      firstDate: initialDate,
       lastDate: subscriptionEnd,
     );
 
@@ -40,10 +42,9 @@ class DateWidget extends StatelessWidget {
       final updatedStart =
           isStartDate ? _dateFormat.format(picked) : currentStart;
       final updatedEnd = !isStartDate ? _dateFormat.format(picked) : currentEnd;
-      final parsedDate = DateFormat('yyyy-MM-dd').parse(startDate);
-      final formatted = DateFormat('dd/MM/yyyy').format(parsedDate);
+
       Get.context?.read<PauseResumeSubCubit>().updatePauseDates(
-            startDate: updatedStart.isEmpty ? formatted : updatedStart,
+            startDate: updatedStart,
             endDate: updatedEnd,
           );
     }
@@ -51,30 +52,29 @@ class DateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final showStartDate =
-        DateFormat('dd/MM/yyyy').format(DateTime.parse(startDate));
+    final DateTime subscriptionStart = DateTime.parse(startDate);
+    final DateTime today = DateTime.now();
+    final String showStartDate = DateFormat('dd/MM/yyyy')
+        .format(subscriptionStart.isBefore(today) ? today : subscriptionStart);
+
     return BlocBuilder<PauseResumeSubCubit, PauseResumeSubState>(
       builder: (context, state) {
+        final String currentStartDate =
+            state.pauseStartDate.isEmpty ? showStartDate : state.pauseStartDate;
+
         return Column(
           children: [
             SizedBox(
               height: 50.h,
               child: CustomDatePickTextField(
                 hintText: showStartDate,
-                controller: TextEditingController(
-                  text: state.pauseStartDate == showStartDate ||
-                          state.pauseStartDate.isEmpty
-                      ? showStartDate
-                      : state.pauseStartDate,
+                controller: TextEditingController(text: currentStartDate),
+                onTap: () => _selectDate(
+                  context: context,
+                  isStartDate: true,
+                  currentStart: currentStartDate,
+                  currentEnd: state.pauseEndDate,
                 ),
-                onTap: () => () => _selectDate(
-                      context: context,
-                      isStartDate: true,
-                      currentStart: state.pauseStartDate.isEmpty
-                          ? showStartDate
-                          : state.pauseStartDate,
-                      currentEnd: state.pauseEndDate,
-                    ),
               ),
             ),
             10.height,
@@ -88,7 +88,7 @@ class DateWidget extends StatelessWidget {
                 onTap: () => _selectDate(
                   context: context,
                   isStartDate: false,
-                  currentStart: state.pauseStartDate,
+                  currentStart: currentStartDate,
                   currentEnd: state.pauseEndDate,
                 ),
               ),

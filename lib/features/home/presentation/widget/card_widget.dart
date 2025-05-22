@@ -7,11 +7,15 @@ import 'package:milk_ride_live_wc/core/key/app_images_key.dart';
 import 'package:milk_ride_live_wc/core/routes/app_routes_names.dart';
 import 'package:milk_ride_live_wc/core/theme/app_border_radius.dart';
 import 'package:milk_ride_live_wc/core/theme/app_colors.dart';
+import 'package:milk_ride_live_wc/core/theme/app_icons.dart';
 import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
+import 'package:milk_ride_live_wc/core/theme/app_text_size.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_network_images.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_text.dart';
 import 'package:milk_ride_live_wc/core/utils/list_utils.dart';
 import 'package:milk_ride_live_wc/features/product/domain/entities/product_data.dart';
+
+import '../../../product/presentation/variants/variants_screen.dart';
 
 class CardWidget extends StatefulWidget {
   final List<ProductData> state;
@@ -33,7 +37,7 @@ class _CardWidgetState extends State<CardWidget> {
   Widget build(BuildContext context) {
     final uniqueProducts = ListUtils.getUniqueProductsByProductId(widget.state);
     return SizedBox(
-      height: 205.h,
+      height: 210.h,
       child: ListView.builder(
         itemCount: uniqueProducts.length,
         scrollDirection: Axis.horizontal,
@@ -52,7 +56,7 @@ class _CardWidgetState extends State<CardWidget> {
               width: 140.w,
               decoration: BoxDecoration(
                   color: AppColors.white,
-                  borderRadius: BorderRadius.circular(12)),
+                  borderRadius: BorderRadius.circular(AppBorderRadius.r12)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -61,7 +65,7 @@ class _CardWidgetState extends State<CardWidget> {
                     children: [
                       ClipRRect(
                         borderRadius:
-                            BorderRadius.circular(AppBorderRadius.r10),
+                            BorderRadius.circular(AppBorderRadius.r12),
                         child: CustomNetworkImages(
                           src: newArrival.imageUrl.toString(),
                           height: 110.h,
@@ -82,11 +86,13 @@ class _CardWidgetState extends State<CardWidget> {
                                 ),
                               ),
                               child: Center(
-                                  child: CustomText(
-                                text: AppString.mustTry,
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.white,
-                              )),
+                                child: CustomText(
+                                  text: AppString.mustTry,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.white,
+                                  fontSize: AppTextSize.s10,
+                                ),
+                              ),
                             )
                           : SizedBox()
                     ],
@@ -105,12 +111,17 @@ class _CardWidgetState extends State<CardWidget> {
                             color: AppColors.grey,
                           ),
                           Spacer(),
-                          newArrival.foodType == AppString.foodTypeVeg
-                              ? Image.asset(
-                                  AppImagesKey.foodType,
-                                  height: 10.h,
-                                )
-                              : SizedBox(),
+                          if (newArrival.foodType == AppString.foodTypeVeg)
+                            Image.asset(
+                              AppImagesKey.foodType,
+                              height: 10.h,
+                            )
+                          else if (newArrival.foodType ==
+                              AppString.foodTypeVegan)
+                            Image.asset(
+                              AppImagesKey.vegan,
+                              height: 19.h,
+                            )
                         ],
                       ),
                       3.height,
@@ -137,18 +148,58 @@ class _CardWidgetState extends State<CardWidget> {
                       ),
                       3.height,
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CustomText(
-                            text: "₹${newArrival.salePrice}",
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.black,
+                          Row(
+                            children: [
+                              CustomText(
+                                text:
+                                    "${AppString.rupeeSymbol}${double.parse(newArrival.salePrice).toStringAsFixed(0)}",
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.black,
+                              ),
+                              5.width,
+                              CustomText(
+                                textDecoration: TextDecoration.lineThrough,
+                                text:
+                                    "${AppString.rupeeSymbol}${double.parse(newArrival.mrpPrice).toStringAsFixed(0)}",
+                                color: AppColors.grey,
+                              ),
+                            ],
                           ),
-                          2.width,
-                          CustomText(
-                            textDecoration: TextDecoration.lineThrough,
-                            text: "₹${newArrival.mrpPrice}",
-                            color: AppColors.grey,
-                          ),
+                          GestureDetector(
+                            onTap: () {
+                              variantSheet(
+                                context: context,
+                                productId: newArrival.productId ?? 0,
+                                packageId: newArrival.id ?? 0,
+                              );
+                            },
+                            child: Container(
+                              height: 18.h,
+                              width: 50.w,
+                              decoration: BoxDecoration(
+                                  color: AppColors.primaryColor,
+                                  borderRadius: BorderRadius.circular(
+                                    AppBorderRadius.r5,
+                                  )),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    AppIcons.add,
+                                    size: 15,
+                                    color: AppColors.black,
+                                  ),
+                                  CustomText(
+                                    text: AppString.add,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: AppTextSize.s11,
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ],

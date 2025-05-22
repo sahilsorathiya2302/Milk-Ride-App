@@ -27,9 +27,13 @@ class ChooseDateWidget extends StatelessWidget {
     required DateTime maxDate,
     DateTime? initial,
   }) async {
+    if (maxDate.isBefore(minDate)) {
+      maxDate = minDate.add(const Duration(days: 30));
+    }
+
     final picked = await showDatePicker(
       context: context,
-      initialDate: initial ?? DateTime.now(),
+      initialDate: initial ?? minDate,
       firstDate: minDate,
       lastDate: maxDate,
     );

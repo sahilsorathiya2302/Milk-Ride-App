@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:milk_ride_live_wc/core/constants/app_string.dart';
 import 'package:milk_ride_live_wc/core/constants/argument_key.dart';
@@ -191,30 +192,50 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
   }
 
-  void _submitRegistration() {
+  void _submitRegistration() async {
     for (int i = 0; i < _formKeys.length; i++) {
       if (!(_formKeys[i].currentState?.validate() ?? true)) {
         return;
       }
     }
+
+    double latitude = 0.0;
+    double longitude = 0.0;
+
+    try {
+      String locationInput = "$area, $city";
+
+      List<Location> locations = await locationFromAddress(locationInput);
+
+      if (locations.isNotEmpty) {
+        latitude = locations[0].latitude;
+        longitude = locations[0].longitude;
+      }
+    } catch (e) {
+      print("Geocoding failed: $e");
+      Get.snackbar("Error", "Couldn't get location from city/area");
+      return;
+    }
+
     context.read<AuthCubit>().register(
-        name: name,
-        email: email,
-        sourceId: find,
-        areaId: areaId,
-        houseNo: houseNo,
-        floor: floor,
-        society: societyName,
-        landMark: landMark,
-        city: "23.0215374",
-        area: "72.5682748",
-        pinCode: pinCode,
-        regionId: cityId,
-        userId: widget.getArgument[StorageKeys.userId],
-        referrerCode: referralCode,
-        agentCode: agentCode,
-        deliveryType: "morning",
-        gender: gender,
-        mobileNumber: widget.getArgument[ArgumentKey.mobileNumber]);
+          name: name,
+          email: email,
+          sourceId: find,
+          areaId: areaId,
+          houseNo: houseNo,
+          floor: floor,
+          society: societyName,
+          landMark: landMark,
+          city: latitude.toString(),
+          area: longitude.toString(),
+          pinCode: pinCode,
+          regionId: cityId,
+          userId: widget.getArgument[StorageKeys.userId],
+          referrerCode: referralCode,
+          agentCode: agentCode,
+          deliveryType: "morning",
+          gender: gender,
+          mobileNumber: widget.getArgument[ArgumentKey.mobileNumber],
+        );
   }
 }

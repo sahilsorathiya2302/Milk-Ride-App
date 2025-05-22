@@ -21,7 +21,7 @@ class _SubscriptionShimmerPlaceHolderState
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 650.h,
+            height: 640.h,
             child: ListView.builder(
               itemCount: 5,
               physics: const NeverScrollableScrollPhysics(),

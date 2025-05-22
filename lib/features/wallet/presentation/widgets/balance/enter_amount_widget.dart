@@ -88,7 +88,7 @@ class _EnterAmountWidgetState extends State<EnterAmountWidget> {
                         ),
                         10.height,
                         SizedBox(
-                          height: 30,
+                          height: 30.h,
                           child: ListView.builder(
                             itemCount: AppList.selectPrice.length,
                             scrollDirection: Axis.horizontal,
@@ -115,7 +115,7 @@ class _EnterAmountWidgetState extends State<EnterAmountWidget> {
                                           "${AppString.rupeeSymbol} ${AppList.selectPrice[index]}",
                                     ),
                                   ),
-                                ).paddingOnly(right: 10),
+                                ).paddingOnly(right: 10.w),
                               );
                             },
                           ),
@@ -130,7 +130,7 @@ class _EnterAmountWidgetState extends State<EnterAmountWidget> {
                     fontWeight: FontWeight.w600,
                     textAlign: TextAlign.center,
                     text:
-                        "${state.selectedMethod == AppString.online ? AppString.payment : AppString.paymentRequest} ${AppString.minimumValue}${cubit.walletData?.customerData?.minimumCashCollection} ${AppString.maximumValue}${cubit.walletData?.customerData?.maximumCashCollection}.${AppString.rangeAmount}",
+                        "${state.selectedMethod == AppString.online ? AppString.payment : AppString.paymentRequest} ${AppString.minimumValue}${cubit.walletData?.customerData?.minimumCashCollection} ${AppString.maximumValue}${cubit.walletData?.customerData?.maximumRecharge}.${AppString.rangeAmount}",
                   ).paddingSymmetric(horizontal: 10),
                 ],
               );

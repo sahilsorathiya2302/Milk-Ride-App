@@ -40,7 +40,7 @@ class UpdatePermanentlyCubit extends Cubit<UpdatePermanentlyState> {
               subTitle: AppString.updatePermanentMessage,
               widget: CustomButton(
                   onPressed: () {
-                    Get.toNamed(AppRoutesNames.bottomNavScreen,
+                    Get.toNamed(AppRoutesNames.mainScreen,
                         arguments: {ArgumentKey.selectedIndex: 3});
                   },
                   text: AppString.ok));

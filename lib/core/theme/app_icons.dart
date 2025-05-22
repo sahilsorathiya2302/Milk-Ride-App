@@ -41,4 +41,10 @@ class AppIcons {
   static const IconData currencyRupee = Icons.currency_rupee;
   static const IconData email = Icons.mail;
   static const IconData forwardArrow = Icons.arrow_forward;
+  static const IconData pageBackArrow = Icons.arrow_back_ios_new_sharp;
+  static const IconData editIcon = Icons.edit;
+  static const IconData refresh = Icons.refresh;
+  static const IconData referEarn = CupertinoIcons.person_2;
+  static const IconData orderCube = CupertinoIcons.cube;
+  static const IconData billingHistory = CupertinoIcons.book_fill;
 }

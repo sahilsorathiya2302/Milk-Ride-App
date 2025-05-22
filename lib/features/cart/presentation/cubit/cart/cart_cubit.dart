@@ -157,10 +157,10 @@ class CartCubit extends Cubit<CartState> {
     final items = cartData.package ?? [];
 
     for (var item in items) {
-      final price = item.price ?? 0;
+      final price = item.price ?? "0";
       final cartId = item.cartId!;
       final qty = cartQuantities[cartId] ?? item.qty ?? 1;
-      total += price * qty;
+      total += double.parse(price) * qty;
     }
 
     return total;

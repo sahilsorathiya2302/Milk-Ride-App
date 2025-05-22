@@ -9,16 +9,18 @@ import 'package:milk_ride_live_wc/features/auth/data/models/regions_source_model
 import 'package:milk_ride_live_wc/features/auth/data/models/register_model.dart';
 import 'package:milk_ride_live_wc/features/cart/data/models/cart_model.dart';
 import 'package:milk_ride_live_wc/features/create_subscription/data/models/create_subscription_model.dart';
-import 'package:milk_ride_live_wc/features/history/data/models/billing_history_model.dart';
-import 'package:milk_ride_live_wc/features/history/data/models/recharge_history_model.dart';
 import 'package:milk_ride_live_wc/features/home/data/models/home_model.dart';
 import 'package:milk_ride_live_wc/features/order/data/models/order_model.dart';
 import 'package:milk_ride_live_wc/features/product/data/models/categories_product_model.dart';
 import 'package:milk_ride_live_wc/features/product/data/models/product_model.dart';
 import 'package:milk_ride_live_wc/features/product/data/models/variant_model.dart';
 import 'package:milk_ride_live_wc/features/product/data/models/view_category_model.dart';
+import 'package:milk_ride_live_wc/features/profile/data/models/profile_model.dart';
+import 'package:milk_ride_live_wc/features/view_all_product/data/models/view_product_model.dart';
 import 'package:milk_ride_live_wc/features/wallet/data/models/pay_online_model.dart';
 import 'package:milk_ride_live_wc/features/wallet/data/models/wallet_model.dart';
+import 'package:milk_ride_live_wc/features/wallet_history/data/models/billing_history_model.dart';
+import 'package:milk_ride_live_wc/features/wallet_history/data/models/recharge_history_model.dart';
 import 'package:milk_ride_live_wc/services/interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:retrofit/retrofit.dart';
@@ -109,15 +111,15 @@ abstract class ApiService {
   @GET(ServerConfig.customerVersion + EndPoints.getAreas)
   Future<List<GetAreaModel>> getAreas({@Path("id") required int id});
 
-  @POST(ServerConfig.milkRideVersion + EndPoints.home)
+  @GET(ServerConfig.milkRideVersion + EndPoints.home)
   Future<HomeModel> getHomeData({
-    @Field("mobile_number") required String mobileNumber,
-    @Field("user_id") required int userId,
-    @Field("type") required String type,
-    @Field("device_type") required String deviceType,
-    @Field("device_model") required String devicesModel,
-    @Field("version") required String version,
-    @Field("device_id") required String devicesId,
+    @Query("mobile_number") required String mobileNumber,
+    @Query("user_id") required int userId,
+    @Query("type") required String type,
+    @Query("device_type") required String deviceType,
+    @Query("device_model") required String devicesModel,
+    @Query("version") required String version,
+    @Query("device_id") required String devicesId,
   });
   @POST(ServerConfig.milkRideVersion + EndPoints.allCategory)
   Future<ViewCategoryModel> viewAllCategories(
@@ -129,13 +131,13 @@ abstract class ApiService {
     @Field("category_id") required int categoryId,
   });
 
-  @GET(ServerConfig.productVersion + EndPoints.productVariants)
+  @GET(ServerConfig.milkRideVersion + EndPoints.productVariants)
   Future<VariantModel> variants({
     @Query("customer_id") required int customerId,
     @Query("product_id") required int productId,
   });
 
-  @GET(ServerConfig.productVersion + EndPoints.product)
+  @GET(ServerConfig.milkRideVersion + EndPoints.product)
   Future<ProductModel> product({
     @Query("customer_id") required int customerId,
     @Query("product_id") required int productId,
@@ -177,7 +179,7 @@ abstract class ApiService {
     @Field("user_id") required int userId,
     @Field("customer_id") required int customerId,
   });
-  @POST(ServerConfig.productVersion + EndPoints.orders)
+  @POST(ServerConfig.milkRideVersion + EndPoints.orders)
   Future<OrderModel> orders({
     @Field("delivery_date") required String deliveryDate,
     @Field("customer_id") required int customerId,
@@ -188,7 +190,7 @@ abstract class ApiService {
     @Field("package_id") required int packageId,
     @Field("reason_id") required int? reasonId,
   });
-  @POST(ServerConfig.productVersion + EndPoints.mySubscription)
+  @POST(ServerConfig.milkRideVersion + EndPoints.mySubscription)
   Future<SubscriptionModel> mySubscription({
     @Field("customer_id") required int customerId,
     @Field("user_id") required int userId,
@@ -229,30 +231,51 @@ abstract class ApiService {
     @Field("customer_id") required int customerId,
   });
 
-  @POST(ServerConfig.productVersion + EndPoints.rechargeHistory)
+  @POST(ServerConfig.milkRideVersion + EndPoints.rechargeHistory)
   Future<RechargeHistoryModel> rechargeHistory({
     @Field("customer_id") required int customerId,
   });
 
-  @POST(ServerConfig.productVersion + EndPoints.billingHistory)
+  @POST(ServerConfig.milkRideVersion + EndPoints.billingHistory)
   Future<BillingHistoryModel> billingHistory({
     @Field("customer_id") required int customerId,
   });
-  @POST(ServerConfig.productVersion + EndPoints.payCash)
+  @POST(ServerConfig.milkRideVersion + EndPoints.payCash)
   Future<ApiResponseModel> payCash({
     @Field("customer_id") required int customerId,
     @Field("amount") required String amount,
     @Field("date") required String date,
   });
-  @POST(ServerConfig.productVersion + EndPoints.payOnline)
+  @POST(ServerConfig.milkRideVersion + EndPoints.payOnline)
   Future<PayOnlineModel> payOnline({
     @Field("amount") required String amount,
     @Field("customer_id") required int customerId,
   });
-  @POST(ServerConfig.productVersion + EndPoints.verifyPayment)
+  @POST(ServerConfig.milkRideVersion + EndPoints.verifyPayment)
   Future<ApiResponseModel> verifyPayment({
     @Field("transaction_id") required String transactionId,
     @Field("order_id") required String orderId,
     @Field("customer_id") required int customerId,
+  });
+
+  @GET(ServerConfig.milkRideVersion + EndPoints.allProduct)
+  Future<ViewAllProductsModel> allProduct({
+    @Query("category_id") required String? categoryId,
+    @Query("customer_id") required int customerId,
+    @Query("page") required int page,
+    @Query("length") required int length,
+    @Query("keyword") required String? keyword,
+  });
+
+  @POST(ServerConfig.milkRideVersion + EndPoints.profile)
+  Future<ProfileModel> profile({
+    @Field("customer_id") required int customerId,
+    @Field("user_id") required int userId,
+  });
+
+  @POST(ServerConfig.milkRideVersion + EndPoints.vacation)
+  Future<ApiResponseModel> vacationMode({
+    @Field("customer_id") required int customerId,
+    @Field("status") required int status,
   });
 }

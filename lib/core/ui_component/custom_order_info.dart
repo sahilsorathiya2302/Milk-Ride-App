@@ -67,8 +67,8 @@ class CustomOrderInfo extends StatelessWidget {
                         5.width,
                         orderData?.packageStatus == AppString.delivered
                             ? recommended(
-                                title:
-                                    orderData?.packageStatus ?? AppString.empty,
+                                title: orderData?.packageStatus.to ??
+                                    AppString.empty,
                                 color: AppColors.green,
                                 textColor: AppColors.white)
                             : SizedBox(),
@@ -168,7 +168,9 @@ Container recommended({
     ),
     child: Center(
       child: CustomText(
-        text: title,
+        text: title.isNotEmpty
+            ? '${title[0].toUpperCase()}${title.substring(1)}'
+            : '',
         fontSize: AppTextSize.s10,
         color: textColor ?? AppColors.black,
       ).paddingSymmetric(horizontal: 10.w),

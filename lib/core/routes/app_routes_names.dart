@@ -11,7 +11,7 @@ class AppRoutesNames {
   static const String productDetails = "/productDetails";
   static const String createSubscriptionScreen = "/createSubscriptionScreen";
   static const String cartScreen = "/cartScreen";
-  static const String bottomNavScreen = "/BottomNavScreen";
+  static const String mainScreen = "/mainScreen";
   static const String successScreen = "/successScreen";
   static const String orderScreen = "/orderScreen";
   static const String subscriptionScreen = "/subscriptionScreen";
@@ -20,4 +20,5 @@ class AppRoutesNames {
   static const String walletScreen = "/walletScreen";
   static const String rechargeHistoryScreen = "/rechargeHistoryScreen";
   static const String billingHistoryScreen = "/billingHistoryScreen";
+  static const String viewAllProduct = "/viewAllProduct";
 }

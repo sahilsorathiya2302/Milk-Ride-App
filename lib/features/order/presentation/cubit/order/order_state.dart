@@ -98,13 +98,8 @@ class OrderLoadedState extends OrderState {
   }
 
   @override
-  List<Object?> get props => [
-        orderResponse,
-        baseDate,
-        selectedDate,
-        index,
-        cancelReason,
-      ];
+  List<Object?> get props =>
+      [orderResponse, baseDate, selectedDate, index, cancelReason];
 }
 
 class OrderErrorState extends OrderState {
@@ -120,11 +115,6 @@ class OrderErrorState extends OrderState {
   });
 
   @override
-  List<Object?> get props => [
-        errorMessage,
-        baseDate,
-        selectedDate,
-        index,
-        cancelReason,
-      ];
+  List<Object?> get props =>
+      [errorMessage, baseDate, selectedDate, index, cancelReason];
 }

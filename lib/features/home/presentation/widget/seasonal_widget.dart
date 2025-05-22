@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:milk_ride_live_wc/core/constants/app_string.dart';
-import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
 import 'package:milk_ride_live_wc/features/home/presentation/widget/card_widget.dart';
 import 'package:milk_ride_live_wc/features/home/presentation/widget/main_title_widget.dart';
 import 'package:milk_ride_live_wc/features/product/domain/entities/product_data.dart';
@@ -21,7 +20,6 @@ class _SeasonalWidgetState extends State<SeasonalWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         MainTitleWidget(title: AppString.seasonal),
-        10.height,
         CardWidget(
           state: widget.state ?? [],
           customerId: widget.customerId,

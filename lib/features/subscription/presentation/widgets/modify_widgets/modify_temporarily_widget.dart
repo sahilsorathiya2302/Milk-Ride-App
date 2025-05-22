@@ -55,6 +55,7 @@ class _ModifyTemporarilyWidgetState extends State<ModifyTemporarilyWidget> {
                   argument: widget.subscriptionData,
                   addOnPressed: () => cubit.incrementQuantity(),
                   removeOnPressed: () => cubit.decrementQuantity(),
+                  qty: cubit.state.quantity,
                 ),
                 10.height,
                 PickTypeWidget(),
@@ -97,7 +98,7 @@ class _ModifyTemporarilyWidgetState extends State<ModifyTemporarilyWidget> {
                           tempEndDate: formattedEnd,
                           tempQty: state.quantity,
                         );
-                    Get.toNamed(AppRoutesNames.bottomNavScreen,
+                    Get.toNamed(AppRoutesNames.mainScreen,
                         arguments: {ArgumentKey.selectedIndex: 3});
                   },
                   text: AppString.updateSubscription,

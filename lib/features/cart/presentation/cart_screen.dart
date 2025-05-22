@@ -42,53 +42,68 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: AppColors.homeBG,
-        appBar: CustomSimpleAppBar(title: AppString.myCart),
-        body: BlocBuilder<CartCubit, CartState>(
-          builder: (context, state) {
-            if (state is CartLoadingState) {
-              return CartShimmerPlaceHolder();
-            } else if (state is CartErrorState) {
-              return NetworkFailCard(message: state.errorMessage);
-            } else if (state is CartLoadedState) {
-              return (state.cartResponse.data?.package?.isNotEmpty ?? false)
-                  ? Column(
-                      children: [
-                        Expanded(
-                          child: SingleChildScrollView(
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        if (!didPop) {
+          Get.back();
+        }
+      },
+      child: Scaffold(
+          backgroundColor: AppColors.homeBG,
+          appBar: CustomSimpleAppBar(
+            title: AppString.myCart,
+            // leadingOnPressed: () {
+            //   Get.back();
+            // },
+          ),
+          body: BlocBuilder<CartCubit, CartState>(
+            builder: (context, state) {
+              if (state is CartLoadingState) {
+                return CartShimmerPlaceHolder();
+              } else if (state is CartErrorState) {
+                return NetworkFailCard(message: state.errorMessage);
+              } else if (state is CartLoadedState) {
+                return (state.cartResponse.data?.package?.isNotEmpty ?? false)
+                    ? Column(
+                        children: [
+                          Expanded(
+                            child: SingleChildScrollView(
                               child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CartItemWidget(
-                                packageState:
-                                    state.cartResponse.data?.package ?? [],
-                              ),
-                              10.height,
-                              DeliveryAddressWidgets(
-                                deliveryState:
-                                    state.cartResponse.data?.deliveryDetails ??
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CartItemWidget(
+                                    packageState:
+                                        state.cartResponse.data?.package ?? [],
+                                  ),
+                                  10.height,
+                                  DeliveryAddressWidgets(
+                                    deliveryState: state.cartResponse.data
+                                            ?.deliveryDetails ??
                                         "",
+                                  ),
+                                  20.height,
+                                ],
                               ),
-                              20.height, // Optional extra space at the bottom
-                            ],
-                          )).paddingSymmetric(vertical: 10.h, horizontal: 15.w),
-                        ),
-                        PayableAmountWidget(
-                          customerId: customerId ?? 0,
-                        )
-                      ],
-                    )
-                  : CustomEmptyScreen(
-                      onPressed: () {
-                        Get.offAllNamed(AppRoutesNames.bottomNavScreen);
-                      },
-                      buttonText: AppString.orderNow,
-                      text: AppString.cartEmpty,
-                      imagesPath: AppImagesKey.cartEmpty);
-            }
-            return CartShimmerPlaceHolder();
-          },
-        ));
+                            ).paddingSymmetric(
+                                vertical: 10.h, horizontal: 15.w),
+                          ),
+                          PayableAmountWidget(
+                            customerId: customerId ?? 0,
+                          )
+                        ],
+                      )
+                    : CustomEmptyScreen(
+                        onPressed: () {
+                          Get.offAllNamed(AppRoutesNames.mainScreen);
+                        },
+                        buttonText: AppString.orderNow,
+                        text: AppString.cartEmpty,
+                        imagesPath: AppImagesKey.cartEmpty);
+              }
+              return CartShimmerPlaceHolder();
+            },
+          )),
+    );
   }
 }

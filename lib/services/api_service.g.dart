@@ -10,7 +10,7 @@ part of 'api_service.dart';
 
 class _ApiService implements ApiService {
   _ApiService(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'https://prod.milkride.com/api/';
+    baseUrl ??= 'https://dev.milkride.com/api/';
   }
 
   final Dio _dio;
@@ -32,7 +32,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v1/signin',
+            'milkride/v4/signin',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -67,7 +67,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v1/otp-check',
+            'milkride/v4/otp-check',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -97,7 +97,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v1/otp-resend',
+            'milkride/v4/otp-resend',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -164,7 +164,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v1/store',
+            'milkride/v4/store',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -194,7 +194,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v1/signup',
+            'milkride/v4/signup',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -253,22 +253,22 @@ class _ApiService implements ApiService {
     required String devicesId,
   }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = {
-      'mobile_number': mobileNumber,
-      'user_id': userId,
-      'type': type,
-      'device_type': deviceType,
-      'device_model': devicesModel,
-      'version': version,
-      'device_id': devicesId,
+    final queryParameters = <String, dynamic>{
+      r'mobile_number': mobileNumber,
+      r'user_id': userId,
+      r'type': type,
+      r'device_type': deviceType,
+      r'device_model': devicesModel,
+      r'version': version,
+      r'device_id': devicesId,
     };
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<HomeModel>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
+      Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v1/home',
+            'milkride/v4/home',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -295,7 +295,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v1/all-category',
+            'milkride/v4/all-category',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -325,7 +325,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v1/category-products',
+            'milkride/v4/category-products',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -358,7 +358,7 @@ class _ApiService implements ApiService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v3/product-variants',
+            'milkride/v4/product-variants',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -391,7 +391,7 @@ class _ApiService implements ApiService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v3/product-view',
+            'milkride/v4/product-view',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -448,7 +448,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v1/subscription-create',
+            'milkride/v4/subscription-create',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -475,7 +475,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v1/add-to-cart',
+            'milkride/v4/add-to-cart',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -502,7 +502,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v1/remove-cart-item',
+            'milkride/v4/remove-cart-item',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -529,7 +529,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v1/cart-update',
+            'milkride/v4/cart-update',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -559,7 +559,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v1/order-place',
+            'milkride/v4/order-place',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -589,7 +589,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v3/orders',
+            'milkride/v4/orders',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -626,7 +626,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v1/order-cancel',
+            'milkride/v4/order-cancel',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -656,7 +656,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v3/my-subscription',
+            'milkride/v4/my-subscription',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -693,7 +693,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v1/temporary-change',
+            'milkride/v4/temporary-change',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -728,7 +728,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v1/pause-subscription',
+            'milkride/v4/pause-subscription',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -761,7 +761,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v1/resume-subscription',
+            'milkride/v4/resume-subscription',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -796,7 +796,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v1/update-quantity',
+            'milkride/v4/update-quantity',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -825,7 +825,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v1/delete-subscription',
+            'milkride/v4/delete-subscription',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -855,7 +855,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v1/wallet',
+            'milkride/v4/wallet',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -884,7 +884,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v3/wallet-history',
+            'milkride/v4/wallet-history',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -911,7 +911,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v3/billing-history',
+            'milkride/v4/billing-history',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -942,7 +942,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v3/payment-request',
+            'milkride/v4/payment-request',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -972,7 +972,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v3/pay-online',
+            'milkride/v4/pay-online',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -1007,7 +1007,107 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'milkride/v3/verify-payment',
+            'milkride/v4/verify-payment',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponseModel _value;
+    try {
+      _value = ApiResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ViewAllProductsModel> allProduct({
+    String? categoryId,
+    required int customerId,
+    required int page,
+    required int length,
+    String? keyword,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'category_id': categoryId,
+      r'customer_id': customerId,
+      r'page': page,
+      r'length': length,
+      r'keyword': keyword,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<ViewAllProductsModel>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'milkride/v4/category-products',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ViewAllProductsModel _value;
+    try {
+      _value = ViewAllProductsModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ProfileModel> profile({
+    required int customerId,
+    required int userId,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'customer_id': customerId, 'user_id': userId};
+    final _options = _setStreamType<ProfileModel>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'milkride/v4/profile',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ProfileModel _value;
+    try {
+      _value = ProfileModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ApiResponseModel> vacationMode({
+    required int customerId,
+    required int status,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'customer_id': customerId, 'status': status};
+    final _options = _setStreamType<ApiResponseModel>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'milkride/v4/vacation-update',
             queryParameters: queryParameters,
             data: _data,
           )

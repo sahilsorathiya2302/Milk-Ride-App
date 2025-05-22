@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:milk_ride_live_wc/core/constants/app_string.dart';
-import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
 import 'package:milk_ride_live_wc/features/product/domain/entities/product_data.dart';
 
 import 'card_widget.dart';
@@ -22,7 +21,6 @@ class _BestSellerWidgetState extends State<BestSellerWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         MainTitleWidget(title: AppString.bestSeller),
-        10.height,
         CardWidget(
           state: widget.state ?? [],
           customerId: widget.customerId,

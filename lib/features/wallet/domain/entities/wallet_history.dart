@@ -2,7 +2,7 @@ class WalletHistory {
   int? id;
   String? createdAt;
   String? amountType;
-  int? amount;
+  String? amount;
   String? walletReason;
   String? paymentStatus;
 
