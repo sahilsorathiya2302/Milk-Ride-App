@@ -81,7 +81,7 @@ Online milk & dairy subscription app built with Flutter, Api, and Bloc pattern.
 
 |         Wallet   |     Wallet           |     Add Amount         |
 | :---------------: | :-----------------: | :-----------------:    |
-| ![Wallet][wallet] | ![wallet2][profile] | [addAmount][addAmount]     | 
+| ![Wallet1][wallet1] | ![Wallet2][wallet2] | [AddAmount][addAmount]     | 
 
 |          Razorpay      |       Success Payment     |       Recharge History             |
 | :-----------------------: | :-------------: | :-------------------------------: |
