@@ -9,12 +9,12 @@ import 'package:milk_ride_live_wc/core/theme/app_size_box_extension.dart';
 import 'package:milk_ride_live_wc/core/theme/app_text_size.dart';
 import 'package:milk_ride_live_wc/core/ui_component/custom_empty_screen.dart';
 import 'package:milk_ride_live_wc/features/wallet_history/domain/entities/billing_history_data.dart';
+import 'package:milk_ride_live_wc/features/wallet_history/presentation/billing_history/widgets/date_and_reason_widget.dart';
 import 'package:milk_ride_live_wc/features/wallet_history/presentation/billing_history/widgets/payment_type_widget.dart';
 
 import '../../../../../core/ui_component/custom_divider.dart';
 import '../../../../../core/ui_component/custom_wallet_text.dart';
 import 'balance_show_widget.dart';
-import 'date_and_reason_widget.dart';
 
 class BillingHistoryWidget extends StatelessWidget {
   final List<BillingHistoryData>? billingHistoryData;
@@ -64,7 +64,7 @@ class BillingHistoryWidget extends StatelessWidget {
                     text: billingData.date ?? AppString.empty,
                     fontWeight: FontWeight.w600,
                     fontSize: AppTextSize.s16,
-                  ).paddingSymmetric(horizontal: 10.w, vertical: 20.h),
+                  ).paddingSymmetric(horizontal: 10.w, vertical: 10.h),
                   Container(
                     decoration: BoxDecoration(color: AppColors.white),
                     child: ListView.separated(
