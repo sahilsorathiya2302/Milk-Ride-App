@@ -42,7 +42,7 @@ Online milk & dairy subscription app built with Flutter, Api, and Bloc pattern.
 [mySubscription]: https://github.com/sahilsorathiya2302/Milk-Ride-App/blob/master/screenshorts/subscription.jpg 'MySubscription'
 [wallet1]: https://github.com/sahilsorathiya2302/Milk-Ride-App/blob/master/screenshorts/wallet.jpg 'Wallet1'
 [wallet2]: https://github.com/sahilsorathiya2302/Milk-Ride-App/blob/master/screenshorts/new_wallet.jpg 'Wallet2'
-[add amount]: https://github.com/sahilsorathiya2302/Milk-Ride-App/blob/master/screenshorts/add_amount.jpg 'Add Amount'
+[addamount]: https://github.com/sahilsorathiya2302/Milk-Ride-App/blob/master/screenshorts/add_amount.jpg 'AddAmount'
 [razorpay]: https://github.com/sahilsorathiya2302/Milk-Ride-App/blob/master/screenshorts/online_payment.jpg 'Rezorpay'
 [successpayment]: https://github.com/sahilsorathiya2302/Milk-Ride-App/blob/master/screenshorts/success_payment.jpg 'SuccessPayment'
 [rechargeHistory]: https://github.com/sahilsorathiya2302/Milk-Ride-App/blob/master/screenshorts/recharge_history.jpg 'RechargeHistory'
@@ -89,7 +89,7 @@ Online milk & dairy subscription app built with Flutter, Api, and Bloc pattern.
 
 |          Filter Recharge History     |       Billing History     |        Filter Billing History           |
 | :-----------------------: | :-------------: | :-------------------------------: |
-| ![FilterRechargeHistory][filterRechargeHistory] | ![BillingHistory][billingHistory] | ![FilterBillingHistory][filter BillingHistory] |
+| ![FilterRechargeHistory][filterRechargeHistory] | ![BillingHistory][billingHistory] | ![FilterBillingHistory][filterBillingHistory] |
 
 |       Profile       | 
 | :-------------:     | 
