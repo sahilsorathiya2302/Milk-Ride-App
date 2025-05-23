@@ -42,7 +42,7 @@ Online milk & dairy subscription app built with Flutter, Api, and Bloc pattern.
 [mySubscription]: https://github.com/sahilsorathiya2302/Milk-Ride-App/blob/master/screenshorts/subscription.jpg 'MySubscription'
 [wallet1]: https://github.com/sahilsorathiya2302/Milk-Ride-App/blob/master/screenshorts/wallet.jpg 'Wallet1'
 [wallet2]: https://github.com/sahilsorathiya2302/Milk-Ride-App/blob/master/screenshorts/new_wallet.jpg 'Wallet2'
-[addamount]: https://github.com/sahilsorathiya2302/Milk-Ride-App/blob/master/screenshorts/add_amount.jpg 'AddAmount'
+[addAmount]: https://github.com/sahilsorathiya2302/Milk-Ride-App/blob/master/screenshorts/add_amount.jpg 'AddAmount'
 [razorpay]: https://github.com/sahilsorathiya2302/Milk-Ride-App/blob/master/screenshorts/online_payment.jpg 'Rezorpay'
 [successpayment]: https://github.com/sahilsorathiya2302/Milk-Ride-App/blob/master/screenshorts/success_payment.jpg 'SuccessPayment'
 [rechargeHistory]: https://github.com/sahilsorathiya2302/Milk-Ride-App/blob/master/screenshorts/recharge_history.jpg 'RechargeHistory'
